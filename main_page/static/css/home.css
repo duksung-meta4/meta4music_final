@@ -1,0 +1,62 @@
+.header{
+    height: 100vh;
+    background-repeat : no-repeat;
+    background-size : cover;
+    display: flex;
+    justify-content: center;
+}
+
+.title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title h1{
+    color:white;
+    font-size: 5rem;
+    font-weight: 900;
+}
+
+.title h3{
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    color:white;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.title button{
+    background-color: #6667AB;
+    font-weight: 600;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.3rem;
+    color: white;
+    padding: 1rem 3rem;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.title button:hover{
+    background-color: #484978;
+}
+
+.services{
+    height: 100px;
+    background-color: black;
+    color: white;
+}
+
+.about{
+    height: 100px;
+    background-color: white;
+    color: black;
+}
+
+.contact{
+    height: 100px;
+    background-color: black;
+    color:white;
+}

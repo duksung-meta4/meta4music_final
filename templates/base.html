@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meta4Music</title>
+  <link rel='stylesheet' href="{% static 'css/home.css' %}" />
+  <link rel='stylesheet' href="{% static 'css/navbar.css' %}" />
+  <link rel='stylesheet' href="{% static 'css/reset.css' %}" />
+</head>
+
+<body>
+  <!-- navbar -->
+  <div class="nav">
+    <a class="nav-logo">Meta4Music</a>
+    <ul class="nav-ul">
+      <li class="nav-item"><a>Home</a></li>
+      <li class="nav-item"><a>Services</a></li>
+      <li class="nav-item"><a>About</a></li>
+      <li class="nav-item"><a>Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- content -->
+  {% block content %}
+  {% endblock content %}
+</body>
+
+</html>
