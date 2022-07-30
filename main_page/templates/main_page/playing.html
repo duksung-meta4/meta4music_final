@@ -1,21 +1,33 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Making music with magenta.js</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.jsdelivr.net/npm/@magenta/music@1.18.1"></script>
+  <script type="text/javascript" src="/static/js/compose.js"/>
+  <script>
+    function makeLyric() {
+      let url = document.forms[0].elements['lyric'].value;
+      window.location.replace('http://127.0.0.1:8000/main_page/playing/' + url)
+      return false;
+    }
+  </script>
 </head>
-<body>
-    <div class="controls">
-      <button onclick="playRNN(event)">Play</button>
-    </div>
-    <div class="lyrics">
-      <a href="/makeLyric" class="button">Lyrics</a>
-    	
-    </div>
+<div class="controls">
+  <button onclick="playRNN(event)">Play</button>
+</div>
+<form onsubmit="return makeLyric();" class="my-form">
+  <input type="text" name="lyric">
+  <input type="submit" value="Submit">
+</form>
+<div>
+  {{lyric}}
+</div>
 </body>
-<script src="/static/js/compose.js"></script>
+
+
 </html>

@@ -15,11 +15,10 @@ def drawing_view(request):
 def playing_view(request):
     return render(request, 'main_page/playing.html')
 
-
-def makeLyric(request):
+def makeLyric(request,lyric):
     args=GenerationDeployArguments(
     pretrained_model_name="skt/kogpt2-base-v2",
-    downstream_model_dir="/main_page/kogpt2/checkpoint-generation",
+    downstream_model_dir="main_page/static/kogpt2/checkpoint-generation",
 	)
     tokenizer=PreTrainedTokenizerFast.from_pretrained(
     args.pretrained_model_name,
@@ -75,5 +74,7 @@ def makeLyric(request):
             'result': generated_sentence,
         }
 
-    result=inference_fn("우정 동그란 얼굴 조잘조잘 신나는 네 이야기\n ")['result']
-    return HttpResponse(str(result));
+    result=inference_fn(str(lyric)+"\n ")['result']
+    result_dict={"lyric":result}
+    print(result_dict);
+    return render(request,'main_page/playing.html',context=result_dict);
