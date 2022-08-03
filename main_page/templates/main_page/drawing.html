@@ -9,6 +9,7 @@
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.min.js"></script>
     <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+    <script src="/static/js/sketch.js"></script>
     <style>
         body {
           background-color: #EEE;
@@ -17,9 +18,24 @@
 </head>
 <body>
     <!-- p5로 제작한 sketch js -->
-    <script src="/static/js/sketch.js"></script>
-    <h1>DoodleNet</h1>
+    <h1>🎨자유롭게 그림을 그려주세요!</h1>
     <button id="clearBtn">Clear Canvas</button>
+    <!-- 캔버스 위치 지정 -->
+    <div id="sketch-holder"></div>
     <p><span id="label"></span> (<span id="confidence"></span>%)</p>
+    <div>
+        <p>😀 "무엇을 그리셨나요?(그림을 그려주세요!)"</p>
+        <p><span id="label1"></span></p>
+        <p><span id="label2"></span></p>
+        <p><span id="label3"></span></p>
+        <p><span id="label4"></span></p>
+        <p><span id="label5"></span></p>
+        <p><span id="label6"></span></p>
+    </div>
+    <div>
+        <p>😀 "선택한 키워드로 작사에 필요한 첫 음절을 추천합니다"</p>
+        <p>"버튼을 눌러주세요"</p>
+        <button id="">첫 음절 추천 받기</button>
+    </div>
 </body>
 </html>

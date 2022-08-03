@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-(*^^ajyl3t%=r!8p65on*y_=7nxo_m)j3m=5w75yo8r4nqol#^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.goorm.io']
-
+#ALLOWED_HOSTS = ['.goorm.io']
+ALLOWED_HOSTS = ['127.0.0.1'] #태영 - 로컬 작업
 
 # Application definition
 
@@ -106,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
