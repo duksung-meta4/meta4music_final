@@ -29,4 +29,5 @@ class Images(models.Model):
     createdAt=models.DateTimeField();
     updatedAt=models.DateTimeField();
     imagescol=models.CharField(max_length=45);
-    memberid=models.ForeignKey("User",on_delete=models.CASCADE)
+    memberid=models.ForeignKey("User",on_delete=models.CASCADE);
+

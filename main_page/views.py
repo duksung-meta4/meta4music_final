@@ -96,4 +96,5 @@ def makeLyric(request,lyric):
 
     result=inference_fn(str(lyric)+"\n ")['result']
     result_dict={"lyric":result};
+
     return render(request,'main_page/playing.html',context=result_dict);
