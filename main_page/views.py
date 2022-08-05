@@ -1,9 +1,12 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from ratsnlp.nlpbook.generation import GenerationDeployArguments
 from transformers import PreTrainedTokenizerFast
 import torch
 from transformers import GPT2Config,GPT2LMHeadModel
+from .models import Lyrics,User
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
+import re
 
 # Create your views here.
 def home_view(request):
@@ -12,9 +15,26 @@ def home_view(request):
 def drawing_view(request):
     return render(request, 'main_page/drawing.html')
 
+@csrf_exempt
+def post(request):
+    if request.method=="POST":
+        user=User(id=1,password='1234',full_name='jeein');
+        lyric=Lyrics();
+        lyric.lyrics=request.POST['content'];
+        lyric.userid=user;
+        lyric.save();
+        messages.success(request,'작사가 저장되었습니다.')
+        #URL
+        return redirect('http://127.0.0.1:8000/main_page/playing')
+    else:
+        lyrics=Lyrics.objects.all();
+        #template
+        return render(request,'main_page/playing.html',{'lyrics':lyrics})
+
 def playing_view(request):
     return render(request, 'main_page/playing.html')
 
+@csrf_exempt
 def makeLyric(request,lyric):
     args=GenerationDeployArguments(
     pretrained_model_name="skt/kogpt2-base-v2",
@@ -75,6 +95,5 @@ def makeLyric(request,lyric):
         }
 
     result=inference_fn(str(lyric)+"\n ")['result']
-    result_dict={"lyric":result}
-    print(result_dict);
+    result_dict={"lyric":result};
     return render(request,'main_page/playing.html',context=result_dict);
