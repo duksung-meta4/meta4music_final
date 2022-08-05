@@ -98,3 +98,4 @@ def makeLyric(request,lyric):
     result_dict={"lyric":result};
 
     return render(request,'main_page/playing.html',context=result_dict);
+ 
