@@ -9,5 +9,7 @@ urlpatterns=[
     path('home',views.home_view, name="home"),
     path('drawing',views.drawing_view, name="drawing"),
     path('playing',views.playing_view, name="playing"),
+    path('post',views.post, name="post"),
+    path('playing/<str:lyric>/',views.makeLyric, name="makeLyric") 
 
 ]
