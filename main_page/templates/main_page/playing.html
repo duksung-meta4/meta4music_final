@@ -19,7 +19,11 @@
       return false;
     }
 
+    window.onload = function () {
+      document.getElementById('firstline').value = localStorage.getItem('myword');
+    }
   </script>
+
 </head>
 
 <body>
@@ -27,8 +31,10 @@
   {% csrf_token %}
     <div class=" mb-3">
     <label class="form-label">첫 소절 : </label>
-    <input type=" text" name="lyric">
+    <input type="text" id="firstline" name="lyric" />
     <button type="submit" onclick="return makeLyric();" class="btn btn-primary">작사시작</button><br>
+    <label class="form-label">추천 소절 : </label>
+    
     </div>
     <div class="form-floating">
       <p>작사 결과 : </p>

@@ -7,7 +7,7 @@ let confidenceSpan;
 let clearButton;
 let canvas;
 
-console.log("ml5 version:", ml5.version);
+// console.log("ml5 version:", ml5.version);
 
 //필터링
 const keyword_fillter = {
@@ -405,9 +405,9 @@ function gotResult(error, results) {
     console.error(error);
     return;
   }
-  // The results are in an array ordered by confidence.
-  console.log(results);
-  // Show the first label and confidence
+  // // The results are in an array ordered by confidence.
+  // console.log(results);
+  // // Show the first label and confidence
 
   labelSpan.html(results[0].label);
   confidenceSpan.html(floor(100 * results[0].confidence));
