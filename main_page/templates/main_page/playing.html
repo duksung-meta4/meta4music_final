@@ -21,29 +21,24 @@
     }
 
     let recommends = [];
-    window.onload = function () {
+    window.onload = function (event) {
       word = localStorage.getItem('myword');
       document.getElementById('firstline').value = word
       recommends = findPrompts(word);
       console.log(recommends);
 
-      let container = document.getElementsByClassName('container');
-      for (let i = 0; i < recommends.length; i++) {
-        let button = document.createElement('button');
-        button.innerHTML = recommends[i];
-        button.id = 'line' + i;
-        button.className="lines";
-        container[0].appendChild(button);
+      let buttons = Array.from(document.getElementsByClassName("btn btn-warning"));
+
+      for (let i = 0; i < 5; i++) {
+        buttons[i].innerHTML = recommends[i];
       }
 
     }
-    
-    let buttons = document.getElementsByClassName("lines");
-    
-    for (let button in buttons){
 
+    function setLyric(event) {
+      input = document.getElementById("firstline");
+      input.value = event.target.innerHTML;
     }
-
 
   </script>
 
@@ -54,11 +49,16 @@
   {% csrf_token %}
     <div class=" mb-3">
     <label class="form-label">첫 소절 : </label>
-    <input type="text" id="firstline" name="lyric" />
-    <button type="submit" onclick="return makeLyric();" class="btn btn-primary">작사시작</button><br>
+    <input type="text" id="firstline" name="lyric" size="40">
+    <button type="button" onclick="return makeLyric();" class="btn btn-primary">작사시작</button><br>
     </div>
     <label class="form-label">추천 소절 : </label>
     <div class="container">
+      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line1"></button>
+      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line2"></button>
+      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line3"></button>
+      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line4"></button>
+      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line5"></button>
     </div>
     <div class="form-floating">
       <p>작사 결과 : </p>
