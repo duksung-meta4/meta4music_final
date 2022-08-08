@@ -43,14 +43,18 @@
 
 <body>
     <!-- p5로 제작한 sketch js -->
-    <h1>🎨자유롭게 그림을 그려주세요!</h1>
-    <button id="clearBtn">Clear Canvas</button>
+    <h1>🎨자유롭게 그림을 그려주세요!</h1><br>
+
     <!-- 캔버스 위치 지정 -->
-    <div id="sketch-holder"></div>
-    <p><span id="label"></span> (<span id="confidence"></span>%)</p>
+    <div id="sketch-holder"></div><button id="clearBtn" class="btn btn-primary">Clear Canvas</button>
+    <div>
+        <p><span id="label"></span> (<span id="confidence"></span>%)</p>
+    </div>
+
+
 
     <div>
-        <p>😀 "무엇을 그리셨나요?(동요를 만들기 원하는 단어를 선택해주세요!)"</p>
+        <h5>😀 "무엇을 그리셨나요?(동요를 만들기 원하는 단어를 선택해주세요!)"</h5>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
                 id="radio1">
@@ -89,6 +93,8 @@
         </div>
     </div>
     <div>
+        <button type="button" class="btn btn-secondary" onclick="location.href='/main_page/home'">home으로
+            돌아가기⬅</button>
         <a><button type="submit" onclick="return handOverWord();" class="btn btn-warning">Let's Make
                 Music</button></a>
     </div>

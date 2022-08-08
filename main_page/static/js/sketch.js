@@ -11,7 +11,7 @@ let canvas;
 
 //필터링
 const keyword_fillter = {
-  aircraft_carrier: "기차",
+  aircraft_carrier: "쪽배",
   airplane: "비행기",
   alarm_clock: "시계",
   ambulance: "자동차",
@@ -158,6 +158,7 @@ const keyword_fillter = {
   hexagon: "미소",
   hockey_puck: "돈",
   hockey_stick: "돈",
+  house_plant: "새싹",
   horse: "염소",
   hospital: "미소",
   hot_air_balloon: "마법",
@@ -286,7 +287,7 @@ const keyword_fillter = {
   snowman: "눈",
   soccer_ball: "구슬",
   sock: "발",
-  speedboat: "바다",
+  speedboat: "쪽배",
   spider: "잠자리",
   spoon: "농부",
   spreadsheet: "돈",
