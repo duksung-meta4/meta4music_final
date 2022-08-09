@@ -8,12 +8,21 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
 
+SECRET = 'secret'
+
 # Create your views here.
 def home_view(request):
     return render(request, 'main_page/home.html')
 
 def drawing_view(request):
     return render(request, 'main_page/drawing.html')    
+
+#이미 가입된 아이디인지 확인.
+def get_or_none(classmodel, kwargs): 
+    try:
+        return classmodel.objects.get(id=kwargs)
+    except classmodel.DoesNotExist:
+        return None
 
 # 회원가입
 @csrf_exempt
@@ -24,9 +33,15 @@ def signup(request):
         user=User();
         user.id=request.POST['id'];
         user.password=request.POST['password'];
-        user.save();
-        messages.success(request, '회원가입되었습니다.');
-        return redirect('http://127.0.0.1:8000/main_page/signin');
+        
+        if get_or_none(User,user.id) is None:
+            user.save();
+            messages.success(request, '회원가입되었습니다.');
+            return redirect('main_page:signin');
+        else:
+            messages.error(request,'이미 등록된 id입니다.')
+            return redirect('main_page:signup');
+            
 
 # 로그인
 @csrf_exempt
