@@ -3,7 +3,7 @@ from ratsnlp.nlpbook.generation import GenerationDeployArguments
 from transformers import PreTrainedTokenizerFast
 import torch
 from transformers import GPT2Config,GPT2LMHeadModel
-from .models import Lyrics,User
+from .models import Login_User, Lyrics,User
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
@@ -17,10 +17,17 @@ def home_view(request):
 def drawing_view(request):
     return render(request, 'main_page/drawing.html')    
 
-#이미 가입된 아이디인지 확인.
-def get_or_none(classmodel, kwargs): 
+#회원가입에서 이미 가입된 아이디인지 확인.
+def signup_get_or_none(classmodel, kwargs): 
     try:
         return classmodel.objects.get(id=kwargs)
+    except classmodel.DoesNotExist:
+        return None
+
+#로그인에서 회원정보 확인
+def signin_get_or_none(classmodel, id, password): 
+    try:
+        return classmodel.objects.get(id=id, password=password);
     except classmodel.DoesNotExist:
         return None
 
@@ -34,7 +41,7 @@ def signup(request):
         user.id=request.POST['id'];
         user.password=request.POST['password'];
         
-        if get_or_none(User,user.id) is None:
+        if signup_get_or_none(User,user.id) is None:
             user.save();
             messages.success(request, '회원가입되었습니다.');
             return redirect('main_page:signin');
@@ -49,16 +56,18 @@ def signin(request):
     if request.method=="GET":
         return render(request, 'main_page/signin.html')
     if request.method=="POST":
-        userid=str(request.POST['id']);
-        userpassword=str(request.POST['password']);
-        user=authenticate(id=userid,password=userpassword);
-        print(user);
+        userid=request.POST['id'];
+        userpassword=request.POST['password'];
+        user=signin_get_or_none(User, id=userid,password=userpassword);
         if user is not None:
-            login(request,user=user)
+            login_user=Login_User();
+            login_user.id=user.id;
+            login_user.password=user.password;
+            login_user.save();
             return redirect('main_page:home')
         else:
-            messages.error(request,'ID 혹은 비밀번호 오류입니다.')
-            return redirect('main_page:signin')
+            messages.error(request,'ID 혹은 비밀번호 오류입니다.');
+            return redirect('main_page:signin');
 
 @csrf_exempt
 def post(request):
