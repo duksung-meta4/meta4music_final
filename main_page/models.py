@@ -2,9 +2,8 @@ from django.db import models
 import base64
 
 class User(models.Model): 
-    id=models.AutoField(primary_key=True);
+    id=models.CharField(max_length=50,primary_key=True);
     password=models.TextField();
-    full_name=models.CharField(max_length=45);
 
 class Lyrics(models.Model):
     id=models.AutoField(primary_key=True);

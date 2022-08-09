@@ -6,19 +6,49 @@ from transformers import GPT2Config,GPT2LMHeadModel
 from .models import Lyrics,User
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
-import re
+from django.contrib.auth import authenticate,login
 
 # Create your views here.
 def home_view(request):
     return render(request, 'main_page/home.html')
 
 def drawing_view(request):
-    return render(request, 'main_page/drawing.html')
+    return render(request, 'main_page/drawing.html')    
+
+# 회원가입
+@csrf_exempt
+def signup(request):
+    if request.method=="GET":
+        return render(request, 'main_page/signup.html');
+    if request.method=="POST":
+        user=User();
+        user.id=request.POST['id'];
+        user.password=request.POST['password'];
+        user.save();
+        messages.success(request, '회원가입되었습니다.');
+        return redirect('http://127.0.0.1:8000/main_page/signin');
+
+# 로그인
+@csrf_exempt
+def signin(request):
+    if request.method=="GET":
+        return render(request, 'main_page/signin.html')
+    if request.method=="POST":
+        userid=str(request.POST['id']);
+        userpassword=str(request.POST['password']);
+        user=authenticate(id=userid,password=userpassword);
+        print(user);
+        if user is not None:
+            login(request,user=user)
+            return redirect('main_page:home')
+        else:
+            messages.error(request,'ID 혹은 비밀번호 오류입니다.')
+            return redirect('main_page:signin')
 
 @csrf_exempt
 def post(request):
     if request.method=="POST":
-        user=User(id=1,password='1234',full_name='jeein');
+        user=User(id=1,password='1234');
         lyric=Lyrics();
         lyric.lyrics=request.POST['content'];
         lyric.userid=user;
