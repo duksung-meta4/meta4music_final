@@ -4,10 +4,6 @@ import base64
 class User(models.Model): 
     id=models.CharField(max_length=50,primary_key=True);
     password=models.TextField();
-    
-class Login_User(models.Model): 
-    id=models.CharField(max_length=50,primary_key=True);
-    password=models.TextField();
 
 class Lyrics(models.Model):
     id=models.AutoField(primary_key=True);
