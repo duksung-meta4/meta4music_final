@@ -3,7 +3,8 @@ from ratsnlp.nlpbook.generation import GenerationDeployArguments
 from transformers import PreTrainedTokenizerFast
 import torch
 from transformers import GPT2Config,GPT2LMHeadModel
-from .models import Lyrics,User
+from .models import Lyrics
+from account.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 
@@ -15,55 +16,6 @@ def home_view(request):
 def drawing_view(request):
     return render(request, 'main_page/drawing.html')    
 
-#회원가입에서 이미 가입된 아이디인지 확인.
-def signup_get_or_none(classmodel, id): 
-    try:
-        print(classmodel.objects.get(id=id));
-        return classmodel.objects.get(id=id);
-    except classmodel.DoesNotExist:
-        return None
-
-#로그인에서 회원정보 확인
-def signin_get_or_none(classmodel, id, password): 
-    try:
-        return classmodel.objects.get(id=id, password=password);
-    except classmodel.DoesNotExist:
-        return None
-
-# 회원가입
-@csrf_exempt
-def signup(request):
-    if request.method=="GET":
-        return render(request, 'main_page/signup.html');
-    if request.method=="POST":
-        user=User();
-        user.id=request.POST['id'];
-        user.password=request.POST['password'];
-        print(user.id,user.password);
-        if signup_get_or_none(User,user.id) is None:
-            user.save();
-            messages.success(request, '회원가입되었습니다.');
-            return redirect('main_page:signin');
-        else:
-            messages.error(request,'이미 등록된 id입니다.')
-            return redirect('main_page:signup');
-            
-
-# 로그인
-@csrf_exempt
-def signin(request):
-    if request.method=="GET":
-        return render(request, 'main_page/signin.html')
-    if request.method=="POST":
-        userid=request.POST['id'];
-        userpassword=request.POST['password'];
-        user=signin_get_or_none(User, id=userid,password=userpassword);
-        if user is not None:
-            messages.success(request, "로그인되었습니다.");
-            return redirect('main_page:home')
-        else:
-            messages.error(request,'ID 혹은 비밀번호 오류입니다.');
-            return redirect('main_page:signin');
 
 @csrf_exempt
 def post(request):

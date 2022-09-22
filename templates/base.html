@@ -23,9 +23,15 @@
     <a class="nav-logo">Meta4Music</a>
     <ul class="nav-ul">
       <li class="nav-item" onclick="location.href='/main_page/home'"><a>Home</a></li>
-      <li class="nav-item" onclick="location.href='/main_page/signin'"><a>Signin</a></li>
+      {% if not id %}
+      <li class="nav-item" onclick="location.href='/account/signin'"><a>Signin</a></li>
+      {% endif %}
       <li class="nav-item"><a>About</a></li>
       <li class="nav-item"><a>Contact</a></li>
+      {% if id %}
+      <li class="nav-item"><a>{{id}}님 반갑습니다!</a></li>
+      <li class="nav-item" onclick="location.href='/account/logout'"><a>Logout</a></li>
+      {% endif %}
     </ul>
   </div>
 
