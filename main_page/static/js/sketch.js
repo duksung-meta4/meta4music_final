@@ -7,11 +7,11 @@ let confidenceSpan;
 let clearButton;
 let canvas;
 
-console.log("ml5 version:", ml5.version);
+// console.log("ml5 version:", ml5.version);
 
 //필터링
 const keyword_fillter = {
-  aircraft_carrier: "기차",
+  aircraft_carrier: "쪽배",
   airplane: "비행기",
   alarm_clock: "시계",
   ambulance: "자동차",
@@ -158,6 +158,7 @@ const keyword_fillter = {
   hexagon: "미소",
   hockey_puck: "돈",
   hockey_stick: "돈",
+  house_plant: "새싹",
   horse: "염소",
   hospital: "미소",
   hot_air_balloon: "마법",
@@ -286,7 +287,7 @@ const keyword_fillter = {
   snowman: "눈",
   soccer_ball: "구슬",
   sock: "발",
-  speedboat: "바다",
+  speedboat: "쪽배",
   spider: "잠자리",
   spoon: "농부",
   spreadsheet: "돈",
@@ -405,9 +406,9 @@ function gotResult(error, results) {
     console.error(error);
     return;
   }
-  // The results are in an array ordered by confidence.
-  console.log(results);
-  // Show the first label and confidence
+  // // The results are in an array ordered by confidence.
+  // console.log(results);
+  // // Show the first label and confidence
 
   labelSpan.html(results[0].label);
   confidenceSpan.html(floor(100 * results[0].confidence));

@@ -1,0 +1,25 @@
+/* NotoSans KR import  */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+.footer{
+    font-family: 'Nanum Gothic', sans-serif;
+    background-color: #9BAEB5;
+    padding: 30px 50px;
+    color: white;
+}
+
+.footHead{
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.title{
+    float:left;
+    font-weight: bold;
+    width: 60px;
+}
+
+.footcontent > div{
+    margin-top: 10px;
+}

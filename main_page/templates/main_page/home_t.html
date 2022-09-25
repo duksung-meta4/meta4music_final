@@ -1,0 +1,30 @@
+{% extends 'base_t.html' %}
+{% load static %}
+
+{% block head %}
+<link rel='stylesheet' href="{% static 'css/home_t.css' %}" />
+{% endblock head %}
+
+{% block content %}
+<div id="content">
+    <div id="home">
+        <div class="homeContent">
+            <img src="{% static 'img/headlogo.png' %}" />
+            <p id="logoContent">내가 그린 그림으로 만들어지는 나만의 특별한 동요🎶</p>
+            <div>
+                <p class="homeButton"><a href="{% url 'main_page:drawing' %}"><button id="making">나만의 동요 만들기 바로가기 →</button></a></p>
+                <p class="homeButton"><a><button id="showing">메타버스 세계에서 다른 작품 구경하기 →</button></a></p>
+            </div>
+        </div>
+    </div>
+    <div id="services">
+        <p>Introduce our service</p>
+    </div>
+    <div id="technicque">
+        <p>The technologies used in this project</p>
+    </div>
+    <div id="team">
+        <p>We are Team '메타포'</p>
+    </div>
+</div>
+{% endblock content %}
