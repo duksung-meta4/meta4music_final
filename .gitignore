@@ -5,6 +5,9 @@
 # kogpt2파일 너무 커서 제외하고 올림
 kogpt2
 
+# gan 작곡 파일 너무 커서 제외
+run
+
 ### Django ###
 *.log
 *.pot
