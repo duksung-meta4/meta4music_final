@@ -10,4 +10,5 @@ class LoginUser(models.Model):
     id=models.CharField(max_length=50,primary_key=True);
     password=models.TextField();
     
+    
 # Create your models here.

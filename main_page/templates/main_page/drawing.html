@@ -33,9 +33,10 @@
 
         function handOverWord() {
             localStorage.setItem('myword', word);
-            window.location.replace('http://127.0.0.1:8000/main_page/playing');
+            window.location.replace('http://127.0.0.1:8000/playing');
             return false;
         }
+
 
     </script>
 
@@ -97,6 +98,7 @@
             돌아가기⬅</button>
         <a><button type="submit" onclick="return handOverWord();" class="btn btn-warning">Let's Make
                 Music</button></a>
+        <button type="submit" onclick="return save();" class="btn btn-secondary">저장하기</button>
     </div>
 
 </body>
