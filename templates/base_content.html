@@ -9,8 +9,8 @@
   <title>Meta4Music</title>
   {% block head %}
   {% endblock head %}
-  <link rel='stylesheet' href="{% static 'css/footer_t.css' %}" />
-  <link rel='stylesheet' href="{% static 'css/navbar_t.css' %}" />
+  <link rel='stylesheet' href="{% static 'css/footer_content.css' %}" />
+  <link rel='stylesheet' href="{% static 'css/navbar_content.css' %}" />
   <link rel='stylesheet' href="{% static 'css/reset.css' %}" />
 </head>
 
@@ -18,13 +18,7 @@
   <!-- navbar -->
   <div class="nav">
     <a class="nav-logo" href="{% url 'main_page:main' %}">Meta4Music</a>
-    <ul class="nav-ul">
-      <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#home">Home</a></span></li>
-      <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#services">Services</a></span></li>
-      <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#boundary">Technicque</a></span></li>
-      <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#team">Team</a></span></li>
-    </ul>
-    <a class="nav-login" href="{% url 'account:login' %}">
+    <a class="nav-login" href="{% url 'account:signin' %}">
       <div class="button">
         <p class="btnText">Sign In</p>
         <div class="btnTwo">

@@ -30,7 +30,7 @@ def post(request):
         lyric.save();
         messages.success(request,'작사가 저장되었습니다.')
         #URL
-        return redirect('http://127.0.0.1:8000/main_page/playing')
+        return redirect('http://127.0.0.1:8000/playing')
     else:
         lyrics=Lyrics.objects.all();
         #template

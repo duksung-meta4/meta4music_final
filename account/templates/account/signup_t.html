@@ -1,0 +1,20 @@
+{% extends 'base_content.html' %}
+{% load static %}
+
+{% block head %}
+<link rel='stylesheet' href="{% static 'css/account.css' %}" />
+{% endblock head %}
+
+{% block content %} 
+
+<div id="accountBody">
+    <h2>SIGN UP</h2>
+    <form method="POST" action="{% url 'account:signup2' %}">
+        {% csrf_token %}
+        <p><input type="text" placeholder="UserID" name="id" ></input></p>
+        <p><input type="password" placeholder="Password" name="password"></input></p>
+        <button type="submit" id="AccountBt">SIGN UP</button>
+    </form>
+</div>
+
+{% endblock content %}

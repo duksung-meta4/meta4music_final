@@ -16,7 +16,7 @@
   <script>
     function makeLyric() {
       let url = document.forms[0].elements['lyric'].value;
-      window.location.replace('http://127.0.0.1:8000/main_page/playing/' + url)
+      window.location.replace('http://127.0.0.1:8000/playing/' + url)
       document.getElementById('firstline').value = "";
       return false;
     }
@@ -75,7 +75,7 @@
       <p>작사 결과 : </p>
       <textarea class="form-control" placeholder="작사 내용이 출력됩니다." id="floatingTextarea2" style="height: 100px"
         name="content" id="content">{{lyric}}</textarea><br>
-      <button type="button" class="btn btn-secondary" onclick="location.href='/main_page/drawing'">돌아가기⬅</button>
+      <button type="button" class="btn btn-secondary" onclick="location.href='/drawing'">돌아가기⬅</button>
       <button type="submit" class="btn btn-secondary">저장하기</button>
     </div>
   </form>
