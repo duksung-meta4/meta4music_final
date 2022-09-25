@@ -10,6 +10,9 @@ from django.contrib import messages
 
 
 # Create your views here.
+def home(request):
+    return render(request, 'main_page/home_t.html')
+
 def home_view(request):
     return render(request, 'main_page/home.html')
 
