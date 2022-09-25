@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,33 +10,96 @@
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.min.js"></script>
     <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <script src="/static/js/sketch.js"></script>
+    <link rel="stylesheet" href="{% static 'css/drawing.css' %}">
+
     <style>
         body {
-          background-color: #EEE;
+            background-color: #EEE;
         }
     </style>
+
+    <script>
+        let word = "";
+        function fnRadioName(event) {
+            const radioId = event.target.id;
+            const query = 'label[for="' + radioId + '"]';
+            const text = document.querySelector(query).innerText;
+            console.log(text);
+            word = text;
+        }
+
+        function handOverWord() {
+            localStorage.setItem('myword', word);
+            window.location.replace('http://127.0.0.1:8000/main_page/playing');
+            return false;
+        }
+
+    </script>
+
 </head>
+
 <body>
     <!-- p5로 제작한 sketch js -->
-    <h1>🎨자유롭게 그림을 그려주세요!</h1>
-    <button id="clearBtn">Clear Canvas</button>
+    <h1>🎨자유롭게 그림을 그려주세요!</h1><br>
+
     <!-- 캔버스 위치 지정 -->
-    <div id="sketch-holder"></div>
-    <p><span id="label"></span> (<span id="confidence"></span>%)</p>
+    <div id="sketch-holder"></div><button id="clearBtn" class="btn btn-primary">Clear Canvas</button>
     <div>
-        <p>😀 "무엇을 그리셨나요?(그림을 그려주세요!)"</p>
-        <p><span id="label1"></span></p>
-        <p><span id="label2"></span></p>
-        <p><span id="label3"></span></p>
-        <p><span id="label4"></span></p>
-        <p><span id="label5"></span></p>
-        <p><span id="label6"></span></p>
+        <p><span id="label"></span> (<span id="confidence"></span>%)</p>
+    </div>
+
+
+
+    <div>
+        <h5>😀 "무엇을 그리셨나요?(동요를 만들기 원하는 단어를 선택해주세요!)"</h5>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
+                id="radio1">
+            <label class="form-check-label" for="radio1" id="label1">
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
+                id="radio2">
+            <label class="form-check-label" for="radio2" id="label2">
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
+                id="radio3">
+            <label class="form-check-label" for="radio3" id="label3">
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
+                id="radio4">
+            <label class="form-check-label" for="radio4" id="label4">
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
+                id="radio5">
+            <label class="form-check-label" for="radio5" id="label5">
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
+                id="radio6">
+            <label class="form-check-label" for="radio6" id="label6">
+            </label>
+        </div>
     </div>
     <div>
-        <p>😀 "선택한 키워드로 작사에 필요한 첫 음절을 추천합니다"</p>
-        <p>"버튼을 눌러주세요"</p>
-        <button id="">첫 음절 추천 받기</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='/main_page/home'">home으로
+            돌아가기⬅</button>
+        <a><button type="submit" onclick="return handOverWord();" class="btn btn-warning">Let's Make
+                Music</button></a>
     </div>
+
 </body>
+
+
 </html>

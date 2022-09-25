@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/django
 # Edit at https://www.toptal.com/developers/gitignore?templates=django
 
+# kogpt2파일 너무 커서 제외하고 올림
+kogpt2
+
 ### Django ###
 *.log
 *.pot
