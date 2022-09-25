@@ -4,7 +4,7 @@ from transformers import PreTrainedTokenizerFast
 import torch
 from transformers import GPT2Config,GPT2LMHeadModel
 from .models import Lyrics
-from account.models import User
+from account.models import LoginUser
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 
@@ -23,7 +23,7 @@ def drawing_view(request):
 @csrf_exempt
 def post(request):
     if request.method=="POST":
-        user=User(id=1,password='1234');
+        user=LoginUser.objects.all()[:1][0];      
         lyric=Lyrics();
         lyric.lyrics=request.POST['content'];
         lyric.userid=user;
