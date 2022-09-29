@@ -12,28 +12,70 @@
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
   <!-- JavaScript Bundle with Popper -->
   <link rel="stylesheet" href="{% static 'css/playing.css' %}">
+  <script src="/static/js/lyric.js"></script>
   <script>
     function makeLyric() {
       let url = document.forms[0].elements['lyric'].value;
-      window.location.replace('http://127.0.0.1:8000/main_page/playing/' + url)
+      window.location.replace('http://127.0.0.1:8000/playing/' + url)
+      document.getElementById('firstline').value = "";
       return false;
     }
 
+    let recommends = [];
+
+
+    window.onload = function (event) {
+      word = localStorage.getItem('myword');
+      document.getElementById('firstline').value = word
+      recommends = findPrompts(word);
+      let buttons = Array.from(document.getElementsByClassName("btn btn-warning"));
+      for (let i = 0; i < 5; i++) {
+        buttons[i].innerHTML = recommends[i];
+      }
+
+    }
+
+    function setFirstLine(event) {
+      recommends.splice(0);
+      word = event.target.value
+      recommends = findPrompts(word);
+      let buttons = Array.from(document.getElementsByClassName("btn btn-warning"));
+      for (let i = 0; i < 5; i++) {
+        buttons[i].innerHTML = recommends[i];
+      }
+    }
+
+    function setLyric(event) {
+      input = document.getElementById("firstline");
+      input.value = event.target.innerHTML;
+    }
+
   </script>
+
 </head>
 
 <body>
-  <form class="my-form" method="POST" action="{% url 'main_page:post' %}"">
+  <form class="my-form" method="POST" action="{% url 'main_page:post' %}">
   {% csrf_token %}
     <div class=" mb-3">
     <label class="form-label">첫 소절 : </label>
-    <input type=" text" name="lyric">
-    <button type="submit" onclick="return makeLyric();" class="btn btn-primary">작사시작</button><br>
+    <input type="text" placeholder="단어를 직접 입력할 수 있습니다." id="firstline" name="lyric" size="40"
+      onkeyup="setFirstLine(event)">
+    <button type="button" onclick="return makeLyric();" class="btn btn-primary">작사시작</button><br>
+    </div>
+    <label class="form-label">추천 소절 : </label>
+    <div class="container">
+      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line1"></button>
+      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line2"></button>
+      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line3"></button>
+      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line4"></button>
+      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line5"></button>
     </div>
     <div class="form-floating">
       <p>작사 결과 : </p>
       <textarea class="form-control" placeholder="작사 내용이 출력됩니다." id="floatingTextarea2" style="height: 100px"
-        name="content" id="content">{{lyric}}</textarea>
+        name="content" id="content">{{lyric}}</textarea><br>
+      <button type="button" class="btn btn-secondary" onclick="location.href='/drawing'">돌아가기⬅</button>
       <button type="submit" class="btn btn-secondary">저장하기</button>
     </div>
   </form>
@@ -56,10 +98,8 @@
 
     <hr />
   </div>
+
 </body>
 
-<<<<<<< HEAD
+
 </html>
-=======
-</html>
->>>>>>> 5f984d16b09664a545d962087066165d35159e3c

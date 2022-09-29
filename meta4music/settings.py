@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-(*^^ajyl3t%=r!8p65on*y_=7nxo_m)j3m=5w75yo8r4nqol#^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = ['127.0.0.1'] 
 
 
 # Application definition
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_page.apps.MainPageConfig',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -114,12 +116,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -132,7 +135,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'main_page\\static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'main_page\\static'),os.path.join(BASE_DIR,'account\\static'))
 
 
 # STATIC_ROOT = [os.path.join(BASE_DIR,'static')]

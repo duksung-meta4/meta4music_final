@@ -1,0 +1,33 @@
+{% extends 'base_content.html' %}
+{% load static %}
+
+{% block head %}
+<link rel='stylesheet' href="{% static 'css/account.css' %}" />
+{% endblock head %}
+
+{% block content %} 
+
+<div id="accountBody">
+    <h2>Login</h2>
+    <form method="POST" action="{% url 'account:login' %}">
+        {% csrf_token %}
+        <p><input type="text" placeholder="UserId" name="id"></input></p>
+        <p><input type="password" placeholder="Password" name="password" ></input></p>
+        <p id="question">계정이 없으신가요? <span><a href="{% url 'account:signup2' %}">회원가입 바로가기</a></span></p>
+        <button type="submit" id="AccountBt">Login</button>
+    </form>
+
+    <div>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert">
+                {{ message.message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}
