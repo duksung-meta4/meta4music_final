@@ -119,12 +119,16 @@
 </head>
 
 <body>
-
-  <div class="mb-3">
-    <p class="label" style="display:inline">선택한 키워드 :  <h5 id="chosen_keyword" style="display:inline"></h5></p>
-    <button type="button" onclick="return makeSong();" class="btn btn-primary" id="start">작곡시작</button><br>
-    <button type="button" onclick="return lookResult();" class="btn btn-primary" id="result">작곡 결과 보기</button><br>
-  </div>
+  <form class="my-form" method="POST" action="{% url 'main_page:post2' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <p class="label" style="display:inline">선택한 키워드 :  <h5 id="chosen_keyword" style="display:inline"></h5></p>
+      <button type="button" onclick="return makeSong();" class="btn btn-primary" id="start">작곡시작</button><br>
+      <button type="button" onclick="return lookResult();" class="btn btn-primary" id="result">작곡 결과 보기</button><br>
+      <textarea class="form-control" placeholder="작곡 루트가 출력됩니다." id="floatingTextarea2" name="content" id="content" style="display:none">{{midi}}</textarea><br>
+      <button type="submit" class="btn btn-secondary">저장하기</button>
+    </div>
+  </form>
 
   <div class="controls" id="midi-control" style="display: none;">
     <section id="section1">
@@ -144,6 +148,24 @@
     </section>
   </div>
   <!--<h1>{{ midi }}</h1>-->
+
+  <div class="col-sm-12">
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="alert alert-info">
+        {{ message.message }}
+        {{ message.tags }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    {% block content %}
+    {% endblock content %}
+
+    <hr />
+  </div>
 </body>
 
 <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>

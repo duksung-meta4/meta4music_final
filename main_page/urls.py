@@ -11,6 +11,7 @@ urlpatterns=[
     path('drawing',views.drawing_view, name="drawing"),
     path('playing',views.playing_view, name="playing"),
     path('post',views.post, name="post"),
+    path('post2',views.post2, name="post2"),
     path('playing/<str:lyric>/',views.makeLyric, name="makeLyric"),
     path('composing/',views.compose, name="compose"),
     path('composing/<str:keyword>/',views.composing, name="composing"), 

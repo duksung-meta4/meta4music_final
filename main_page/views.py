@@ -3,7 +3,7 @@ from ratsnlp.nlpbook.generation import GenerationDeployArguments
 from transformers import PreTrainedTokenizerFast
 import torch
 from transformers import GPT2Config,GPT2LMHeadModel
-from .models import Lyrics
+from .models import Lyrics, Compose
 from account.models import LoginUser
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
@@ -46,6 +46,20 @@ def post(request):
         lyrics=Lyrics.objects.all();
         #template
         return render(request,'main_page/playing.html',{'lyrics':lyrics})
+
+
+@csrf_exempt
+def post2(request):
+    if request.method=="POST":
+        user=LoginUser.objects.all()[:1][0];      
+        compose=Compose();
+        compose.music=request.POST['content'];
+        compose.adminid=user;
+        compose.save();
+        messages.success(request,'작곡이 저장되었습니다.')
+
+    return render(request,'main_page/composing.html')
+
 
 def playing_view(request):
     return render(request, 'main_page/playing.html')
