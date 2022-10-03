@@ -19,11 +19,16 @@ from music21 import instrument, note, stream, chord, duration, converter
 from .RNNAttention import create_network, sample_with_temp
 import matplotlib.pyplot as plt
 
-
 # Create your views here.
 def home(request):
-    return render(request, 'main_page/home_t.html')
-
+    try:
+        user_id=LoginUser.objects.all()[:1][0].id
+    except:
+        return render(request, 'main_page/home_t.html')
+    else:
+        user_dict={"id":user_id};
+        return render(request, 'main_page/home_t.html',context=user_dict)
+    
 def home_view(request):
     return render(request, 'main_page/home.html')
 
@@ -64,6 +69,9 @@ def post2(request):
 def playing_view(request):
     return render(request, 'main_page/playing.html')
 
+def result(request):
+    return render(request, 'main_page/result.html')
+
 @csrf_exempt
 def makeLyric(request,lyric):
     args=GenerationDeployArguments(
@@ -85,14 +93,14 @@ def makeLyric(request,lyric):
     model.load_state_dict({k.replace("model.",""): v for k,v in fine_tuned_model_ckpt['state_dict'].items()})
     model.eval()
     def inference_fn(
-    prompt,
-    min_length=30,
-    max_length=60,
-    top_p=1.0,
-    top_k=50,
-    repetition_penalty=1.0,
-    no_repeat_ngram_size=3,
-    temperature=0.5,
+        prompt,
+        min_length=30,
+        max_length=60,
+        top_p=1.0,
+        top_k=50,
+        repetition_penalty=1.0,
+        no_repeat_ngram_size=3,
+        temperature=0.5,
     ):
         try :
             input_ids=tokenizer.encode(prompt,return_tensors="pt")

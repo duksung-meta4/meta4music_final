@@ -23,6 +23,10 @@
       <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#services">Services</a></span></li>
       <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#boundary">Technicque</a></span></li>
       <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#team">Team</a></span></li>
+      {% if id %}
+      <li class="nav-item"><a>{{id}}님 반갑습니다!</a></li>
+      <li class="nav-item" onclick="location.href='/account/logout'"><a>Logout</a></li>
+      {% endif %}
     </ul>
     <a class="nav-login" href="{% url 'account:login' %}">
       <div class="button">
@@ -44,11 +48,18 @@
       <p>2022 덕성여자대학교 컴퓨터공학과 졸업프로젝트</p>
     </div>
     <div class="footcontent">
-      <div><p class="title">주제</p><p class="content">딥러닝을 이용한 동요 작사·작곡 프로그램</p></div>
-      <div><p class="title">팀</p><p class="content">강태영, 신효정, 박지인, 김지민</p></div>
+      <div>
+        <p class="title">주제</p>
+        <p class="content">딥러닝을 이용한 동요 작사·작곡 프로그램</p>
+      </div>
+      <div>
+        <p class="title">팀</p>
+        <p class="content">강태영, 신효정, 박지인, 김지민</p>
+      </div>
     </div>
   </div>
 
   <script src="/static/js/navbar.js"></script>
 </body>
+
 </html>
