@@ -12,6 +12,9 @@
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
     <link rel="stylesheet" href="{% static 'css/result.css' %}">
+    <!-- midi player -->
+    <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+
 
 
 </head>
@@ -20,6 +23,25 @@
     <div>
         <h4>작사 작곡 결과</h4>
         <textarea placeholder="작사 내용이 출력됩니다." style="height:100px; width:500px;" >{{lyrics}}</textarea><br>
+
+        <div class="controls" id="midi-control">
+            <section id="section1">
+                <h2>1 player, 2 visualizers</h2>
+                <midi-visualizer
+                    type="piano-roll"
+                    src="{% static midi %}">
+                </midi-visualizer>
+                <midi-visualizer
+                    type="staff"
+                    src="{% static midi %}">
+                </midi-visualizer>
+                <midi-player
+                    src="{% static midi %}"
+                    sound-font visualizer="#section1 midi-visualizer">
+                </midi-player>
+            </section>
+        </div>
+
     </div>
 
 </body>

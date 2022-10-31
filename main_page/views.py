@@ -73,8 +73,12 @@ def result_view(request):
     lyric=Lyrics.objects.last();
     lyrics=lyric.lyrics;
     
-    lyric_dict={"lyrics":lyrics};
-    return render(request, 'main_page/result.html',context=lyric_dict);
+    compose = Compose.objects.last();
+    midi = compose.music;
+
+    dict={"lyrics":lyrics, "midi": midi};
+
+    return render(request, 'main_page/result.html',context= dict);
 
 @csrf_exempt
 def makeLyric(request,lyric):
