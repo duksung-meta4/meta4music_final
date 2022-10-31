@@ -24,6 +24,7 @@
       <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#boundary">Technicque</a></span></li>
       <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#team">Team</a></span></li>
     </ul>
+    {% if not id %}
     <a class="nav-login" href="{% url 'account:login' %}">
       <div class="button">
         <p class="btnText">Sign In</p>
@@ -32,7 +33,12 @@
         </div>
       </div>
     </a>
-  </div>
+    {% endif %}
+    {% if id %}
+      <li class="nav-item"><a>{{id}}님 반갑습니다!</a></li>
+      <li class="nav-item" onclick="location.href='/account/logout'"><a>Logout</a></li>
+    {% endif %}
+    </div>
 
   <!-- content -->
   {% block content %}

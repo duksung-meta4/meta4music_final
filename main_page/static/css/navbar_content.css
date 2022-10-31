@@ -9,6 +9,10 @@ a{
   text-decoration: none;
 }
 
+.content{
+  height: 100%;
+}
+
 .nav{
     font-family: 'Nanum Gothic', sans-serif;
     box-sizing: border-box;
@@ -90,7 +94,7 @@ a{
   }
 
   @media screen and (max-width: 768px) {
-    .nav{
+    /* .nav{
         flex-direction: column;
         align-items: flex-end;
     }
@@ -103,6 +107,10 @@ a{
 
     .nav-item{
         padding: 7px 0px;
+    } */
+    
+    .nav{
+      display: none;
     }
 }
 
