@@ -69,8 +69,12 @@ def post2(request):
 def playing_view(request):
     return render(request, 'main_page/playing.html')
 
-def result(request):
-    return render(request, 'main_page/result.html')
+def result_view(request):
+    lyric=Lyrics.objects.last();
+    lyrics=lyric.lyrics;
+    
+    lyric_dict={"lyrics":lyrics};
+    return render(request, 'main_page/result.html',context=lyric_dict);
 
 @csrf_exempt
 def makeLyric(request,lyric):
@@ -307,3 +311,4 @@ def composing(request, keyword):
     midi = 'run/compose/0007_child/{}/output/output-'.format(keyword)+ timestr + '.mid'
 
     return render(request, 'main_page/composing.html', context = {'midi': midi})
+
