@@ -361,11 +361,13 @@ const keyword_fillter = {
 
 function preload() {
   //분류기 생성
+  console.log("로딩 중");
   classifier = ml5.imageClassifier("DoodleNet");
 }
 
 function setup() {
   //캔버스 크기 고정
+
   canvas = createCanvas(280, 280);
   canvas.parent("sketch-holder");
   background(255);
@@ -376,8 +378,8 @@ function setup() {
   clearButton.mousePressed(clearCanvas);
 
   // Create 'label' and 'confidence' div to hold results
-  labelSpan = select("#label");
-  confidenceSpan = select("#confidence");
+  // labelSpan = select("#label");
+  // confidenceSpan = select("#confidence");
 
   labelSpan1 = select("#label1");
   labelSpan2 = select("#label2");
@@ -410,8 +412,8 @@ function gotResult(error, results) {
   // console.log(results);
   // // Show the first label and confidence
 
-  labelSpan.html(results[0].label);
-  confidenceSpan.html(floor(100 * results[0].confidence));
+  // labelSpan.html(results[0].label);
+  // confidenceSpan.html(floor(100 * results[0].confidence));
 
   labelSpan1.html(keyword_fillter[results[0].label]);
   labelSpan2.html(keyword_fillter[results[1].label]);
