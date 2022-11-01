@@ -165,3 +165,37 @@ a{
   text-decoration: none;
 }
 
+.dropdown{
+  position: relative;
+}
+
+#dropbtn{
+  width: 40px;
+  cursor: pointer;
+}
+
+.dropdown-content{
+  position: absolute;
+  display: none;
+  left: -90px;
+  flex-direction: column;
+  width: 130px;
+  z-index : 1;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: white;
+}
+
+.dropdown-content a {
+  text-decoration: none;
+  color: #54666C;
+  text-align: right;
+  padding: 15px;
+}
+
+.dropdown-content a:hover{
+  background-color: #EEEEEE;
+}
+
+.dropdown:hover .dropdown-content{
+  display: flex;
+}
