@@ -23,10 +23,6 @@
       <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#services">Services</a></span></li>
       <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#boundary">Technicque</a></span></li>
       <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#team">Team</a></span></li>
-      {% if id %}
-      <li class="nav-item"><a>{{id}}님 반갑습니다!</a></li>
-      <li class="nav-item" onclick="location.href='/account/logout'"><a>Logout</a></li>
-      {% endif %}
     </ul>
     {% if not id %}
     <a class="nav-login" href="{% url 'account:login' %}">
