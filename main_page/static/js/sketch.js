@@ -390,8 +390,8 @@ function setup() {
   labelSpan5 = select("#label5");
   labelSpan6 = select("#label6");
 
-  button = createButton("snap");
-  button.mousePressed(takesnap);
+  // button = createButton("snap");
+  // button.mousePressed(takesnap);
 }
 
 function clearCanvas() {
