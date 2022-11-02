@@ -8,6 +8,9 @@ kogpt2
 # gan 작곡 파일 너무 커서 제외
 run
 
+# 이미지 저장 파일 너무 커서 제외
+resultImg
+
 ### Django ###
 *.log
 *.pot

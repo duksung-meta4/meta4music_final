@@ -1,13 +1,16 @@
+import random
 from django.shortcuts import render,redirect
 from ratsnlp.nlpbook.generation import GenerationDeployArguments
 from transformers import PreTrainedTokenizerFast
 import torch
 from transformers import GPT2Config,GPT2LMHeadModel
-from .models import Lyrics, Compose
+from .models import Lyrics, Compose, Images
 from account.models import LoginUser
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 
+# 스샷
+import base64
 
 # 작곡
 import pickle as pkl
@@ -34,6 +37,38 @@ def home_view(request):
 
 def drawing_view(request):
     return render(request, 'main_page/drawing.html')    
+
+
+# canvas 이미지 저장
+@csrf_exempt
+def canvasToImage(request):
+    if request.method == "POST":
+        data = request.POST.__getitem__('data')
+        data = data[22:]
+        number = random.randrange(1,10000)
+
+        # 저장할 경로 및 파일명을 지정
+        path = str('main_page/static/')
+        filename = 'resultImg/image' + str(number) + '.png'
+
+        # "wb" (즉, 바이너리파일 쓰기전용)으로 파일을 open
+        image = open(path+filename, "wb")
+
+        # `base64.b64decode()`를 통하여 디코딩을 하고 파일에 써준다.
+        image.write(base64.b64decode(data))
+        image.close()
+
+        # sql에 저장
+        user=LoginUser.objects.all()[:1][0]     
+        img=Images()
+        img.canvas = filename
+        img.adminid=user
+        img.save()
+        messages.success(request,'사진이 저장되었습니다.')
+
+    # filename을 json형식에 맞추어 response를 보내준다.
+    # answer = {'filename':filename}
+    return render(request, 'main_page/drawing.html')
 
 
 @csrf_exempt
@@ -76,7 +111,10 @@ def result_view(request):
     compose = Compose.objects.last();
     midi = compose.music;
 
-    dict={"lyrics":lyrics, "midi": midi};
+    img = Images.objects.last();
+    image = img.canvas;
+
+    dict={"lyrics":lyrics, "midi": midi, "image": image};
 
     return render(request, 'main_page/result.html',context= dict);
 

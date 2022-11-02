@@ -16,4 +16,5 @@ urlpatterns=[
     path('playing/<str:lyric>/',views.makeLyric, name="makeLyric"),
     path('composing/',views.compose, name="compose"),
     path('composing/<str:keyword>/',views.composing, name="composing"), 
+    path('canvasToImage', views.canvasToImage, name="canvasToImage"),
 ]

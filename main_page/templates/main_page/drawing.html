@@ -15,6 +15,10 @@
     <script src="/static/js/sketch.js"></script>
     <link rel="stylesheet" href="{% static 'css/drawing.css' %}">
 
+    <!-- html2canvas -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
     <style>
         body {
             background-color: #EEE;
@@ -35,6 +39,26 @@
             localStorage.setItem('myword', word);
             window.location.replace('http://127.0.0.1:8000/playing');
             return false;
+        }
+
+
+        // html2canvas를 이용한 canvas 스샷
+        function saveImage(){
+                html2canvas($('#defaultCanvas0').get(0)).then(function(canvas){
+                    var data = canvas.toDataURL();
+                    
+                    // ajax 통신
+                    $.ajax({
+                        type: 'POST',
+                        url: 'canvasToImage',
+                        data: {data:data},
+                        success: function(result){
+                            var filename = result['filename'];
+                        },
+                        error: function(e){ alert("에러발생");}
+                    });
+                });
+         
         }
 
 
@@ -98,7 +122,7 @@
             돌아가기⬅</button>
         <a><button type="submit" onclick="return handOverWord();" class="btn btn-warning">Let's Make
                 Music</button></a>
-        <button type="submit" onclick="return save();" class="btn btn-secondary">저장하기</button>
+        <button type="submit" onclick="return saveImage()" class="btn btn-secondary">저장하기</button>
     </div>
 
 </body>
