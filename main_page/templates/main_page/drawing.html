@@ -8,6 +8,10 @@
 <link rel="stylesheet" href="{% static 'css/drawing.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<!-- html2canvas -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
 <script>
     let word = "";
     function fnRadioName(event) {
@@ -128,17 +132,6 @@
     </div>
 
     <div style="display:hidden; height:50px"></div>
-    {% comment %} 
-        navbar에 home 버튼이 있어 주석처리 합니다. - 태영 - 
-        <button type="button" class="btn btn-secondary" onclick="location.href='/main_page/home'">home으로
-        돌아가기⬅</button> 
-    {% endcomment %}
-
-    {% comment %} 
-        저장하기버튼 어떻게 구현되었는지 묻고 다시 살리겠습니다. - 태영 - 
-        <button type="submit" onclick="return save();" class="btn btn-secondary">저장하기</button> 
-    {% endcomment %}
-
 </div>
 
 
