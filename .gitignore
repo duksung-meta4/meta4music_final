@@ -5,6 +5,12 @@
 # kogpt2파일 너무 커서 제외하고 올림
 kogpt2
 
+# gan 작곡 파일 너무 커서 제외
+run
+
+# 이미지 저장 파일 너무 커서 제외
+resultImg
+
 ### Django ###
 *.log
 *.pot
@@ -14,6 +20,8 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
+kogpt2
+run
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
