@@ -79,6 +79,20 @@
 
 
     <div>
+        <div class="nav">
+            <a class="nav-logo" href="{% url 'main_page:main' %}">Meta4Music</a>
+            {% if id %}
+              <li class="nav-login welcome">
+                <div class="dropdown">
+                  <img id="dropbtn" src="{% static 'img/profile_icon.png' %}" />
+                  <div class="dropdown-content">
+                    <a href="#">{{id}}님</a>
+                    <a onclick="location.href='/account/logout'">로그아웃</a>
+                  </div>
+                </div>
+              </li>
+            {% endif %}
+          </div>
         <h5>😀 "무엇을 그리셨나요?(동요를 만들기 원하는 단어를 선택해주세요!)"</h5>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"

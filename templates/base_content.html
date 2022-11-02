@@ -18,14 +18,17 @@
   <!-- navbar -->
   <div class="nav">
     <a class="nav-logo" href="{% url 'main_page:main' %}">Meta4Music</a>
-    <a class="nav-login" href="{% url 'account:login' %}">
-      <div class="button">
-        <p class="btnText">Sign In</p>
-        <div class="btnTwo">
-          <p class="btnText2">Go!</p>
+    {% if id %}
+      <li class="nav-login welcome">
+        <div class="dropdown">
+          <img id="dropbtn" src="{% static 'img/profile_icon.png' %}" />
+          <div class="dropdown-content">
+            <a href="#">{{id}}님</a>
+            <a onclick="location.href='/account/logout'">로그아웃</a>
+          </div>
         </div>
-      </div>
-    </a>
+      </li>
+    {% endif %}
   </div>
 
   <!-- content -->
