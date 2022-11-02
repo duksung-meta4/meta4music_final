@@ -365,6 +365,8 @@ function preload() {
   classifier = ml5.imageClassifier("DoodleNet");
 }
 
+let button;
+
 function setup() {
   //캔버스 크기 고정
 
@@ -387,8 +389,13 @@ function setup() {
   labelSpan4 = select("#label4");
   labelSpan5 = select("#label5");
   labelSpan6 = select("#label6");
+
+
+  button = createButton('snap');
+  button.mousePressed(takesnap);
 }
 
+  
 function clearCanvas() {
   background(255);
 }

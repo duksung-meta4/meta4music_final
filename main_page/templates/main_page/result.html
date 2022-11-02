@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>결과보기</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <link rel="stylesheet" href="{% static 'css/result.css' %}">
+    <!-- midi player -->
+    <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+
+
+
+</head>
+
+<body>
+    <div>
+        <h4>작사 작곡 결과</h4>
+        
+        <img src="{% static image %}"><br>
+        <textarea placeholder="작사 내용이 출력됩니다." style="height:100px; width:500px;" >{{lyrics}}</textarea><br>
+
+        <div class="controls" id="midi-control">
+            <section id="section1">
+                <h2>1 player, 2 visualizers</h2>
+                <midi-visualizer
+                    type="piano-roll"
+                    src="{% static midi %}">
+                </midi-visualizer>
+                <midi-visualizer
+                    type="staff"
+                    src="{% static midi %}">
+                </midi-visualizer>
+                <midi-player
+                    src="{% static midi %}"
+                    sound-font visualizer="#section1 midi-visualizer">
+                </midi-player>
+            </section>
+        </div>
+
+    </div>
+
+</body>
+
+
+</html>
