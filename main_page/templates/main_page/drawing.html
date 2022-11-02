@@ -1,28 +1,45 @@
-{% extends 'base_content.html' %}
 {% load static %}
 
-{% block head %}
-<script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.min.js"></script>
-<script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
-<script src="/static/js/sketch.js"></script>
-<link rel="stylesheet" href="{% static 'css/drawing.css' %}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!DOCTYPE html>
+<html lang="en">
 
-<script>
-    let word = "";
-    function fnRadioName(event) {
-        const radioId = event.target.id;
-        const query = 'label[for="' + radioId + '"]';
-        const text = document.querySelector(query).innerText;
-        //console.log(text);
-        word = text;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.min.js"></script>
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="/static/js/sketch.js"></script>
+    <link rel="stylesheet" href="{% static 'css/drawing.css' %}">
 
-    function handOverWord() {
-        localStorage.setItem('myword', word);
-        window.location.replace('http://127.0.0.1:8000/playing');
-        return false;
-    }
+    <!-- html2canvas -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+    <style>
+        body {
+            background-color: #EEE;
+        }
+    </style>
+
+    <script>
+        let word = "";
+        function fnRadioName(event) {
+            const radioId = event.target.id;
+            const query = 'label[for="' + radioId + '"]';
+            const text = document.querySelector(query).innerText;
+            console.log(text);
+            word = text;
+        }
+
+        function handOverWord() {
+            localStorage.setItem('myword', word);
+            window.location.replace('http://127.0.0.1:8000/playing');
+            return false;
+        }
 
 
         // html2canvas를 이용한 canvas 스샷
@@ -41,6 +58,7 @@
                         error: function(e){ alert("에러발생");}
                     });
                 });
+         
         }
 
 
@@ -53,80 +71,53 @@
     <h1>🎨자유롭게 그림을 그려주세요!</h1><br>
 
     <!-- 캔버스 위치 지정 -->
-    <div id="sketch-holder"></div>
-    <div id="sketch-button">
-        <button id="clearBtn">🗑️</button>    
-    </div>
-    
-    {% comment %} <div>
+    <div id="sketch-holder"></div><button id="clearBtn" class="btn btn-primary">Clear Canvas</button>
+    <div>
         <p><span id="label"></span> (<span id="confidence"></span>%)</p>
-    </div> {% endcomment %}
+    </div>
 
-    <div class="drawing-content">
-        <div>
-            <div class="question">
-                <img src="{% static 'img/smile.png' %}" />
-                <p>"무엇을 그리셨나요? (동요를 만들기 원하는 단어를 선택해주세요!)"</p>
-            </div>
-            <div class="checkbox">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
-                        id="radio1">
-                    <label class="form-check-label" for="radio1" id="label1">
-                        <i class="fa fa-spinner fa-spin"></i>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
-                        id="radio2">
-                    <label class="form-check-label" for="radio2" id="label2">
-                        <i class="fa fa-spinner fa-spin"></i>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
-                        id="radio3">
-                    <label class="form-check-label" for="radio3" id="label3">
-                        <i class="fa fa-spinner fa-spin"></i>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
-                        id="radio4">
-                    <label class="form-check-label" for="radio4" id="label4">
-                        <i class="fa fa-spinner fa-spin"></i>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
-                        id="radio5">
-                    <label class="form-check-label" for="radio5" id="label5">
-                        <i class="fa fa-spinner fa-spin"></i>
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
-                        id="radio6">
-                    <label class="form-check-label" for="radio6" id="label6">
-                        <i class="fa fa-spinner fa-spin"></i>
-                    </label>
-                </div>
-            </div>
-            <div class="question">
-                <img src="{% static 'img/smile.png' %}" />
-                <div style="display:flex;flex-direction:column;">
-                    <p style="margin-bottom:10px">"선택학 키워드로 작사에 필요한 첫 음절을 추천합니다"</p>
-                    <p>"버튼을 눌러주세요"</p>
-                </div>
-            </div>
-            <a><button type="submit" onclick="return handOverWord();" class="recommend">
-                첫 음절 추천 받기</button></a>
+
+
+    <div>
+        <h5>😀 "무엇을 그리셨나요?(동요를 만들기 원하는 단어를 선택해주세요!)"</h5>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
+                id="radio1">
+            <label class="form-check-label" for="radio1" id="label1">
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
+                id="radio2">
+            <label class="form-check-label" for="radio2" id="label2">
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
+                id="radio3">
+            <label class="form-check-label" for="radio3" id="label3">
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
+                id="radio4">
+            <label class="form-check-label" for="radio4" id="label4">
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
+                id="radio5">
+            <label class="form-check-label" for="radio5" id="label5">
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" onclick="fnRadioName(event);"
+                id="radio6">
+            <label class="form-check-label" for="radio6" id="label6">
+            </label>
         </div>
     </div>
-
-    <div style="display:hidden; height:50px"></div>
-    {% comment %} 
-        navbar에 home 버튼이 있어 주석처리 합니다. - 태영 - 
+    <div>
         <button type="button" class="btn btn-secondary" onclick="location.href='/main_page/home'">home으로
             돌아가기⬅</button>
         <a><button type="submit" onclick="return handOverWord();" class="btn btn-warning">Let's Make
@@ -134,9 +125,7 @@
         <button type="submit" onclick="return saveImage()" class="btn btn-secondary">저장하기</button>
     </div>
 
-    {% endcomment %}
-
-</div>
+</body>
 
 
-{% endblock content %}
+</html>
