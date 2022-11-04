@@ -50,6 +50,13 @@
   padding: 20px 30px;
 }
 
+.blind{
+  /* display: none; 
+  클릭 애니메이션 효과 넣을 때 사용 예정
+  */
+  margin-bottom: 35px;
+}
+
 .question{
   font-family: 'Nanum Gothic', sans-serif;
   display: flex;
@@ -119,6 +126,22 @@ input[type=radio]:hover + label{
   cursor: pointer;
 }
 
+.saveButton{
+  margin-left: 80px;
+  background-color: #80D4D6;
+  font-size: 17px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 35px;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+
 .recommend:hover{
+  background-color: #6DB2B4;
+}
+
+.saveButton:hover{
   background-color: #6DB2B4;
 }
