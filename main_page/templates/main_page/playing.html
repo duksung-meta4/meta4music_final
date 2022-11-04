@@ -17,7 +17,7 @@
     function makeLyric() {
       
       let url = document.forms[0].elements['lyric'].value;
-      window.location.replace('http://127.0.0.1:8000/main_page/playing/' + url)
+      window.location.replace('http://127.0.0.1:8000/playing/' + url)
       document.getElementById('firstline').value = "";
       return false;
     }

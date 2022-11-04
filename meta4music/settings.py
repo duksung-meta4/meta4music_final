@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 from django.contrib import messages
+import pymysql
+
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,6 +83,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'meta4music.wsgi.application'
+
+pymysql.install_as_MySQLdb()
 
 
 # Database
