@@ -60,6 +60,43 @@
 
 
 #services{
-    height: 100vh;
+    height: 80vh;
+    padding-top: 100px;
     background-color: #EEEFF4;
+}
+
+#boundary{
+    height: 100px;
+    background-color: #EEEFF4;
+}
+
+#technicque{
+    background-image: url('/static/img/background3.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 0;
+    padding-top: 66.64%;
+    position: relative;
+}
+
+#team{
+    height: 100vh;
+    padding-top: 100px;
+    background-color: #EEEFF4;
+}
+
+.contentTitle{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
+    font-size: 35px;
+    text-align: center;
+    margin-top: 70px;
+}
+
+#technicque .contentTitle{
+    position: absolute;
+    top: 205px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
 }

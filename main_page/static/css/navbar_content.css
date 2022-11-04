@@ -9,15 +9,18 @@ a{
   text-decoration: none;
 }
 
+.content{
+  height: 100%;
+}
+
 .nav{
     font-family: 'Nanum Gothic', sans-serif;
     box-sizing: border-box;
-    background-color: transparent;
+    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 30px 10%;
-    position: fixed;
     width: 100vw;
     transition: all 300ms ease-in-out;
     top: 0;
@@ -27,20 +30,12 @@ a{
     z-index: 1;
 }
 
-.nav.navbar--white{
-  background-color: white;
-}
-
 .nav-logo{
     /* color: #F45866; */
-    color: white;
+    color: #F45866;
     font-weight: 700;
     font-size: 30px;
     cursor: pointer;
-}
-
-.nav-logo.navbar--white{
-  color: #F45866;
 }
 
 .nav-logo{
@@ -56,43 +51,6 @@ a{
     display: inline-block;
     cursor: pointer;
 }
-
-.item-a{
-    font-weight: 500;
-    /* color: #F45866; */
-    color: white;
-    font-size: 20px;
-}
-
-.item-a.navbar--white{
-  color: #F45866;
-}
-
-.spread-underline {
-    color: #333;
-    text-decoration: none;
-    display: inline-block;
-    padding: 10px 0;
-    position: relative;
-  }
-
-  .spread-underline:after {  
-    background: none repeat scroll 0 0 transparent;
-    bottom: 0;
-    content: "";
-    display: block;
-    height: 2px;
-    left: 50%;
-    position: absolute;
-    background: var(--change-color);
-    transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    width: 0;
-  }
-
-  .spread-underline:hover:after { 
-    width: 100%; 
-    left: 0; 
-  }
 
   .button {
     background: #69BBBD;
@@ -136,66 +94,26 @@ a{
   }
 
   @media screen and (max-width: 768px) {
-    .nav{
-        display: none;
+    /* .nav{
+        flex-direction: column;
+        align-items: flex-end;
     }
-/* 
+
     .nav-ul{
         align-items: flex-end;
         flex-direction: column;
         margin: 10px 0px;
-        
     }
 
     .nav-item{
         padding: 7px 0px;
-        color: #F45866;
     } */
-
-    .homeContent{
+    
+    .nav{
       display: none;
-    }
-
-    .hamburger{
-      display: block;
     }
 }
 
 .nav-login{
   text-decoration: none;
-}
-
-.dropdown{
-  position: relative;
-}
-
-#dropbtn{
-  width: 40px;
-  cursor: pointer;
-}
-
-.dropdown-content{
-  position: absolute;
-  display: none;
-  left: -90px;
-  flex-direction: column;
-  width: 130px;
-  z-index : 1;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background-color: white;
-}
-
-.dropdown-content a {
-  text-decoration: none;
-  color: #54666C;
-  text-align: right;
-  padding: 15px;
-}
-
-.dropdown-content a:hover{
-  background-color: #EEEEEE;
-}
-
-.dropdown:hover .dropdown-content{
-  display: flex;
 }

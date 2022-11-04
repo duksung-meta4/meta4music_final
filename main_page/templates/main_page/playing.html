@@ -1,21 +1,19 @@
+{% extends 'base_content.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <title>Making music with magenta.js</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+{% block head %}
+
   <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+  {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <!-- JavaScript Bundle with Popper -->
+   {% endcomment %}
+
   <link rel="stylesheet" href="{% static 'css/playing.css' %}">
+  
+  <!-- JavaScript Bundle with Popper -->
   <script src="/static/js/lyric.js"></script>
   <script>
     function makeLyric() {
-      
       let url = document.forms[0].elements['lyric'].value;
       window.location.replace('http://127.0.0.1:8000/playing/' + url)
       document.getElementById('firstline').value = "";
@@ -53,16 +51,18 @@
 
   </script>
 
-</head>
+{% endblock head %}
 
-<body>
+{% block content %}
+
+<div id="playing">
   <form class="my-form" method="POST" action="{% url 'main_page:post' %}">
-  {% csrf_token %}
+    {% csrf_token %}
     <div class=" mb-3">
-    <label class="form-label">첫 소절 : </label>
-    <input type="text" placeholder="단어를 직접 입력할 수 있습니다." id="firstline" name="lyric" size="40"
-      onkeyup="setFirstLine(event)">
-    <button type="button" onclick="return makeLyric();" class="btn btn-primary">작사시작</button><br>
+      <label class="form-label">첫 소절 : </label>
+      <input type="text" placeholder="단어를 직접 입력할 수 있습니다." id="firstline" name="lyric" size="40"
+        onkeyup="setFirstLine(event)">
+      <button type="button" onclick="return makeLyric();" class="btn btn-primary">작사시작</button><br>
     </div>
     <label class="form-label">추천 소절 : </label>
     <div class="container">
@@ -76,13 +76,15 @@
       <p>작사 결과 : </p>
       <textarea class="form-control" placeholder="작사 내용이 출력됩니다." id="floatingTextarea2" style="height: 100px"
         name="content" id="content">{{lyric}}</textarea><br>
-      <button type="button" class="btn btn-secondary" onclick="location.href='/main_page/drawing'">돌아가기⬅</button>
+      <button type="button" class="btn btn-secondary" onclick="location.href='/drawing'">돌아가기⬅</button>
+      <button type="button" class="btn btn-secondary" onclick="location.href='/composing'">작곡하기</button>
       <button type="submit" class="btn btn-secondary">저장하기</button>
     </div>
   </form>
+  
   <p> {{lyrics}} </p>
 
-  <div class="col-sm-12">
+  {% comment %} <div class="col-sm-12">
     {% if messages %}
     <div class="messages">
       {% for message in messages %}
@@ -98,9 +100,7 @@
     {% endblock content %}
 
     <hr />
-  </div>
+  </div> {% endcomment %}
 
-</body>
-
-
-</html>
+</div>
+{% endblock content %}

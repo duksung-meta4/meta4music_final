@@ -9,8 +9,8 @@
   <title>Meta4Music</title>
   {% block head %}
   {% endblock head %}
-  <link rel='stylesheet' href="{% static 'css/footer_t.css' %}" />
-  <link rel='stylesheet' href="{% static 'css/navbar_t.css' %}" />
+  <link rel='stylesheet' href="{% static 'css/footer_content.css' %}" />
+  <link rel='stylesheet' href="{% static 'css/navbar_content.css' %}" />
   <link rel='stylesheet' href="{% static 'css/reset.css' %}" />
 </head>
 
@@ -18,13 +18,7 @@
   <!-- navbar -->
   <div class="nav">
     <a class="nav-logo" href="{% url 'main_page:main' %}">Meta4Music</a>
-    <ul class="nav-ul">
-      <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#home">Home</a></span></li>
-      <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#services">Services</a></span></li>
-      <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#boundary">Technicque</a></span></li>
-      <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#team">Team</a></span></li>
-    </ul>
-    {% if not id %}
+    {% comment %} {% if not id %}
     <a class="nav-login" href="{% url 'account:login' %}">
       <div class="button">
         <p class="btnText">Sign In</p>
@@ -43,12 +37,15 @@
             <a onclick="location.href='/account/logout'">로그아웃</a>
           </div>
         </div>
-    {% endif %}
-    </div>
-    
+      </li>
+    {% endif %} {% endcomment %}
+  </div>
+
   <!-- content -->
-  {% block content %}
-  {% endblock content %}
+  <div class="content">
+    {% block content %}
+    {% endblock content %}
+  </div>
 
   <!-- footer -->
   <div class="footer">
@@ -56,18 +53,11 @@
       <p>2022 덕성여자대학교 컴퓨터공학과 졸업프로젝트</p>
     </div>
     <div class="footcontent">
-      <div>
-        <p class="title">주제</p>
-        <p class="content">딥러닝을 이용한 동요 작사·작곡 프로그램</p>
-      </div>
-      <div>
-        <p class="title">팀</p>
-        <p class="content">강태영, 신효정, 박지인, 김지민</p>
-      </div>
+      <div><p class="title">주제</p><p class="content">딥러닝을 이용한 동요 작사·작곡 프로그램</p></div>
+      <div><p class="title">팀</p><p class="content">강태영, 신효정, 박지인, 김지민</p></div>
     </div>
   </div>
 
   <script src="/static/js/navbar.js"></script>
 </body>
-
 </html>
