@@ -12,11 +12,11 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(model_name="images", name="_data",),
-        migrations.RemoveField(model_name="images", name="createdAt",),
-        migrations.RemoveField(model_name="images", name="imagescol",),
+        # migrations.RemoveField(model_name="images", name="_data",),
+        # migrations.RemoveField(model_name="images", name="createdAt",),
+        # migrations.RemoveField(model_name="images", name="imagescol",),
         migrations.RemoveField(model_name="images", name="memberid",),
-        migrations.RemoveField(model_name="images", name="updatedAt",),
+        # migrations.RemoveField(model_name="images", name="updatedAt",),
         migrations.AddField(
             model_name="images",
             name="adminid",
