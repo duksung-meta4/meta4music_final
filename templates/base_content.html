@@ -18,6 +18,16 @@
   <!-- navbar -->
   <div class="nav">
     <a class="nav-logo" href="{% url 'main_page:main' %}">Meta4Music</a>
+    {% comment %} {% if not id %}
+    <a class="nav-login" href="{% url 'account:login' %}">
+      <div class="button">
+        <p class="btnText">Sign In</p>
+        <div class="btnTwo">
+          <p class="btnText2">Go!</p>
+        </div>
+      </div>
+    </a>
+    {% endif %}
     {% if id %}
       <li class="nav-login welcome">
         <div class="dropdown">
@@ -28,7 +38,7 @@
           </div>
         </div>
       </li>
-    {% endif %}
+    {% endif %} {% endcomment %}
   </div>
 
   <!-- content -->
