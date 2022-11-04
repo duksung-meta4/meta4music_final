@@ -10,6 +10,7 @@
 {% endcomment %}
 
 <link rel="stylesheet" href="{% static 'css/playing.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <!-- JavaScript Bundle with Popper -->
 <script src="/static/js/lyric.js"></script>
@@ -29,7 +30,7 @@
     recommends = findPrompts(word);
     let buttons = Array.from(document.getElementsByClassName("btn btn-warning"));
     for (let i = 0; i < 5; i++) {
-      if (recommends[i] == undefined){
+      if (recommends[i] == undefined){//태영: undefined일때 undefined가 뜨지 않도록 설정
         buttons[i].style="display:none;"
       }
       buttons[i].innerHTML = recommends[i];
@@ -43,7 +44,7 @@
     recommends = findPrompts(word);
     let buttons = Array.from(document.getElementsByClassName("btn btn-warning"));
     for (let i = 0; i < 5; i++) {
-      if (recommends[i] == undefined){
+      if (recommends[i] == undefined){//태영: undefined일때 undefined가 뜨지 않도록 설정
         buttons[i].style="display:none;"
       }
       buttons[i].innerHTML = recommends[i];
@@ -77,8 +78,11 @@
         </div>
 
         <div class="answer">
-          <input type="text" placeholder="단어를 직접 입력할 수 있습니다." id="firstline" name="lyric" size="40"
-          onkeyup="setFirstLine(event)">
+          <div style="display:flex">
+            <input type="text" placeholder="단어를 직접 입력할 수 있습니다." id="firstline" name="lyric" size="40"
+            onkeyup="setFirstLine(event)">
+            <p id="reload" onclick="window.location.reload()"><i class="fa fa-refresh" aria-hidden="true"></i></p>
+          </div>
           <div class="container">
             <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line1"></button>
             <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line2"></button>
@@ -86,7 +90,8 @@
             <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line4"></button>
             <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line5"></button>
           </div>
-        </div>
+          
+        </div> 
       </div>
       
       <button type="button" onclick="return makeLyric();" class="btn btn-primary">작사시작</button><br>
