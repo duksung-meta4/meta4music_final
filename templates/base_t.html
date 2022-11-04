@@ -39,8 +39,15 @@
     </a>
     {% endif %}
     {% if id %}
-      <li class="nav-item"><a>{{id}}님 반갑습니다!</a></li>
-      <li class="nav-item" onclick="location.href='/account/logout'"><a>Logout</a></li>
+      <li class="nav-login welcome">
+        <div class="dropdown">
+          <img id="dropbtn" src="{% static 'img/profile_icon.png' %}" />
+          <div class="dropdown-content">
+            <a href="#">{{id}}님</a>
+            <a onclick="location.href='/account/logout'">로그아웃</a>
+          </div>
+        </div>
+      </li>
     {% endif %}
     </div>
 

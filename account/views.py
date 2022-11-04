@@ -102,4 +102,4 @@ def login(request):
 def logout(request):
     if request.method=="GET":
         LoginUser.objects.all().delete();
-        return redirect('main_page:home')
+        return redirect('main_page:main')
