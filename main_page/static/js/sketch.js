@@ -95,7 +95,7 @@ const keyword_fillter = {
   cow: "송아지",
   crab: "개구리",
   crayon: "아기",
-  crocodile: "악어",
+  crocodile: "물고기",
   crown: "별",
   cruise_ship: "호수",
   cup: "물",

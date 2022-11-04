@@ -1,4 +1,44 @@
-#playing{
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+.playing{
   font-family: 'Nanum Gothic', sans-serif;
- 
+  background: #EEEFF4;
+}
+
+.playing h1{
+  font-family: 'Nanum Gothic', sans-serif;
+  text-align: center;
+  font-size: 25px;
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.playing-content{
+  width: 700px;
+  background-color: white;
+  margin: auto; /*가운데 정렬*/
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 20px 30px;
+}
+
+.question{
+  font-family: 'Nanum Gothic', sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.question img{
+  margin-right: 25px;
+}
+
+.question p{
+  font-size: 20px;
+  color: #5A676B;
+  display: block;
+}
+
+.answer{
+  margin-top: 10px;
+  margin-left: 80px;
 }

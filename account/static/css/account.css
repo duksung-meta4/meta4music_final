@@ -4,6 +4,7 @@
     position: relative;
     min-height: 100%;
     text-align: center;
+    height: 50vh;
 }
 
 #accountBody h2{
