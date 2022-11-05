@@ -46,6 +46,17 @@
     return false;
   }
 
+  function makeSave(){
+    let loading = document.getElementById('loading');
+    loading.style.display = 'none';
+
+    let complete = document.getElementById('complete');
+    complete.style.display = 'block';
+
+    let nextlevel = document.getElementById('nextlevel');
+    nextlevel.style.display = 'block';
+  }
+
   let recommends = [];
 
   window.addEventListener('DOMContentLoaded', function () {
@@ -79,6 +90,14 @@
     input = document.getElementById("firstline");
     input.value = event.target.innerHTML;
   }
+
+  {% comment %} function dontReload(event){
+    console.log("야");
+    event.preventDefault();
+    return true;
+  } {% endcomment %}
+
+
 </script>
 
 {% endblock head %}
@@ -88,7 +107,7 @@
 <div class="playing">
   <h1>🎨그림을 바탕으로 자신만의 동요🎶를 만들어보세요!</h1><br>
   <div class="playing-content">
-    <form class="my-form" method="POST" action="{% url 'main_page:post' %}">
+    <form  class="my-form" method="POST" action="{% url 'main_page:post' %}">
       {% csrf_token %}
 
       <div class="hidden">
@@ -166,7 +185,7 @@
         <div class="answer">
           <i style="display:none" class="fa fa-spinner fa-spin"></i>
           <button type="button" class="btn btn-secondary returnButton" onclick="location.href='/drawing'">다시 그림 그리기</button>
-        <button type="button" class="btn btn-secondary makelyricButton" onclick="location.href='/composing'">작곡 시작하기</button>
+          <button type="button" class="btn btn-secondary makelyricButton" onclick="location.href='/composing'">작곡 시작하기</button>
         </div>
       </div>
     </form>
@@ -176,6 +195,9 @@
 </div>
 
 <script>
+  var na = document.getElementById('na');
+  na.addEventListener('submit', handleSubmit);
+
   let content = document.getElementById('content');
   let whiteSpace = content.value;
 

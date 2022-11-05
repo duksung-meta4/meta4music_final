@@ -22,6 +22,9 @@ from music21 import instrument, note, stream, chord, duration, converter
 from .RNNAttention import create_network, sample_with_temp
 import matplotlib.pyplot as plt
 
+result_dict={};
+result_dict2={};
+
 # Create your views here.
 def home(request):
     try:
@@ -95,7 +98,7 @@ def post(request):
         lyric.save();
         messages.success(request,'작사가 저장되었습니다.')
         #URL
-        return redirect('http://127.0.0.1:8000/playing')
+        return render(request,'main_page/playing.html',context=result_dict)
     else:
         lyrics=Lyrics.objects.all();
         #template
@@ -112,7 +115,7 @@ def post2(request):
         compose.save();
         messages.success(request,'작곡이 저장되었습니다.')
 
-    return render(request,'main_page/composing.html')
+    return render(request,'main_page/composing.html', context=result_dict2)
 
 
 def playing_view(request):
@@ -193,6 +196,7 @@ def makeLyric(request,lyric):
         }
 
     result=inference_fn(str(lyric)+"\n ")['result']
+    global result_dict;
     result_dict={"lyric":result};
 
     return render(request,'main_page/playing.html',context=result_dict);
@@ -364,7 +368,10 @@ def composing(request, keyword):
     timestr = time.strftime("%Y%m%d-%H%M%S")
     midi_stream.write('midi', fp=os.path.join(output_folder, 'output-' + timestr + '.mid'))
 
+    
     midi = 'run/compose/0007_child/{}/output/output-'.format(keyword)+ timestr + '.mid'
+    global result_dict2
+    result_dict2={"midi":midi};
 
-    return render(request, 'main_page/composing.html', context = {'midi': midi})
+    return render(request, 'main_page/composing.html', context = result_dict2);
 

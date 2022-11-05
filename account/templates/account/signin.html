@@ -59,18 +59,6 @@
                             });
                         }, 4000);
                     </script>
-                    <div class="col-sm-12">
-                        {% if messages %}
-                        <div class="messages">
-                            {% for message in messages %}
-                            <div class="alert {{ message.tags }} alert-auto-dismissible alert-dismissible notification-container text-center"
-                                role="alert">
-                                {{ message.message }}
-                                {{ message.tags }}
-                            </div>
-                            {% endfor %}
-                        </div>
-                        {% endif %}
                 </form>
             </div>
         </div>
