@@ -1,0 +1,36 @@
+{% extends 'base_content.html' %}
+{% load static %}
+{% block head %}
+<meta http-equiv="Content-Type" content="application/javascript; charset=utf-8" />
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock head %}
+
+{% block content %}
+
+<canvas id="three-canvas"></canvas>
+<div class="popup_layer" id="popup_layer" style="display: none;">
+    <div class="popup_box">
+        <div style="height: 10px; width: 375px; float: top;">
+            <a id="btnPopClose">
+                <img src="{% static 'img/ic_close_36px.svg' %}" class="btnPopclose" width="30px" height="30px">
+            </a>
+        </div>
+        <!--팝업 컨텐츠 영역-->
+        <div class="popup_cont">
+            <p id="lyric_box">
+                {{data.lyrics}}
+                <!-- <%= data.lyrics %> -->
+            </p>
+            <p id="compose_box">
+                {{data.midi}}
+                <!-- <%= data.lyrics %> -->
+            </p>
+        </div>
+    </div>
+</div>
+<script type="Text/javascript">
+        var drawingSrc = "{{data.image}}";
+    </script>
+<script type="module" src="/static/js/gallery.js"></script>
+<!-- <script type="module" src="/js/gallery.js" defer></script> -->
+{% endblock content %}

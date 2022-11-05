@@ -34,6 +34,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1'] 
 
 
+    
 # Application definition
 
 INSTALLED_APPS = [
@@ -149,3 +150,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'main_page\\static'),os.path.join(BAS
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".js", True)

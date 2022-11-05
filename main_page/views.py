@@ -38,6 +38,20 @@ def home_view(request):
 def drawing_view(request):
     return render(request, 'main_page/drawing.html')    
 
+def meta(request):
+    # 작사
+    lyric=Lyrics.objects.last();
+    lyrics=lyric.lyrics;
+    #작곡
+    compose = Compose.objects.last();
+    midi = compose.music;
+    #이미지
+    img = Images.objects.last();
+    image = img.canvas;
+
+    data={"lyrics":lyrics, "midi": midi, "image": image};
+
+    return render(request,'main_page/index.html',context=data);
 
 # canvas 이미지 저장
 @csrf_exempt

@@ -17,4 +17,5 @@ urlpatterns=[
     path('composing/',views.compose, name="compose"),
     path('composing/<str:keyword>/',views.composing, name="composing"), 
     path('canvasToImage', views.canvasToImage, name="canvasToImage"),
+    path('meta', views.meta, name="meta"),
 ]
