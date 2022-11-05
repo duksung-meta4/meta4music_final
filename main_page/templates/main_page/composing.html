@@ -1,22 +1,45 @@
+{% extends 'base_content.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <title>Making music with magenta.js</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- CSS only -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+{% block head %}
+
+
+<!-- CSS only -->
+  {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <!-- JavaScript Bundle with Popper -->
+  
+    <!-- JavaScript Bundle with Popper --> {% endcomment %}
   <!--<link rel="stylesheet" href="{% static 'css/playing.css' %}">
   <script src="/static/js/composing.js"></script>-->
+
+  <link rel="stylesheet" href="{% static 'css/composing.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
   <script>
+
+    $(document).ready(function(){
+      //console.log(window.location.pathname);
+      if(window.location.pathname == '/composing/'){
+        let complete = document.getElementById('complete');
+        let nextlevel = document.getElementById('nextlevel');
+        let mymargin = document.getElementById('mymargin');
+        complete.style.display = 'none';
+        nextlevel.style.display = 'none';
+        mymargin.style.height = '450px';
+      }
+    });
 
     function makeSong(){
 
+      let loading = document.getElementById('loading');
+      loading.style.display = 'block';
+
+      let complete = document.getElementById('complete');
+      complete.style.display = 'none';
+
+      let mymargin = document.getElementById('mymargin');
+      mymargin.style.height = '400px';
       // 그림에서 선택한 단어에 대한 7가지 키워드 분류값 가져옴
       const keyword_fillter2 = {
         "쪽배" : "etc",
@@ -99,14 +122,22 @@
     }
 
 
-    window.onload = function (event) {
+    {% comment %} window.onload = function (event) {
       word = localStorage.getItem('myword');
       document.getElementById('chosen_keyword').innerText = word;
-    }
+    } {% endcomment %}
+
+    window.addEventListener('DOMContentLoaded', function(){
+      word = localStorage.getItem('myword');
+      document.getElementById('chosen_keyword').innerText = word;
+    });
 
     function lookResult(){
-      const start = document.getElementById('start');
-      start.style.display = 'none';
+      //const start = document.getElementById('start');
+      //start.style.display = 'none';
+
+      let mymargin = document.getElementById('mymargin');
+      mymargin.style.height = '50px';
 
       const control = document.getElementById('midi-control');
       control.style.display = 'block';
@@ -116,41 +147,99 @@
 
   </script>
 
-</head>
+{% endblock head %}
 
-<body>
+{% block content %}
+<div class="composing">
+  <h1>🎨그림을 바탕으로 자신만의 동요🎶를 만들어보세요!</h1><br>
+  <div class="composing-content">
   <form class="my-form" method="POST" action="{% url 'main_page:post2' %}">
     {% csrf_token %}
-    <div class="mb-3">
-      <p class="label" style="display:inline">선택한 키워드 :  <h5 id="chosen_keyword" style="display:inline"></h5></p>
+
+    <div class="hidden">
+      <div class="question">
+        <img src="{% static 'img/smile.png' %}" />
+        <div>
+          <p id="waitLyricTitle">"현재 선택되어 있는 키워드는 <span id="chosen_keyword" style="color:#80D4D6;font-weight:bold;"></span> 입니다"</p>
+        </div>
+      </div>
+      <div class="answer">
+        <button type="button" onclick="return makeSong();" class="btn btn-primary makelyricButton" id="start">작곡시작</button><br>
+      </div>
+    </div>
+
+    <div class="hidden" id="loading" style="display:none">
+      <div class="question">
+        <img src="{% static 'img/smile.png' %}" />
+        <div>
+          <p id="waitLyricTitle">"작곡이 진행 중입니다."</p>
+        </div>
+      </div>
+      <div class="answer">
+        <i class="fa fa-spinner fa-spin"></i>
+      </div>
+    </div>
+
+    <div class="hidden" id="complete" style="display:block">
+      <div class="question">
+        <img src="{% static 'img/smile.png' %}" />
+        <div>
+          <p id="waitLyricTitle">"작곡이 완료되었습니다"</p>
+        </div>
+      </div>
+      <div class="answer">
+        <i style="display:none" class="fa fa-spinner fa-spin"></i>
+        <button type="button" onclick="return lookResult();" class="btn btn-primary makelyricButton" id="result">작곡 결과 보기</button><br>
+        <textarea class="form-control" placeholder="작곡 루트가 출력됩니다." id="floatingTextarea2" name="content" id="content" style="display:none">{{midi}}</textarea><br>
+        <!-- 악보 출력 -->
+        <div class="controls" id="midi-control" style="display: none;">
+          <section id="section1">
+            <h2>1 player, 2 visualizers</h2>
+            <midi-visualizer
+              type="piano-roll"
+              src="{% static midi %}">
+            </midi-visualizer>
+            <midi-visualizer
+              type="staff"
+              src="{% static midi %}">
+            </midi-visualizer>
+            <midi-player
+              src="{% static midi %}"
+              sound-font visualizer="#section1 midi-visualizer">
+            </midi-player>
+          </section>
+          <!-- 저장 버튼 -->
+          <button type="submit" style="margin-top:15px" class="btn btn-secondary makelyricButton">저장하기</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hidden" id="nextlevel" style="display:block">
+      <div class="question">
+        <img src="{% static 'img/smile.png' %}" />
+        <div>
+          <p id="waitLyricTitle">"완성된 작품을 감상해보세요!"</p>
+        </div>
+      </div>
+      <div class="answer">
+        <i style="display:none" class="fa fa-spinner fa-spin"></i>
+        <button type="button" class="btn btn-secondary makelyricButton" onclick="location.href='/result'">결과보기</button>  
+      </div>
+    </div>
+
+    {% comment %} <div class="mb-3">
       <button type="button" onclick="return makeSong();" class="btn btn-primary" id="start">작곡시작</button><br>
       <button type="button" onclick="return lookResult();" class="btn btn-primary" id="result">작곡 결과 보기</button><br>
       <textarea class="form-control" placeholder="작곡 루트가 출력됩니다." id="floatingTextarea2" name="content" id="content" style="display:none">{{midi}}</textarea><br>
       <button type="submit" class="btn btn-secondary">저장하기</button>
       <button type="button" class="btn btn-secondary" onclick="location.href='/result'">결과보기</button>
-    </div>
+    </div> {% endcomment %}
   </form>
 
-  <div class="controls" id="midi-control" style="display: none;">
-    <section id="section1">
-      <h2>1 player, 2 visualizers</h2>
-      <midi-visualizer
-        type="piano-roll"
-        src="{% static midi %}">
-      </midi-visualizer>
-      <midi-visualizer
-        type="staff"
-        src="{% static midi %}">
-      </midi-visualizer>
-      <midi-player
-        src="{% static midi %}"
-        sound-font visualizer="#section1 midi-visualizer">
-      </midi-player>
-    </section>
-  </div>
+  
   <!--<h1>{{ midi }}</h1>-->
 
-  <div class="col-sm-12">
+  {% comment %} <div class="col-sm-12">
     {% if messages %}
     <div class="messages">
       {% for message in messages %}
@@ -165,9 +254,12 @@
     {% block content %}
     {% endblock content %}
 
-    <hr />
+    <hr /> {% endcomment %}
   </div>
-</body>
 
-<script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
-</html>
+  <div id="mymargin" style="display:hidden; height:200px"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+</div>
+{% endblock content %}

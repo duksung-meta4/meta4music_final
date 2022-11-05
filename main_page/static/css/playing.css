@@ -22,6 +22,10 @@
   padding: 20px 30px;
 }
 
+.hidden{
+  margin-bottom: 20px;
+  transition-duration: 0.4s;
+}
 .question{
   font-family: 'Nanum Gothic', sans-serif;
   display: flex;
@@ -41,6 +45,7 @@
 .answer{
   margin-top: 10px;
   margin-left: 80px;
+  margin-bottom: 20px;
 }
 
 #firstline{
@@ -50,7 +55,6 @@
   border: solid 2px #9BAEB5;
 	border-radius: 8px;
   color: black;
-  font-weight: bold;
 }
 
 #firstline::placeholder{
@@ -84,15 +88,55 @@
 .container button{
   background-color: #9BAEB5;
   font-size: 12px;
-  color: white;
+  color: black;
   border: none;
   border-radius: 10px;
   padding: 5px 20px;
   transition-duration: 0.3s;
   cursor: pointer;
-  margin: 2px;
+  margin: 3px 2px;
 }
 
 .container button:hover{
   background-color: #80D4D6;;
+}
+
+.makelyricButton{
+  background-color: #80D4D6;
+  font-size: 17px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 30px;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  width: 200px;
+}
+
+.makelyricButton:hover{
+  background-color: #6DB2B4;
+}
+
+.lyricResult{
+  border: 0;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.returnButton{
+  background-color: #9BAEB5;
+  font-size: 17px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 30px;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  width: 200px;
+}
+
+.returnButton:hover{
+  background-color:#5A676B;
 }

@@ -63,6 +63,7 @@
     height: 80vh;
     padding-top: 100px;
     background-color: #EEEFF4;
+    
 }
 
 #boundary{
@@ -77,6 +78,7 @@
     height: 0;
     padding-top: 66.64%;
     position: relative;
+    overflow: hidden;
 }
 
 #team{
@@ -95,8 +97,94 @@
 
 #technicque .contentTitle{
     position: absolute;
-    top: 205px;
+    top: 15%;
     left: 50%;
     transform: translateX(-50%);
     color: white;
+}
+
+#service-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 48px;
+}
+
+#technicque-content img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+#team_profile{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    justify-items: center;
+    width: 700px;
+    margin: 60px auto;
+}
+
+.tistory{
+    font-family: 'Nanum Gothic', sans-serif;
+    text-align: center;
+    margin-top: 35px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.tistory:hover{
+    color: #80D4D6;
+}
+.profile{
+    width: 280px;
+    height: 280px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    display: flex;
+    position: relative;
+}
+
+#taeyoung{
+    background-image: url('/static/img/태영.png');
+    width: 280px;
+    height: 280px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#HyoJeong{
+    background-image: url('/static/img/효정.png');
+    width: 280px;
+    height: 280px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#Jeein{
+    background-image: url('/static/img/지인.png');
+    width: 280px;
+    height: 280px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#Jimin{
+    background-image: url('/static/img/지민.png');
+    width: 280px;
+    height: 280px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.profile-img p{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+}
+
+i{
+    cursor: pointer;
 }

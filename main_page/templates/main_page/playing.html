@@ -11,14 +11,38 @@
 
 <link rel="stylesheet" href="{% static 'css/playing.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- JavaScript Bundle with Popper -->
 <script src="/static/js/lyric.js"></script>
 <script>
+
+  $(document).ready(function(){
+    if(window.location.pathname == '/playing'){
+      let complete = document.getElementById('complete');
+      let nextlevel = document.getElementById('nextlevel');
+      let mymargin = document.getElementById('mymargin');
+      mymargin.style.height = '270px';
+      complete.style.display = 'none';
+      nextlevel.style.display = 'none';
+    }
+  });
+  
   function makeLyric() {
     let url = document.forms[0].elements['lyric'].value;
     window.location.replace('http://127.0.0.1:8000/playing/' + url)
     document.getElementById('firstline').value = "";
+
+    //버튼이 눌리고 나서 작사 진행 중 question이 뜸
+    //시간이 흐름
+    //quesiont과 answer이 바뀜
+
+    let loading = document.getElementById('loading');
+    loading.style.display = 'block';
+
+    let complete = document.getElementById('complete');
+    complete.style.display = 'none';
+    
     return false;
   }
 
@@ -55,7 +79,6 @@
     input = document.getElementById("firstline");
     input.value = event.target.innerHTML;
   }
-
 </script>
 
 {% endblock head %}
@@ -68,13 +91,13 @@
     <form class="my-form" method="POST" action="{% url 'main_page:post' %}">
       {% csrf_token %}
 
-      <div id="hidden1">
+      <div class="hidden">
         <div class="question">
           <img src="{% static 'img/smile.png' %}" />
           <div style="display:flex;flex-direction:column;">
             <p style="margin-bottom:10px">"선택한 키워드에 맞춰 동요의 첫 소절을 추천합니다."</p>
             <p>"선택해주세요."</p>
-        </div>
+          </div>
         </div>
 
         <div class="answer">
@@ -93,39 +116,75 @@
           
         </div> 
       </div>
+
+      <div class="hidden">
+        <div class="question">
+          <img src="{% static 'img/smile.png' %}" />
+          <div>
+            <p>"아래 버튼을 클릭하면 작사가 시작됩니다."</p>
+          </div>
+        </div>
+        <div class="answer">
+          <button type="button" onclick="return makeLyric();" class="btn btn-primary makelyricButton">작사시작!</button><br>
+        </div>
+      </div>
       
-      <button type="button" onclick="return makeLyric();" class="btn btn-primary">작사시작</button><br>
-      
-      <div class="form-floating">
-        <p>작사 결과 : </p>
-        <textarea class="form-control" placeholder="작사 내용이 출력됩니다." id="floatingTextarea2" style="height: 100px"
+      <div class="hidden" id="loading" style="display:none">
+        <div class="question">
+          <img src="{% static 'img/smile.png' %}" />
+          <div>
+            <p id="waitLyricTitle">"작사가 진행 중입니다"</p>
+          </div>
+        </div>
+        <div class="answer">
+          <i class="fa fa-spinner fa-spin"></i>
+        </div>
+      </div>
+
+      <div class="hidden" id="complete" style="display:block">
+        <div class="question">
+          <img src="{% static 'img/smile.png' %}" />
+          <div>
+            <p id="waitLyricTitle">"작사가 완료되었습니다"</p>
+          </div>
+        </div>
+        <div class="answer">
+          <i style="display:none" class="fa fa-spinner fa-spin"></i>
+          <textarea rows="10" cols="70" class="lyricResult" placeholder="작사 내용이 출력됩니다." 
           name="content" id="content">{{lyric}}</textarea><br>
-        <button type="button" class="btn btn-secondary" onclick="location.href='/drawing'">돌아가기⬅</button>
-        <button type="button" class="btn btn-secondary" onclick="location.href='/composing'">작곡하기</button>
-        <button type="submit" class="btn btn-secondary">저장하기</button>
+          <button type="submit" class="btn btn-secondary makelyricButton">저장하기</button>
+        </div>
+      </div>
+
+      <div class="hidden" id="nextlevel" style="display:block">
+        <div class="question">
+          <img src="{% static 'img/smile.png' %}" />
+          <div>
+            <p id="waitLyricTitle">"작곡을 시작할까요?"</p>
+          </div>
+        </div>
+        <div class="answer">
+          <i style="display:none" class="fa fa-spinner fa-spin"></i>
+          <button type="button" class="btn btn-secondary returnButton" onclick="location.href='/drawing'">다시 그림 그리기</button>
+        <button type="button" class="btn btn-secondary makelyricButton" onclick="location.href='/composing'">작곡 시작하기</button>
+        </div>
       </div>
     </form>
   </div>
 
-  <p> {{lyrics}} </p>
-
-  {% comment %} <div class="col-sm-12">
-    {% if messages %}
-    <div class="messages">
-      {% for message in messages %}
-      <div class="alert alert-info">
-        {{ message.message }}
-        {{ message.tags }}
-      </div>
-      {% endfor %}
-    </div>
-    {% endif %}
-
-    {% block content %}
-    {% endblock content %}
-
-    <hr />
-  </div> {% endcomment %}
-
+  <div id="mymargin" style="display:hidden; height:50px"></div>
 </div>
+
+<script>
+  let content = document.getElementById('content');
+  let whiteSpace = content.value;
+
+  let TempSpace = whiteSpace.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;");
+  TempSpace = TempSpace.replaceAll('<unk>', "&nbsp;");
+
+  content.innerHTML =  TempSpace;
+
+  //console.log(content.value);
+  //console.log(whiteSpace.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;"));
+</script>
 {% endblock content %}
