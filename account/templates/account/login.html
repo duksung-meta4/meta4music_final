@@ -16,18 +16,6 @@
         <p id="question">계정이 없으신가요? <span><a href="{% url 'account:signup2' %}">회원가입 바로가기</a></span></p>
         <button type="submit" id="AccountBt">Login</button>
     </form>
-
-    <div>
-        {% if messages %}
-        <div class="messages">
-            {% for message in messages %}
-            <div class="alert">
-                {{ message.message }}
-            </div>
-            {% endfor %}
-        </div>
-        {% endif %}
-    </div>
 </div>
 
 {% endblock content %}
