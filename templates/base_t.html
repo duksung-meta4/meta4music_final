@@ -21,7 +21,7 @@
     <ul class="nav-ul">
       <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#home">Home</a></span></li>
       <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#services">Services</a></span></li>
-      <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#boundary">Technicque</a></span></li>
+      <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#technicque">Technicque</a></span></li>
       <li class="nav-item"><span class="spread-underline"><a class="item-a" href="#team">Team</a></span></li>
     </ul>
     {% if not id %}
@@ -39,7 +39,7 @@
         <div class="dropdown">
           <img id="dropbtn" src="{% static 'img/profile_icon.png' %}" />
           <div class="dropdown-content">
-            <a href="#">{{id}}님</a>
+            <a onclick="location.href='/result'">{{id}}님</a>
             <a onclick="location.href='/account/logout'">로그아웃</a>
           </div>
         </div>

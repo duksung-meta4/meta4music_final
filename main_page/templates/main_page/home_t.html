@@ -3,6 +3,8 @@
 
 {% block head %}
 <link rel='stylesheet' href="{% static 'css/home_t.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 {% endblock head %}
 
 
@@ -21,13 +23,57 @@
     </div>
     <div id="services">
         <p class="contentTitle">Introduce our service</p>
+        <div id="service-content">
+            <img src="{% static 'img/step1.png' %}" />
+            <img src="{% static 'img/step2.png' %}" style="margin: 0px 34px" />
+            <img src="{% static 'img/step3.png' %}" />
+        </div>
     </div>
-    <div id="boundary"></div>
+    {% comment %} <div id="boundary"></div> {% endcomment %}
     <div id="technicque">
-        <p class="contentTitle">The technologies used in this project</p>
+        <p class="contentTitle">The technologies used in this project
+            <img src="{% static 'img/service.png' %}" />
+        </p>
+        
     </div>
     <div id="team">
         <p class="contentTitle">We are Team '메타포'</p>
+        <a><p class="tistory">We are Team 'Meta4'</p></a>
+
+        <div id="team_profile">
+            <div class="profile">
+                <div class="profile-img" id="taeyoung">
+                    <p>Taeyoung</p>
+                    <i style="padding-left: 10px;" class="fa fa-github" aria-hidden="true"></i>
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="profile">
+                <div class="profile-img" id="HyoJeong">
+                    <p>HyoJeong</p>
+                    <i style="padding-left: 10px;" class="fa fa-github" aria-hidden="true"></i>
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="profile">
+                <div class="profile-img" id="Jeein">
+                    <p>Jeein</p>
+                    <i style="padding-left: 10px;" class="fa fa-github" aria-hidden="true"></i>
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="profile">
+                <div class="profile-img" id="Jimin">
+                    <p>Jimin</p>
+                    <i style="padding-left: 10px;" class="fa fa-github" aria-hidden="true"></i>
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock content %}

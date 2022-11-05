@@ -10,14 +10,39 @@
 {% endcomment %}
 
 <link rel="stylesheet" href="{% static 'css/playing.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <!-- JavaScript Bundle with Popper -->
 <script src="/static/js/lyric.js"></script>
 <script>
+
+  $(document).ready(function(){
+    if(window.location.pathname == '/playing'){
+      let complete = document.getElementById('complete');
+      let nextlevel = document.getElementById('nextlevel');
+      let mymargin = document.getElementById('mymargin');
+      mymargin.style.height = '270px';
+      complete.style.display = 'none';
+      nextlevel.style.display = 'none';
+    }
+  });
+  
   function makeLyric() {
     let url = document.forms[0].elements['lyric'].value;
     window.location.replace('http://127.0.0.1:8000/playing/' + url)
     document.getElementById('firstline').value = "";
+
+    //버튼이 눌리고 나서 작사 진행 중 question이 뜸
+    //시간이 흐름
+    //quesiont과 answer이 바뀜
+
+    let loading = document.getElementById('loading');
+    loading.style.display = 'block';
+
+    let complete = document.getElementById('complete');
+    complete.style.display = 'none';
+    
     return false;
   }
 
@@ -29,6 +54,9 @@
     recommends = findPrompts(word);
     let buttons = Array.from(document.getElementsByClassName("btn btn-warning"));
     for (let i = 0; i < 5; i++) {
+      if (recommends[i] == undefined){//태영: undefined일때 undefined가 뜨지 않도록 설정
+        buttons[i].style="display:none;"
+      }
       buttons[i].innerHTML = recommends[i];
     }
     });
@@ -40,6 +68,9 @@
     recommends = findPrompts(word);
     let buttons = Array.from(document.getElementsByClassName("btn btn-warning"));
     for (let i = 0; i < 5; i++) {
+      if (recommends[i] == undefined){//태영: undefined일때 undefined가 뜨지 않도록 설정
+        buttons[i].style="display:none;"
+      }
       buttons[i].innerHTML = recommends[i];
     }
   }
@@ -48,59 +79,112 @@
     input = document.getElementById("firstline");
     input.value = event.target.innerHTML;
   }
-
 </script>
 
 {% endblock head %}
 
 {% block content %}
 
-<div id="playing">
-  <form class="my-form" method="POST" action="{% url 'main_page:post' %}">
-    {% csrf_token %}
-    <div class=" mb-3">
-      <label class="form-label">첫 소절 : </label>
-      <input type="text" placeholder="단어를 직접 입력할 수 있습니다." id="firstline" name="lyric" size="40"
-        onkeyup="setFirstLine(event)">
-      <button type="button" onclick="return makeLyric();" class="btn btn-primary">작사시작</button><br>
-    </div>
-    <label class="form-label">추천 소절 : </label>
-    <div class="container">
-      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line1"></button>
-      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line2"></button>
-      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line3"></button>
-      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line4"></button>
-      <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line5"></button>
-    </div>
-    <div class="form-floating">
-      <p>작사 결과 : </p>
-      <textarea class="form-control" placeholder="작사 내용이 출력됩니다." id="floatingTextarea2" style="height: 100px"
-        name="content" id="content">{{lyric}}</textarea><br>
-      <button type="button" class="btn btn-secondary" onclick="location.href='/drawing'">돌아가기⬅</button>
-      <button type="button" class="btn btn-secondary" onclick="location.href='/composing'">작곡하기</button>
-      <button type="submit" class="btn btn-secondary">저장하기</button>
-    </div>
-  </form>
+<div class="playing">
+  <h1>🎨그림을 바탕으로 자신만의 동요🎶를 만들어보세요!</h1><br>
+  <div class="playing-content">
+    <form class="my-form" method="POST" action="{% url 'main_page:post' %}">
+      {% csrf_token %}
 
-  <p> {{lyrics}} </p>
+      <div class="hidden">
+        <div class="question">
+          <img src="{% static 'img/smile.png' %}" />
+          <div style="display:flex;flex-direction:column;">
+            <p style="margin-bottom:10px">"선택한 키워드에 맞춰 동요의 첫 소절을 추천합니다."</p>
+            <p>"선택해주세요."</p>
+          </div>
+        </div>
 
-  {% comment %} <div class="col-sm-12">
-    {% if messages %}
-    <div class="messages">
-      {% for message in messages %}
-      <div class="alert alert-info">
-        {{ message.message }}
-        {{ message.tags }}
+        <div class="answer">
+          <div style="display:flex">
+            <input type="text" placeholder="단어를 직접 입력할 수 있습니다." id="firstline" name="lyric" size="40"
+            onkeyup="setFirstLine(event)">
+            <p id="reload" onclick="window.location.reload()"><i class="fa fa-refresh" aria-hidden="true"></i></p>
+          </div>
+          <div class="container">
+            <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line1"></button>
+            <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line2"></button>
+            <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line3"></button>
+            <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line4"></button>
+            <button type="button" onclick="return setLyric(event);" class="btn btn-warning" id="line5"></button>
+          </div>
+          
+        </div> 
       </div>
-      {% endfor %}
-    </div>
-    {% endif %}
 
-    {% block content %}
-    {% endblock content %}
+      <div class="hidden">
+        <div class="question">
+          <img src="{% static 'img/smile.png' %}" />
+          <div>
+            <p>"아래 버튼을 클릭하면 작사가 시작됩니다."</p>
+          </div>
+        </div>
+        <div class="answer">
+          <button type="button" onclick="return makeLyric();" class="btn btn-primary makelyricButton">작사시작!</button><br>
+        </div>
+      </div>
+      
+      <div class="hidden" id="loading" style="display:none">
+        <div class="question">
+          <img src="{% static 'img/smile.png' %}" />
+          <div>
+            <p id="waitLyricTitle">"작사가 진행 중입니다"</p>
+          </div>
+        </div>
+        <div class="answer">
+          <i class="fa fa-spinner fa-spin"></i>
+        </div>
+      </div>
 
-    <hr />
-  </div> {% endcomment %}
+      <div class="hidden" id="complete" style="display:block">
+        <div class="question">
+          <img src="{% static 'img/smile.png' %}" />
+          <div>
+            <p id="waitLyricTitle">"작사가 완료되었습니다"</p>
+          </div>
+        </div>
+        <div class="answer">
+          <i style="display:none" class="fa fa-spinner fa-spin"></i>
+          <textarea rows="10" cols="70" class="lyricResult" placeholder="작사 내용이 출력됩니다." 
+          name="content" id="content">{{lyric}}</textarea><br>
+          <button type="submit" class="btn btn-secondary makelyricButton">저장하기</button>
+        </div>
+      </div>
 
+      <div class="hidden" id="nextlevel" style="display:block">
+        <div class="question">
+          <img src="{% static 'img/smile.png' %}" />
+          <div>
+            <p id="waitLyricTitle">"작곡을 시작할까요?"</p>
+          </div>
+        </div>
+        <div class="answer">
+          <i style="display:none" class="fa fa-spinner fa-spin"></i>
+          <button type="button" class="btn btn-secondary returnButton" onclick="location.href='/drawing'">다시 그림 그리기</button>
+        <button type="button" class="btn btn-secondary makelyricButton" onclick="location.href='/composing'">작곡 시작하기</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div id="mymargin" style="display:hidden; height:50px"></div>
 </div>
+
+<script>
+  let content = document.getElementById('content');
+  let whiteSpace = content.value;
+
+  let TempSpace = whiteSpace.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;");
+  TempSpace = TempSpace.replaceAll('<unk>', "&nbsp;");
+
+  content.innerHTML =  TempSpace;
+
+  //console.log(content.value);
+  //console.log(whiteSpace.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;"));
+</script>
 {% endblock content %}

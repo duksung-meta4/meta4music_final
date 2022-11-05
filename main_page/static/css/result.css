@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+.result{
+    font-family: 'Nanum Gothic', sans-serif;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.result h1{
+    font-family: 'Nanum Gothic', sans-serif;
+    text-align: center;
+    font-size: 25px;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-weight: bold;;
+}
+
+#playlist{
+    margin: 0 auto;
+    background-color: #A6ABBD;
+    width: 600px;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.playlist-content{
+    display: flex;
+}
+
+#content{
+    font-family: 'Nanum Gothic', sans-serif;
+    width: 280px;
+    height: 280px;
+    background-color: #EEEFF4;
+    color: black;
+    border: 0;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    resize: none;
+    text-align: center;
+    box-sizing: border-box; 
+    padding: 20px 10px;
+}
+
+.controls{
+    width: 590px !important;
+}
+
+.metawordButton{
+    background-color: #80D4D6;
+    font-size: 17px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 30px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 660px;
+    margin-top: 20px;
+    margin-bottom: 140px;
+}
+
+.metawordButton:hover{
+    background-color: #6DB2B4;
+}
+
