@@ -1,6 +1,6 @@
 import * as THREE from 'https://cdn.skypack.dev/three';
 import { OrbitControls } from 'https://cdn.skypack.dev/three-orbitcontrols-ts';
-import { GLTFLoader } from 'https://cdn.skypack.dev/@maptalks/gltf-loader';
+import { GLTFLoader } from  'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
 import gsap from 'https://cdn.skypack.dev/@recly/gsap';
 
 import {
@@ -75,7 +75,7 @@ controls.enableDamping = true;
 // let mixer;
 
 // gltfloader.load(
-// 	'./model/metamong.glb',
+// 	'/Users/hyojeong/Desktop/Desktop/grad/meta4music_final/main_page/static/model/metamong.glb',
 // 	gltf => {
 // 		const metamongMesh = gltf.scene.children[0];
 //         metamongMesh.scale.set(0.2, 0.2, 0.2);
@@ -96,7 +96,6 @@ controls.enableDamping = true;
 
 // Mesh
 const planeGeometry = new THREE.PlaneGeometry(0.3, 0.3);
-const boxGeometry = new THREE.BoxGeometry(0.3, 0.3, 0.001);
 
 // Points
 const sphereGeometry = new THREE.SphereGeometry(1, 8, 8);
@@ -118,8 +117,8 @@ for(let i = 0; i < imageurl.length; i++) {
     geometry: planeGeometry,
     imageSrc: imageurl[i],
     x: randomPositionArray[i],
-    y: randomPositionArray[i + 1],
-    z: randomPositionArray[i + 2],
+    y: randomPositionArray[i],
+    z: randomPositionArray[i],
   })
   imagePanels.push(imagePanel);  
 }
@@ -251,11 +250,11 @@ function setShape(e) {
         z: 0,
       });
     } else if (type === "sphere") {
-      gsap.to(imagePanels[i].mesh.rotation, {
+      gsap.to(imagePanels[i].mesh.position, {
         duration: 2,
-        x: imagePanels[i].sphereRotationX,
-        y: imagePanels[i].sphereRotationY,
-        z: imagePanels[i].sphereRotationZ,
+        x: array[i * 3],
+        y: array[i * 3 + 1]+(Math.random() - 0.5) * 5,
+        z: array[i * 3 + 2]+(Math.random() - 0.5) * 5,
       });
     }
   }
@@ -287,7 +286,7 @@ const sphereBtn = document.createElement("button");
 sphereBtn.dataset.type = "sphere";
 sphereBtn.style.cssText =
   "position: absolute; left: 30px; top: 70px; color: #F45866;";
-sphereBtn.innerHTML = "Sphere";
+sphereBtn.innerHTML = "Slide";
 btnWrapper.append(sphereBtn);
 
 document.body.append(btnWrapper);
