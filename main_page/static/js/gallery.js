@@ -110,17 +110,6 @@ for (let i = 0; i < spherePositionArray.length; i++) {
 const imagePanels = [];
 let imagePanel;
 
-let lyr = document.getElementById('lyrics').innerHTML;
-
-let temp1 = lyr.replace("[" , '');
-temp1 = temp1.replace("]", '');
-temp1 = temp1.replaceAll("\'", '');
-temp1 = temp1.replace(/ /g, '');
-
-
-let templ1 = temp1.split(',');
-
-let j;
 
 for(let i = 0; i < imageurl.length; i++) {
   imagePanel = new ImagePanel({
@@ -128,9 +117,9 @@ for(let i = 0; i < imageurl.length; i++) {
     scene,
     geometry: planeGeometry,
     imageSrc: imageurl[i],
-    x: spherePositionArray[i],
-    y: spherePositionArray[i + 1],
-    z: spherePositionArray[i + 2],
+    x: randomPositionArray[i],
+    y: randomPositionArray[i + 1],
+    z: randomPositionArray[i + 2],
   })
   imagePanels.push(imagePanel);  
 }
@@ -209,7 +198,10 @@ function showPopup(i) {
   document.getElementById("popup_layer").style.display = "block";
   //for(let i = 0; i < imageurl.length; i++) {
   document.getElementById("userid").innerHTML = templ3[i] + "님이 만든 작품입니다.";
-  document.getElementById("lyrics2").innerHTML = templ1[i];
+  let temp_textarea = templ1[i]
+  let flower = temp_textarea.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;");
+  flower = flower.replaceAll('&lt;unk&gt;', "&nbsp;");
+  document.getElementById("lyrics2").innerHTML = flower;
   document.getElementById("midiplayer").src = '/static/'+ templ2[i];
   //}
   //document.getElementById("lyrics2").innerHTML = templ1[Math.floor(Math.random() * templ1.length)];

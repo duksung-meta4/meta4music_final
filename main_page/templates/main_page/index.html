@@ -19,6 +19,13 @@
         <!--팝업 컨텐츠 영역-->
         <div class="popup_cont">
                 <h2 id="userid"></h2>
+                
+
+                <p id="lyrics" style="display:none">{{lyric}}</p>
+                <p id="midi" style="display: none;">{{compose}}</p>
+
+                <div id="lyric_box"><textarea id="lyrics2"></textarea></div>
+
                 <div class="controls" id="midi-control">
                     <section id="section1">
                         <midi-player id="midiplayer"
@@ -27,18 +34,36 @@
                         </midi-player>
                     </section>
                 </div>
-
-                <p id="lyrics" style="display:none">{{lyric}}</p>
-                <p id="midi" style="display: none;">{{compose}}</p>
-
-                <p id="lyrics2"></p>
-
                 <!--<textarea placeholder="작사 내용이 출력됩니다." style="height:100px; width:500px;">{{lyric}}</textarea><br>
                 <textarea placeholder="작사 내용이 출력됩니다." style="height:100px; width:500px;" >{{compose}}</textarea>-->
         </div>
     </div>
 </div>
 <script>
+//     let content = document.getElementById('lyrics2');
+//     console.log(content);
+//     console.log(content.value);
+//     let whiteSpace = content.innerHTML;
+//     console.log(whiteSpace);
+
+//     let TempSpace = whiteSpace.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;");
+//     TempSpace = TempSpace.replaceAll('<unk>', "&nbsp;");
+
+//     console.log(TempSpace);
+//     content.innerHTML =  TempSpace;
+// </script>
+<script>
+
+        let lyr = document.getElementById('lyrics').innerHTML;
+
+        let temp1 = lyr.replace("[" , '');
+        temp1 = temp1.replace("]", '');
+        temp1 = temp1.replaceAll("\'", '');
+        temp1 = temp1.replace(/ /g, '');
+
+        let templ1 = temp1.split(',');
+        
+
         // var lyr = document.getElementById('lyrics').innerHTML;
 
         // let temp1 = lyr.replace("[" , '');
