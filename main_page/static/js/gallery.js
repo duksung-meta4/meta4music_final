@@ -1,14 +1,13 @@
-import * as THREE from "https://cdn.skypack.dev/three";
-import { OrbitControls } from "https://cdn.skypack.dev/three-orbitcontrols-ts";
-import { GLTFLoader } from "https://cdn.skypack.dev/@maptalks/gltf-loader";
-import gsap from "https://cdn.skypack.dev/@recly/gsap";
-
+import * as THREE from 'https://cdn.skypack.dev/three';
+import { OrbitControls } from 'https://cdn.skypack.dev/three-orbitcontrols-ts';
+import { GLTFLoader } from 'https://cdn.skypack.dev/@maptalks/gltf-loader';
+import gsap from 'https://cdn.skypack.dev/@recly/gsap';
 
 import {
   MeshBasicMaterial,
   DoubleSide,
   Mesh,
-} from "https://cdn.skypack.dev/three";
+} from 'https://cdn.skypack.dev/three';
 
 export class ImagePanel {
   constructor(info) {
@@ -27,11 +26,13 @@ export class ImagePanel {
     this.sphereRotationY = this.mesh.rotation.y;
     this.sphereRotationZ = this.mesh.rotation.z;
 
+    //this.id = info.id;  // imagepanel 생성시 key값으로 id값 설정 // id값은 imageurl 반복문에서 넣어줌. 그곳에서 imagepanels 배열 생성
     info.scene.add(this.mesh);
   }
 }
 
 // Renderer
+const textureLoader = new THREE.TextureLoader();
 const canvas = document.querySelector("#three-canvas");
 const renderer = new THREE.WebGLRenderer({
   canvas,
@@ -42,6 +43,9 @@ renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 
 // Scene
 const scene = new THREE.Scene();
+
+const bgTexture = textureLoader.load('/static/img/space_metabackground.jpg');
+scene.background = bgTexture;
 
 // Camera
 const camera = new THREE.PerspectiveCamera(
@@ -71,7 +75,7 @@ controls.enableDamping = true;
 // let mixer;
 
 // gltfloader.load(
-// 	'/models/metamong.glb',
+// 	'./model/metamong.glb',
 // 	gltf => {
 // 		const metamongMesh = gltf.scene.children[0];
 //         metamongMesh.scale.set(0.2, 0.2, 0.2);
@@ -92,7 +96,6 @@ controls.enableDamping = true;
 
 // Mesh
 const planeGeometry = new THREE.PlaneGeometry(0.3, 0.3);
-const textureLoader = new THREE.TextureLoader();
 const boxGeometry = new THREE.BoxGeometry(0.3, 0.3, 0.001);
 
 // Points
@@ -106,24 +109,51 @@ for (let i = 0; i < spherePositionArray.length; i++) {
 // // 여러 개의 Plane Mesh 생성
 const imagePanels = [];
 let imagePanel;
-for (let i = 0; i < spherePositionArray.length; i += 3) {
+
+let lyr = document.getElementById('lyrics').innerHTML;
+
+let temp1 = lyr.replace("[" , '');
+temp1 = temp1.replace("]", '');
+temp1 = temp1.replaceAll("\'", '');
+temp1 = temp1.replace(/ /g, '');
+
+
+let templ1 = temp1.split(',');
+
+let j;
+
+for(let i = 0; i < imageurl.length; i++) {
   imagePanel = new ImagePanel({
     textureLoader,
     scene,
-    geometry: boxGeometry,
-    // imageSrc: `..${drawingSrc}`,
-    imageSrc: `../images/0${Math.ceil(Math.random() * 9)}.png`,
+    geometry: planeGeometry,
+    imageSrc: imageurl[i],
     x: spherePositionArray[i],
     y: spherePositionArray[i + 1],
     z: spherePositionArray[i + 2],
-    id: [i] / 3,
-  });
-
-  imagePanels.push(imagePanel);
-  imagePanels.name = "그림 " + ([i] / 3 + 1);
-  // console.log(imagePanels.name);
+  })
+  imagePanels.push(imagePanel);  
 }
 
+
+console.log(imagePanels[0])
+//console.log(imagePanels[1].mesh.uuid);
+
+// for (let i = 0; i < spherePositionArray.length; i += 3) {
+//   imagePanel = new ImagePanel({
+//     textureLoader,
+//     scene,
+//     geometry: boxGeometry,
+//     // imageSrc: `..${drawingSrc}`,
+//     x: spherePositionArray[i],
+//     y: spherePositionArray[i + 1],
+//     z: spherePositionArray[i + 2],
+//   });
+
+//   imagePanels.push(imagePanel);
+//   console.log(imageurl);
+// }
+//console.log(imageurl);
 // Raycaster
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
@@ -147,18 +177,43 @@ function checkIntersects() {
   if (mouseMoved) return;
 
   raycaster.setFromCamera(mouse, camera);
-
   const intersects = raycaster.intersectObjects(scene.children);
+
   for (const item of intersects) {
-    // console.log(item.object.name);
-    showPopup();
+    console.log(item.object.uuid)
+    //클릭하는 그림에 따라 해당하는 id값 반환
+    for(let i = 0; i < imageurl.length; i++){
+      if (imagePanels[i].mesh.uuid == item.object.uuid){
+        showPopup(i);
+      }
+    }
     break;
   }
 }
 
+//작사
+// let lyr = document.getElementById('lyrics').innerHTML;
+
+// let temp1 = lyr.replace("[" , '');
+// temp1 = temp1.replace("]", '');
+// temp1 = temp1.replaceAll("\'", '');
+// temp1 = temp1.replace(/ /g, '');
+
+
+// let templ1 = temp1.split(',');
+
+
 // 팝업 띄우기
-function showPopup() {
+function showPopup(i) {
+ 
   document.getElementById("popup_layer").style.display = "block";
+  //for(let i = 0; i < imageurl.length; i++) {
+  document.getElementById("userid").innerHTML = templ3[i] + "님이 만든 작품입니다.";
+  document.getElementById("lyrics2").innerHTML = templ1[i];
+  document.getElementById("midiplayer").src = '/static/'+ templ2[i];
+  //}
+  //document.getElementById("lyrics2").innerHTML = templ1[Math.floor(Math.random() * templ1.length)];
+
 }
 //팝업 닫기
 const btnPopClose = document.getElementById("btnPopClose");
