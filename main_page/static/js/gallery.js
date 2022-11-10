@@ -1,6 +1,9 @@
-import * as THREE from 'https://cdn.skypack.dev/three';
+//import * as THREE from 'https://cdn.skypack.dev/three';
+import * as THREE from 'three';
 import { OrbitControls } from 'https://cdn.skypack.dev/three-orbitcontrols-ts';
-import { GLTFLoader } from  'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+//import { GLTFLoader } from  'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+import {GLTFLoader} from 'GLTFLoader';
+
 import gsap from 'https://cdn.skypack.dev/@recly/gsap';
 
 import {
@@ -70,29 +73,29 @@ scene.add(directionalLight);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
-// gltf loader
-// const gltfloader = new GLTFLoader();
-// let mixer;
+//gltf loader
+const gltfloader = new GLTFLoader();
+let mixer;
 
-// gltfloader.load(
-// 	'/Users/hyojeong/Desktop/Desktop/grad/meta4music_final/main_page/static/model/metamong.glb',
-// 	gltf => {
-// 		const metamongMesh = gltf.scene.children[0];
-//         metamongMesh.scale.set(0.2, 0.2, 0.2);
-//         metamongMesh.rotation.y = -2;
-//         scene.add(metamongMesh);
+gltfloader.load(
+	'static/model/metamong.glb',
+	gltf => {
+		const metamongMesh = gltf.scene.children[0];
+        metamongMesh.scale.set(0.2, 0.2, 0.2);
+        metamongMesh.rotation.y = -2;
+        scene.add(metamongMesh);
 
-//         // 애니메이션
-//         mixer = new THREE.AnimationMixer(metamongMesh);
-//         const actions = [];
-//         console.log(gltf.animations);
-//         actions[0] = mixer.clipAction(gltf.animations[0]);
-//         // actions[1] = mixer.clipAction(gltf.animations[1]);
-//         actions[0].repetitions = 1;
-//         actions[0].clampWhenFinished = true;
-//         actions[0].play();
-// 	}
-// )
+        // 애니메이션
+        mixer = new THREE.AnimationMixer(metamongMesh);
+        const actions = [];
+        console.log(gltf.animations);
+        actions[0] = mixer.clipAction(gltf.animations[0]);
+        // actions[1] = mixer.clipAction(gltf.animations[1]);
+        actions[0].repetitions = 1;
+        actions[0].clampWhenFinished = true;
+        actions[0].play();
+	}
+)
 
 // Mesh
 const planeGeometry = new THREE.PlaneGeometry(0.3, 0.3);
