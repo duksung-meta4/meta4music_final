@@ -28,13 +28,13 @@ SESSION_COOKIE_AGE=3600
 SECRET_KEY = 'django-insecure-(*^^ajyl3t%=r!8p65on*y_=7nxo_m)j3m=5w75yo8r4nqol#^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False   # pythonanywhere 배포 세팅 
+DEBUG = True
+# DEBUG = False   # pythonanywhere 배포 세팅 
 
 
 # pythonanywhere 배포 세팅 (이 주소가 아니라 다른 주소로 접근하면 막기)
-# ALLOWED_HOSTS = ['127.0.0.1', 'hyojeong.pythonanywhere.com'] 
-ALLOWED_HOSTS = ['hyojeong.pythonanywhere.com'] 
+ALLOWED_HOSTS = ['127.0.0.1'] 
+# ALLOWED_HOSTS = ['hyojeong.pythonanywhere.com'] 
 
 
     
@@ -94,27 +94,27 @@ WSGI_APPLICATION = 'meta4music.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'meta4DB',
-#         'USER':'admin',
-#         'PASSWORD':'12341234',
-#         'HOST':'localhost',
-#         'PORT':'3306',
-#     }
-# }
-
-# pythonanywhere에 업로드 하기 위한 databases 수정
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hyojeong$default',
-        'USER':'hyojeong',
-        'PASSWORD':'meta4music',
-        'HOST':'hyojeong.mysql.pythonanywhere-services.com',
+        'NAME': 'meta4DB',
+        'USER':'admin',
+        'PASSWORD':'12341234',
+        'HOST':'localhost',
+        'PORT':'3306',
     }
 }
+
+# # pythonanywhere에 업로드 하기 위한 databases 수정
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'hyojeong$default',
+#         'USER':'hyojeong',
+#         'PASSWORD':'meta4music',
+#         'HOST':'hyojeong.mysql.pythonanywhere-services.com',
+#     }
+# }
 
 
 # Password validation
