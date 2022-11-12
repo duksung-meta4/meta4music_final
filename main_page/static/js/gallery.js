@@ -1,9 +1,6 @@
-//import * as THREE from 'https://cdn.skypack.dev/three';
 import * as THREE from 'three';
-import { OrbitControls } from 'https://cdn.skypack.dev/three-orbitcontrols-ts';
-//import { GLTFLoader } from  'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'https://unpkg.com/three@0.128.0/examples/jsm/controls/OrbitControls.js';
 import {GLTFLoader} from 'GLTFLoader';
-
 import gsap from 'https://cdn.skypack.dev/@recly/gsap';
 
 import {
@@ -73,7 +70,7 @@ scene.add(directionalLight);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
-//gltf loader
+// gltf loader
 const gltfloader = new GLTFLoader();
 let mixer;
 
@@ -108,43 +105,27 @@ for (let i = 0; i < spherePositionArray.length; i++) {
   randomPositionArray.push((Math.random() - 0.5) * 10);
 }
 
-// // 여러 개의 Plane Mesh 생성
+// 여러 개의 Plane Mesh 생성
+// const imageNum = imageurl.length + 1;
+// const imagePanels = [imageNum];
 const imagePanels = [];
 let imagePanel;
 
-
-for(let i = 0; i < imageurl.length; i++) {
+for (let i = 0; i < spherePositionArray.length; i += 3) {
+  const randnum = Math.ceil(Math.random() * imageurl.length) - 1;
   imagePanel = new ImagePanel({
     textureLoader,
     scene,
     geometry: planeGeometry,
-    imageSrc: imageurl[i],
-    x: randomPositionArray[i],
-    y: randomPositionArray[i],
-    z: randomPositionArray[i],
-  })
-  imagePanels.push(imagePanel);  
+    imageSrc: imageurl[randnum],
+    x: spherePositionArray[i],
+    y: spherePositionArray[i + 1],
+    z: spherePositionArray[i + 2],
+  });
+
+  imagePanels.push(imagePanel);
 }
 
-
-console.log(imagePanels[0])
-//console.log(imagePanels[1].mesh.uuid);
-
-// for (let i = 0; i < spherePositionArray.length; i += 3) {
-//   imagePanel = new ImagePanel({
-//     textureLoader,
-//     scene,
-//     geometry: boxGeometry,
-//     // imageSrc: `..${drawingSrc}`,
-//     x: spherePositionArray[i],
-//     y: spherePositionArray[i + 1],
-//     z: spherePositionArray[i + 2],
-//   });
-
-//   imagePanels.push(imagePanel);
-//   console.log(imageurl);
-// }
-//console.log(imageurl);
 // Raycaster
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
@@ -171,32 +152,26 @@ function checkIntersects() {
   const intersects = raycaster.intersectObjects(scene.children);
 
   for (const item of intersects) {
-    console.log(item.object.uuid)
     //클릭하는 그림에 따라 해당하는 id값 반환
+    // console.log(item.object);
     for(let i = 0; i < imageurl.length; i++){
-      if (imagePanels[i].mesh.uuid == item.object.uuid){
+      const panel = imagePanels[i].mesh.material.map.source.data.attributes.src.value;
+      const it = item.object.material.map.source.data.attributes.src.value;
+      console.log(panel + " 랑 " + it);
+        console.log(i)
+
+      if (panel == it){
         showPopup(i);
+        console.log(i)
       }
     }
     break;
   }
 }
 
-//작사
-// let lyr = document.getElementById('lyrics').innerHTML;
-
-// let temp1 = lyr.replace("[" , '');
-// temp1 = temp1.replace("]", '');
-// temp1 = temp1.replaceAll("\'", '');
-// temp1 = temp1.replace(/ /g, '');
-
-
-// let templ1 = temp1.split(',');
-
-
 // 팝업 띄우기
 function showPopup(i) {
- 
+
   document.getElementById("popup_layer").style.display = "block";
   //for(let i = 0; i < imageurl.length; i++) {
   document.getElementById("userid").innerHTML = templ3[i] + "님이 만든 작품입니다.";
@@ -227,39 +202,48 @@ function setShape(e) {
   let array;
 
   switch (type) {
-    case "random":
-      array = randomPositionArray;
-      break;
-    case "sphere":
-      array = spherePositionArray;
-      break;
+      case 'random':
+          array = randomPositionArray;
+          break;
+      case 'sphere':
+          array = spherePositionArray;
+          break;
   }
 
   for (let i = 0; i < imagePanels.length; i++) {
-    // 위치 이동
-    gsap.to(imagePanels[i].mesh.position, {
-      duration: 2,
-      x: array[i * 3],
-      y: array[i * 3 + 1],
-      z: array[i * 3 + 2],
-    });
+      // 위치 이동 
+      gsap.to(
+          imagePanels[i].mesh.position,
+          {
+              duration: 2,
+              x: array[i * 3],
+              y: array[i * 3 + 1],
+              z: array[i * 3 + 2],
+          }
+      );
 
-    // 회전
-    if (type === "random") {
-      gsap.to(imagePanels[i].mesh.rotation, {
-        duration: 2,
-        x: 0,
-        y: 0,
-        z: 0,
-      });
-    } else if (type === "sphere") {
-      gsap.to(imagePanels[i].mesh.position, {
-        duration: 2,
-        x: array[i * 3],
-        y: array[i * 3 + 1]+(Math.random() - 0.5) * 5,
-        z: array[i * 3 + 2]+(Math.random() - 0.5) * 5,
-      });
-    }
+      // 회전
+      if (type === 'random') {
+          gsap.to(
+              imagePanels[i].mesh.rotation,
+              {
+                  duration: 2,
+                  x: 0,
+                  y: 0,
+                  z: 0
+              }
+          );
+      } else if (type === 'sphere') {
+          gsap.to(
+              imagePanels[i].mesh.rotation,
+              {
+                  duration: 2,
+                  x: imagePanels[i].sphereRotationX,
+                  y: imagePanels[i].sphereRotationY,
+                  z: imagePanels[i].sphereRotationZ
+              } 
+          )
+      }
   }
 }
 
@@ -289,7 +273,7 @@ const sphereBtn = document.createElement("button");
 sphereBtn.dataset.type = "sphere";
 sphereBtn.style.cssText =
   "position: absolute; left: 30px; top: 70px; color: #F45866;";
-sphereBtn.innerHTML = "Slide";
+sphereBtn.innerHTML = "Sphere";
 btnWrapper.append(sphereBtn);
 
 document.body.append(btnWrapper);
