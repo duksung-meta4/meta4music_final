@@ -80,11 +80,13 @@ def canvasToImage(request):
     if request.method == "POST":
         data = request.POST.__getitem__('data')
         data = data[22:]
-        number = random.randrange(1,10000)
+        timestr = time.strftime("%Y%m%d-%H%M%S")
+
+        #number = random.randrange(1,10000)
 
         # 저장할 경로 및 파일명을 지정
         path = str('main_page/static/')
-        filename = 'resultImg/image' + str(number) + '.png'
+        filename = 'resultImg/image' + timestr + '.png'
 
         # "wb" (즉, 바이너리파일 쓰기전용)으로 파일을 open
         image = open(path+filename, "wb")
