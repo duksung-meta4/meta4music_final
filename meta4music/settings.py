@@ -94,14 +94,25 @@ WSGI_APPLICATION = 'meta4music.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'meta4DB',
+#         'USER':'admin',
+#         'PASSWORD':'12341234',
+#         'HOST':'localhost',
+#         'PORT':'3306',
+#     }
+# }
+
+# pythonanywhere에 업로드 하기 위한 databases 수정
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'meta4DB',
-        'USER':'admin',
-        'PASSWORD':'12341234',
-        'HOST':'localhost',
-        'PORT':'3306',
+        'NAME': 'hyojeong$default',
+        'USER':'hyojeong',
+        'PASSWORD':'meta4music',
+        'HOST':'hyojeong.mysql.pythonanywhere-services.com',
     }
 }
 
