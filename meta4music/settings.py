@@ -95,14 +95,29 @@ WSGI_APPLICATION = 'meta4music.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'meta4DB',
+#         'USER':'admin',
+#         'PASSWORD':'12341234',
+#         'HOST':'localhost',
+#         'PORT':'3306',
+#     }
+# }
+
+# AWS RDS와 연결하기 위한 database 설정
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'meta4DB',
         'USER':'admin',
         'PASSWORD':'12341234',
-        'HOST':'localhost',
+        'HOST':'database-1.cxhdf5vmbh57.ap-northeast-2.rds.amazonaws.com',  # 생성한 데이터베이스 엔드포인트
         'PORT':'3306',
+        'OPTIONS':{
+            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
