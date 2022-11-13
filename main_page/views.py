@@ -5,7 +5,7 @@ from transformers import PreTrainedTokenizerFast
 import torch
 from transformers import GPT2Config,GPT2LMHeadModel
 from .models import Lyrics, Compose, Images
-from account.models import LoginUser
+from account.models import LoginUser, User
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 
@@ -20,7 +20,6 @@ import numpy as np
 import sys
 from music21 import instrument, note, stream, chord, duration, converter
 from .RNNAttention import create_network, sample_with_temp
-import matplotlib.pyplot as plt
 
 result_dict={};
 result_dict2={};
@@ -39,8 +38,40 @@ def home_view(request):
     return render(request, 'main_page/home.html')
 
 def drawing_view(request):
-    return render(request, 'main_page/drawing.html')    
+    return render(request, 'main_page/drawing.html')   
 
+
+def meta(request):
+    # id
+    useridurl = [];
+
+    
+    # 작사
+    lyricurl = [];
+
+    lyric=Lyrics.objects.all();
+    for lyrics in lyric:
+        lyricurl.append(lyrics.lyrics);
+        useridurl.append(lyrics.userid.id);
+    
+    #lyrics=lyric.lyrics;
+    #작곡
+    composeurl = [];
+    compose = Compose.objects.all();
+    for midi in compose:
+        composeurl.append(midi.music);
+
+    #midi = compose.music;
+    #이미지
+    imgurl =[];
+    img = Images.objects.all();
+    for image in img:
+        imgurl.append(image.canvas);
+
+    #image = img.canvas;
+    data = {"userid": useridurl, "lyric" : lyricurl, "compose" : composeurl, "image" : imgurl};
+
+    return render(request,'main_page/index.html', context=data);
 
 # canvas 이미지 저장
 @csrf_exempt
@@ -48,11 +79,13 @@ def canvasToImage(request):
     if request.method == "POST":
         data = request.POST.__getitem__('data')
         data = data[22:]
-        number = random.randrange(1,10000)
+        timestr = time.strftime("%Y%m%d-%H%M%S")
+
+        #number = random.randrange(1,10000)
 
         # 저장할 경로 및 파일명을 지정
         path = str('main_page/static/')
-        filename = 'resultImg/image' + str(number) + '.png'
+        filename = 'resultImg/image' + timestr + '.png'
 
         # "wb" (즉, 바이너리파일 쓰기전용)으로 파일을 open
         image = open(path+filename, "wb")
@@ -62,7 +95,7 @@ def canvasToImage(request):
         image.close()
 
         # sql에 저장
-        user=LoginUser.objects.all()[:1][0]     
+        user=User.objects.get(id=LoginUser.objects.all()[:1][0].id);     
         img=Images()
         img.canvas = filename
         img.adminid=user
@@ -77,7 +110,7 @@ def canvasToImage(request):
 @csrf_exempt
 def post(request):
     if request.method=="POST":
-        user=LoginUser.objects.all()[:1][0];      
+        user=User.objects.get(id=LoginUser.objects.all()[:1][0].id);     
         lyric=Lyrics();
         lyric.lyrics=request.POST['content'];
         lyric.userid=user;
@@ -94,7 +127,7 @@ def post(request):
 @csrf_exempt
 def post2(request):
     if request.method=="POST":
-        user=LoginUser.objects.all()[:1][0];      
+        user=User.objects.get(id=LoginUser.objects.all()[:1][0].id);   
         compose=Compose();
         compose.music=request.POST['content'];
         compose.adminid=user;
@@ -108,13 +141,13 @@ def playing_view(request):
     return render(request, 'main_page/playing.html')
 
 def result_view(request):
-    lyric=Lyrics.objects.last();
+    lyric=Lyrics.objects.filter(userid=LoginUser.objects.all()[:1][0].id).last();
     lyrics=lyric.lyrics;
     
-    compose = Compose.objects.last();
+    compose = Compose.objects.filter(adminid=LoginUser.objects.all()[:1][0].id).last();
     midi = compose.music;
 
-    img = Images.objects.last();
+    img = Images.objects.filter(adminid=LoginUser.objects.all()[:1][0].id).last();
     image = img.canvas;
 
     dict={"lyrics":lyrics, "midi": midi, "image": image};
@@ -360,4 +393,3 @@ def composing(request, keyword):
     result_dict2={"midi":midi};
 
     return render(request, 'main_page/composing.html', context = result_dict2);
-

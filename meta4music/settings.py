@@ -15,6 +15,11 @@ from django.contrib import messages
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
+# RDS 설정
+import pymysql
+pymysql.install_as_MySQLdb()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,11 +34,16 @@ SECRET_KEY = 'django-insecure-(*^^ajyl3t%=r!8p65on*y_=7nxo_m)j3m=5w75yo8r4nqol#^
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False   # pythonanywhere 배포 세팅 
 
 
-ALLOWED_HOSTS = ['127.0.0.1'] 
+# ec2 배포
+ALLOWED_HOSTS = ['127.0.0.1', 'ec2-15-164-233-72.ap-northeast-2.compute.amazonaws.com', '.meta4music.kro.kr'] 
+# pythonanywhere 배포 세팅 (이 주소가 아니라 다른 주소로 접근하면 막기)
+# ALLOWED_HOSTS = ['hyojeong.pythonanywhere.com'] 
 
 
+    
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,9 +55,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main_page.apps.MainPageConfig',
     'account.apps.AccountConfig',
+    'corsheaders', # ec2 cors 에러 해결
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # ec2 cors 에러 해결 #최상단에 추가해주기
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,6 +68,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
+
+# ec2 cors 에러 해결
+CORS_ORIGIN_ALLOW_ALL = True
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
@@ -90,16 +106,42 @@ WSGI_APPLICATION = 'meta4music.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'meta4DB',
+#         'USER':'admin',
+#         'PASSWORD':'12341234',
+#         'HOST':'localhost',
+#         'PORT':'3306',
+#     }
+# }
+
+# AWS RDS와 연결하기 위한 database 설정
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'meta4DB',
         'USER':'admin',
         'PASSWORD':'12341234',
-        'HOST':'localhost',
+        'HOST':'database-1.cxhdf5vmbh57.ap-northeast-2.rds.amazonaws.com',  # 생성한 데이터베이스 엔드포인트
         'PORT':'3306',
+        'OPTIONS':{
+            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
+
+# # pythonanywhere에 업로드 하기 위한 databases 수정
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'hyojeong$default',
+#         'USER':'hyojeong',
+#         'PASSWORD':'meta4music',
+#         'HOST':'hyojeong.mysql.pythonanywhere-services.com',
+#     }
+# }
 
 
 # Password validation
@@ -144,8 +186,13 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'main_page\\static'),os.path.join(BAS
 
 
 # STATIC_ROOT = [os.path.join(BASE_DIR,'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if DEBUG:
+    import mimetypes
+    mimetypes.add_type("application/javascript", ".js", True)

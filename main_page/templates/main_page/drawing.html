@@ -24,7 +24,9 @@
 
     function handOverWord() {
         localStorage.setItem('myword', word);
-        window.location.replace('http://127.0.0.1:8000/playing');
+        //window.location.replace('http://127.0.0.1:8000/playing');
+        // ec2 배포 url
+        window.location.replace('playing');
         return false;
     }
 
@@ -129,7 +131,7 @@
                 <div class="question">
                     <img src="{% static 'img/smile.png' %}" />
                     <div style="display:flex;flex-direction:column;">
-                        <p style="margin-bottom:10px">"선택학 키워드로 작사에 필요한 첫 음절을 추천합니다"</p>
+                        <p style="margin-bottom:10px">"선택한 키워드로 작사에 필요한 첫 음절을 추천합니다"</p>
                         <p>"버튼을 눌러주세요"</p>
                     </div>
                 </div>  

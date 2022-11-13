@@ -116,7 +116,9 @@
 
       keyword =  keyword_fillter2[word];
 
-      window.location.replace('http://127.0.0.1:8000/composing/' + keyword)
+      //window.location.replace('http://127.0.0.1:8000/composing/' + keyword)
+      // ec2 배포 url
+      window.location.replace(keyword);
 
       return false;
     }
