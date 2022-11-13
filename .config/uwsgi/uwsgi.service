@@ -3,7 +3,7 @@ Description=uWSGI service
 After=syslog.target
  
 [Service]
-ExecStart=/home/ubuntu/myvenv/bin/uwsgi -i /srv/meta4music_final/.config/uwsgi/meta4music.conf.ini
+ExecStart=/home/ubuntu/myvenv/bin/uwsgi -i /srv/meta4music_final/.config/uwsgi/meta4music.ini
  
 Restart=always
 KillSignal=SIGQUIT
