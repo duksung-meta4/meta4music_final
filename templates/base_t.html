@@ -15,7 +15,18 @@
 </head>
 
 <body onload="window.scrollTo(0, 0);">
-  <!-- navbar -->
+  <!-- 반응형 navbar -->
+  <input type="checkbox" id="menuicon">
+  <label for="menuicon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </label>
+  <div class="sidebar">
+    <a href="{% url 'main_page:drawing' %}">동요 만들기</a>
+    <a>메타버스 구경하기</a>
+  </div>
+    <!-- navbar -->
   <div class="nav">
     <a class="nav-logo" href="{% url 'main_page:main' %}">Meta4Music</a>
     <ul class="nav-ul">

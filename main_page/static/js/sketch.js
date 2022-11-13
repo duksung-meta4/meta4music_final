@@ -360,16 +360,12 @@ const keyword_fillter = {
 };
 
 function preload() {
-  //분류기 생성
-  console.log("로딩 중");
   classifier = ml5.imageClassifier("DoodleNet");
 }
 
 let button;
 
 function setup() {
-  //캔버스 크기 고정
-
   canvas = createCanvas(280, 280);
   canvas.parent("sketch-holder");
   background(255);
