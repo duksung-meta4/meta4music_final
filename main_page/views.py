@@ -20,7 +20,6 @@ import numpy as np
 import sys
 from music21 import instrument, note, stream, chord, duration, converter
 from .RNNAttention import create_network, sample_with_temp
-import matplotlib.pyplot as plt
 
 result_dict={};
 result_dict2={};
@@ -85,7 +84,7 @@ def canvasToImage(request):
         #number = random.randrange(1,10000)
 
         # 저장할 경로 및 파일명을 지정
-        path = str('static/')
+        path = str('main_page/static/')
         filename = 'resultImg/image' + timestr + '.png'
 
         # "wb" (즉, 바이너리파일 쓰기전용)으로 파일을 open
@@ -394,4 +393,3 @@ def composing(request, keyword):
     result_dict2={"midi":midi};
 
     return render(request, 'main_page/composing.html', context = result_dict2);
-
