@@ -71,6 +71,7 @@ MIDDLEWARE = [
 
 # ec2 cors 에러 해결
 CORS_ORIGIN_ALLOW_ALL = True
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
