@@ -15,6 +15,11 @@ from django.contrib import messages
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
+# RDS 설정
+import pymysql
+pymysql.install_as_MySQLdb()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
