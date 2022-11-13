@@ -15,6 +15,11 @@ from django.contrib import messages
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
+# RDS 설정
+import pymysql
+pymysql.install_as_MySQLdb()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -32,8 +37,9 @@ DEBUG = True
 # DEBUG = False   # pythonanywhere 배포 세팅 
 
 
+# ec2 배포
+ALLOWED_HOSTS = ['127.0.0.1', 'ec2-3-35-233-211.ap-northeast-2.compute.amazonaws.com', 'ec2-15-164-233-72.ap-northeast-2.compute.amazonaws.com'] 
 # pythonanywhere 배포 세팅 (이 주소가 아니라 다른 주소로 접근하면 막기)
-ALLOWED_HOSTS = ['127.0.0.1'] 
 # ALLOWED_HOSTS = ['hyojeong.pythonanywhere.com'] 
 
 
@@ -49,9 +55,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main_page.apps.MainPageConfig',
     'account.apps.AccountConfig',
+    'corsheaders', # ec2 cors 에러 해결
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # ec2 cors 에러 해결 #최상단에 추가해주기
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,6 +68,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
+
+# ec2 cors 에러 해결
+CORS_ORIGIN_ALLOW_ALL = True
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
@@ -94,14 +106,29 @@ WSGI_APPLICATION = 'meta4music.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'meta4DB',
+#         'USER':'admin',
+#         'PASSWORD':'12341234',
+#         'HOST':'localhost',
+#         'PORT':'3306',
+#     }
+# }
+
+# AWS RDS와 연결하기 위한 database 설정
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'meta4DB',
         'USER':'admin',
         'PASSWORD':'12341234',
-        'HOST':'localhost',
+        'HOST':'database-1.cxhdf5vmbh57.ap-northeast-2.rds.amazonaws.com',  # 생성한 데이터베이스 엔드포인트
         'PORT':'3306',
+        'OPTIONS':{
+            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
