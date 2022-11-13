@@ -172,6 +172,14 @@
     cursor: pointer;
 }
 
+.tistory a {
+    color: #000;
+}
+
+.tistory a:hover {
+    color: #80D4D6;
+}
+
 .tistory:hover{
     color: #80D4D6;
 }

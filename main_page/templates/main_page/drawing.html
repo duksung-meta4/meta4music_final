@@ -45,8 +45,7 @@
             });
         });
  
-}
-
+    }   
 </script>
 
 {% endblock head %}
@@ -124,7 +123,7 @@
                         <p>"그림을 저장하고 싶으신가요? 아래 버튼을 눌러주세요!"</p>
                     </div>
                 </div>
-                <button type="submit" onclick="return saveImage()" class="saveButton">저장하기</button>
+                <button type="submit" onclick="return btnActive(); saveImage();" class="saveButton">저장하기</button>
             </div>
             <div class="blind">
                 <div class="question">
@@ -134,13 +133,23 @@
                         <p>"버튼을 눌러주세요"</p>
                     </div>
                 </div>  
-                <a><button type="submit" onclick="return handOverWord();" class="recommend" disabled="disabled">
+                <a><button type="submit" onclick="return handOverWord(); btnActive()" class="recommend" id="recommend" disabled="disabled">
                     첫 음절 추천 받기</button></a>
             </div>
         </div>
     </div>
 
     <div style="display:hidden; height:50px"></div>
+
+    <script>
+        //버튼 활성화 vs 비활성화
+        function btnActive(){
+            console.log("확인");
+            let recommend = document.getElementById("recommend");
+            recommend.disabled = false;
+        }
+
+    </script>
 </div>
 
 

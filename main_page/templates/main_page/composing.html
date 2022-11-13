@@ -209,7 +209,7 @@
             </midi-player>
           </section>
           <!-- 저장 버튼 -->
-          <button type="submit" style="margin-top:15px" class="btn btn-secondary makelyricButton">저장하기</button>
+          <button type="submit" onclick="btnActive();" style="margin-top:15px" class="btn btn-secondary makelyricButton">저장하기</button>
         </div>
       </div>
     </div>
@@ -223,7 +223,7 @@
       </div>
       <div class="answer">
         <i style="display:none" class="fa fa-spinner fa-spin"></i>
-        <button type="button" class="btn btn-secondary makelyricButton" onclick="location.href='/result'">결과보기</button>  
+        <button type="button" disabled="disabled" class="btn btn-secondary makelyricButton" onclick="location.href='/result'">결과보기</button>  
       </div>
     </div>
 
@@ -261,5 +261,13 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
+
+  <script>
+    function btnActive(){
+      console.log("확인");
+      let recommend = document.getElementById("recommend");
+      recommend.disabled = false;
+    }
+  </script>
 </div>
 {% endblock content %}

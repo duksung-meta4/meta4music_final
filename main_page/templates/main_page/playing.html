@@ -171,7 +171,7 @@
           <i style="display:none" class="fa fa-spinner fa-spin"></i>
           <textarea rows="10" cols="70" class="lyricResult" placeholder="작사 내용이 출력됩니다." 
           name="content" id="content">{{lyric}}</textarea><br>
-          <button type="submit" class="btn btn-secondary makelyricButton">저장하기</button>
+          <button type="submit" onclick="btnActive()" class="btn btn-secondary makelyricButton" >저장하기</button>
         </div>
       </div>
 
@@ -185,7 +185,7 @@
         <div class="answer">
           <i style="display:none" class="fa fa-spinner fa-spin"></i>
           <button type="button" class="btn btn-secondary returnButton" onclick="location.href='/drawing'">다시 그림 그리기</button>
-          <button type="button" class="btn btn-secondary makelyricButton" onclick="location.href='/composing'">작곡 시작하기</button>
+          <button type="button" class="btn btn-secondary makelyricButton" onclick="location.href='/composing'" disabled="disabled">작곡 시작하기</button>
         </div>
       </div>
     </form>
@@ -195,8 +195,8 @@
 </div>
 
 <script>
-  var na = document.getElementById('na');
-  na.addEventListener('submit', handleSubmit);
+  {% comment %} var na = document.getElementById('na');
+  na.addEventListener('submit', handleSubmit); {% endcomment %}
 
   let content = document.getElementById('content');
   let whiteSpace = content.value;
@@ -208,5 +208,13 @@
 
   //console.log(content.value);
   //console.log(whiteSpace.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;"));
+
+  //버튼 활성화 vs 비활성화
+  function btnActive(){
+    console.log("확인");
+    let recommend = document.getElementById("recommend");
+    recommend.disabled = false;
+  }
+
 </script>
 {% endblock content %}
