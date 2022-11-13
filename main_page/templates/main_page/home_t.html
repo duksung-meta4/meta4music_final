@@ -10,6 +10,10 @@
 
 {% block content %}
 <div id="content">
+    <div id="useralert">
+        <p>저희 사이트는 웹 환경에 <br>
+            최적화 되어 있습니다.</p>
+    </div>
     <div id="home">
         <div class="homeContent">
             <img src="{% static 'img/headlogo.png' %}" />
@@ -31,14 +35,14 @@
     </div>
     {% comment %} <div id="boundary"></div> {% endcomment %}
     <div id="technicque">
-        <p class="contentTitle">The technologies used in this project
-            <img src="{% static 'img/service.png' %}" />
-        </p>
-        
+        <div id="technicqueContent">
+            <p>The technologies used in this project</p>
+            <img id="serviceimg" src="{% static 'img/service.png' %}" />
+        </div>
     </div>
     <div id="team">
         <p class="contentTitle">We are Team '메타포'</p>
-        <a><p class="tistory">We are Team 'Meta4'</p></a>
+        <p class="tistory"><a href="https://meta4.tistory.com/" target="_blank">We are Team 'Meta4'</a></p>
 
         <div id="team_profile">
             <div class="profile">

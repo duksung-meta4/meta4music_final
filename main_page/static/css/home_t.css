@@ -4,20 +4,30 @@
     background-image: url('/static/img/background2.png');
     background-repeat: no-repeat;
     background-size: cover;
-    padding-left: 180px;
-    padding-right: 180px;
     height: 0;
     padding-top: 66.64%; /* (img-height / img-width * container-width) */
                 /* (853 / 1280 * 100) */
+    display: relative;
 }
 
 .homeContent{
     position: absolute;
-    top: 200px;
+    top: 20%;
+    left: 10%;
+    width: fit-content;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.homeContent img{
+    width: 70%;
 }
 
 #logoContent{
-    font-size: 25px;
+    font-size: 20px;
     margin-top: 50px;
     margin-bottom: 70px;
     color: white;
@@ -87,6 +97,22 @@
     background-color: #EEEFF4;
 }
 
+#technicqueContent{
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+}
+
+#technicqueContent p{
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
+    font-size: 35px;
+    text-align: center;
+    margin-top: 70px;
+}
+
 .contentTitle{
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: bold;
@@ -95,6 +121,11 @@
     margin-top: 70px;
 }
 
+#serviceimg{
+    position: absolute;
+    width: 100%;
+    margin-top: 20px;
+}
 #technicque .contentTitle{
     position: absolute;
     top: 15%;
@@ -105,9 +136,16 @@
 
 #service-content{
     display: flex;
-    justify-content: center;
     align-items: center;
     margin-top: 48px;
+    width: 70%;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#service-content img{
+    width: 70%;
 }
 
 #technicque-content img{
@@ -132,6 +170,14 @@
     margin-top: 35px;
     font-size: 20px;
     cursor: pointer;
+}
+
+.tistory a {
+    color: #000;
+}
+
+.tistory a:hover {
+    color: #80D4D6;
 }
 
 .tistory:hover{
@@ -187,4 +233,17 @@
 
 i{
     cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .homeContent div{
+        display: none;
+    }
+
+    .homeContent{
+        display: block;
+        top: 70px;
+    }
+    
 }
