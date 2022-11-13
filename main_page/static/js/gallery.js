@@ -112,12 +112,15 @@ const imagePanels = [];
 let imagePanel;
 
 for (let i = 0; i < spherePositionArray.length; i += 3) {
-  const randnum = Math.ceil(Math.random() * imageurl.length) - 1;
+  // const randnum = Math.ceil(Math.random() * imageurl.length) - 1;
+  const num = i / 3;
+  const bigNum = num % imageurl.length;
+  // console.log('num은 : ' + num + ' 빅은 : ' + bigNum);
   imagePanel = new ImagePanel({
     textureLoader,
     scene,
     geometry: planeGeometry,
-    imageSrc: imageurl[randnum],
+    imageSrc: imageurl[bigNum],
     x: spherePositionArray[i],
     y: spherePositionArray[i + 1],
     z: spherePositionArray[i + 2],
@@ -157,12 +160,10 @@ function checkIntersects() {
     for(let i = 0; i < imageurl.length; i++){
       const panel = imagePanels[i].mesh.material.map.source.data.attributes.src.value;
       const it = item.object.material.map.source.data.attributes.src.value;
-      console.log(panel + " 랑 " + it);
-        console.log(i)
+      // console.log(panel + " 랑 " + it);
 
       if (panel == it){
         showPopup(i);
-        console.log(i)
       }
     }
     break;
