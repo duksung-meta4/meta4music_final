@@ -55,9 +55,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main_page.apps.MainPageConfig',
     'account.apps.AccountConfig',
+    'corsheaders', # ec2 cors 에러 해결
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # ec2 cors 에러 해결 #최상단에 추가해주기
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -66,6 +68,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
+
+# ec2 cors 에러 해결
+CORS_ORIGIN_ALLOW_ALL = True
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',
