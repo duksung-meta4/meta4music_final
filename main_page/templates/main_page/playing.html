@@ -32,7 +32,7 @@
     let url = document.forms[0].elements['lyric'].value;
     //window.location.replace('http://127.0.0.1:8000/playing/' + url)
     // ec2 배포 url
-    window.location.replace( window.location.hostname + '/playing/' + url);
+    window.location.replace( 'playing/' + url);
     document.getElementById('firstline').value = "";
 
     //버튼이 눌리고 나서 작사 진행 중 question이 뜸
