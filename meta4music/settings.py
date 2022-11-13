@@ -38,7 +38,7 @@ DEBUG = True
 
 
 # ec2 배포
-ALLOWED_HOSTS = ['127.0.0.1', 'ec2-3-35-233-211.ap-northeast-2.compute.amazonaws.com'] 
+ALLOWED_HOSTS = ['127.0.0.1', 'ec2-3-35-233-211.ap-northeast-2.compute.amazonaws.com', 'ec2-15-164-233-72.ap-northeast-2.compute.amazonaws.com'] 
 # pythonanywhere 배포 세팅 (이 주소가 아니라 다른 주소로 접근하면 막기)
 # ALLOWED_HOSTS = ['hyojeong.pythonanywhere.com'] 
 
