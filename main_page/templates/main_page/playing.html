@@ -26,6 +26,56 @@
       complete.style.display = 'none';
       nextlevel.style.display = 'none';
     }
+
+    //버튼 비활성화, 활성화 로직
+    if(window.location.pathname == '/post'){
+      let composingButton = document.getElementById('composingButton');
+      composingButton.disabled = false;
+
+      let savelyricButton = document.getElementById('savelyricButton');
+      savelyricButton.disabled = true;
+
+      $("#lyricStartBT").css("background-color", "#80D4D6");
+      $("#savelyricButton").css("background-color", "#80D4D6");
+      $("#composingButton").css("background-color", "#F69165");
+
+      $("#lyricStartBT").hover(function(){
+        $(this).css("background-color", "#6DB2B4");
+      }, function(){
+        $(this).css("background-color", "#80D4D6");
+      })
+
+      $("#savelyricButton").hover(function(){
+        $(this).css("background-color", "#6DB2B4");
+      }, function(){
+        $(this).css("background-color", "#80D4D6");
+      })
+
+      $("#composingButton").hover(function(){
+        $(this).css("background-color", "#E26D3A");
+      }, function(){
+        $(this).css("background-color", "#F69165");
+      })
+    }
+
+    if(window.location.pathname.includes('/playing/')){
+
+      $("#lyricStartBT").css("background-color", "#80D4D6");
+      $("#savelyricButton").css("background-color", "#F69165");
+      $("#composingButton").css("background-color", "#80D4D6");
+
+      $("#lyricStartBT").hover(function(){
+        $(this).css("background-color", "#6DB2B4");
+      }, function(){
+        $(this).css("background-color", "#80D4D6");
+      })
+
+      $("#savelyricButton").hover(function(){
+        $(this).css("background-color", "#E26D3A");
+      }, function(){
+        $(this).css("background-color", "#F69165");
+      })
+    }
   });
   
   function makeLyric() {
@@ -44,7 +94,7 @@
 
     let complete = document.getElementById('complete');
     complete.style.display = 'none';
-    
+
     return false;
   }
 
@@ -146,7 +196,7 @@
           </div>
         </div>
         <div class="answer">
-          <button type="button" onclick="return makeLyric();" class="btn btn-primary makelyricButton">작사시작!</button><br>
+          <button id="lyricStartBT" style="background:#F69165" type="button" onclick="return makeLyric();" class="btn btn-primary makelyricButton">작사시작!</button><br>
         </div>
       </div>
       
@@ -173,7 +223,7 @@
           <i style="display:none" class="fa fa-spinner fa-spin"></i>
           <textarea rows="10" cols="70" class="lyricResult" placeholder="작사 내용이 출력됩니다." 
           name="content" id="content">{{lyric}}</textarea><br>
-          <button type="submit" onclick="btnActive()" class="btn btn-secondary makelyricButton" >저장하기</button>
+          <button type="submit" id="savelyricButton" onclick="return btnActive();" class="btn btn-secondary makelyricButton" >저장하기</button>
         </div>
       </div>
 
@@ -186,8 +236,8 @@
         </div>
         <div class="answer">
           <i style="display:none" class="fa fa-spinner fa-spin"></i>
-          <button type="button" class="btn btn-secondary returnButton" onclick="location.href='/drawing'">다시 그림 그리기</button>
-          <button type="button" class="btn btn-secondary makelyricButton" onclick="location.href='/composing'" disabled="disabled">작곡 시작하기</button>
+          <button type="button" class="btn btn-secondary returnButton" onclick="disabledAlert(); location.href='/drawing'">다시 그림 그리기</button>
+          <button type="button" id="composingButton" class="btn btn-secondary makelyricButton" onclick="location.href='/composing';" disabled="">작곡 시작하기</button>
         </div>
       </div>
     </form>
@@ -209,12 +259,11 @@
   //console.log(content.value);
   //console.log(whiteSpace.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;"));
 
-  //버튼 활성화 vs 비활성화
-  function btnActive(){
-    console.log("확인");
-    let recommend = document.getElementById("recommend");
-    recommend.disabled = false;
-  }
+  $("#lyricStartBT").hover(function(){
+    $(this).css("background-color", "#E26D3A");
+  }, function(){
+    $(this).css("background-color", "#F69165");
+  })
 
 </script>
 {% endblock content %}

@@ -102,7 +102,6 @@
 }
 
 .makelyricButton{
-  background-color: #80D4D6;
   font-size: 17px;
   color: white;
   border: none;
@@ -111,10 +110,6 @@
   transition-duration: 0.3s;
   cursor: pointer;
   width: 200px;
-}
-
-.makelyricButton:hover{
-  background-color: #6DB2B4;
 }
 
 .lyricResult{

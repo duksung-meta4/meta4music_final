@@ -128,7 +128,7 @@ input[type=radio]:hover + label{
 
 .saveButton{
   margin-left: 80px;
-  background-color: #80D4D6;
+  background-color: #F69165;
   font-size: 17px;
   color: white;
   border: none;
@@ -143,5 +143,5 @@ input[type=radio]:hover + label{
 }
 
 .saveButton:hover{
-  background-color: #6DB2B4;
+  background-color: #E26D3A;
 }
