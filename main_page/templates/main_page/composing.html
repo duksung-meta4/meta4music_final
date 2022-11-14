@@ -28,6 +28,80 @@
         nextlevel.style.display = 'none';
         mymargin.style.height = '450px';
       }
+
+      if(window.location.pathname.includes(`/composing/`)){
+        $("#start").css("background-color", "#80D4D6"); //작곡시작
+        $("#result").css("background-color", "#F69165"); //작곡 결과보기
+        $("#mypage").css("background-color", "#80D4D6"); //결과보기
+  
+        $("#start").hover(function(){
+          $(this).css("background-color", "#6DB2B4");
+        }, function(){
+          $(this).css("background-color", "#80D4D6");
+        })
+  
+        $("#result").hover(function(){
+          $(this).css("background-color", "#E26D3A");
+        }, function(){
+          $(this).css("background-color", "#F69165");
+        })
+
+        $("#mypage").hover(function(){
+          $(this).css("background-color", "#6DB2B4");
+        }, function(){
+          $(this).css("background-color", "#80D4D6");
+        })
+      }
+
+      if(window.location.pathname == '/post2'){
+        let savebutton = document.getElementById("savebutton");
+        savebutton.disabled = true;
+
+        let mypage = document.getElementById("mypage");
+        mypage.disabled = false;
+
+        $("#start").css("background-color", "#80D4D6"); //작곡시작
+        $("#result").css("background-color", "#F69165"); //작곡 결과보기
+        $("#mypage").css("background-color", "#80D4D6"); //결과보기
+  
+        $("#start").hover(function(){
+          $(this).css("background-color", "#6DB2B4");
+        }, function(){
+          $(this).css("background-color", "#80D4D6");
+        })
+  
+        $("#result").hover(function(){
+          $(this).css("background-color", "#E26D3A");
+        }, function(){
+          $(this).css("background-color", "#F69165");
+        })
+
+        $("#mypage").hover(function(){
+          $(this).css("background-color", "#6DB2B4");
+        }, function(){
+          $(this).css("background-color", "#80D4D6");
+        })
+        
+
+        $("#result").click(function(){
+          $("#savebutton").css("background-color", "#80D4D6");
+          $("#mypage").css("background-color", "#F69165");
+
+          $("#savebutton").hover(function(){
+            $(this).css("background-color", "#6DB2B4");
+          }, function(){
+            $(this).css("background-color", "#80D4D6");
+          })
+
+          $("#mypage").hover(function(){
+            $(this).css("background-color", "#E26D3A");
+          }, function(){
+            $(this).css("background-color", "#F69165");
+          })
+        })
+
+        
+      }
     });
 
     function makeSong(){
@@ -144,6 +218,21 @@
       const control = document.getElementById('midi-control');
       control.style.display = 'block';
 
+      $("#result").css("background-color", "#80D4D6");
+      $("#savebutton").css("background-color", "#F69165");
+
+      $("#result").hover(function(){
+        $(this).css("background-color", "#6DB2B4");
+      }, function(){
+        $(this).css("background-color", "#80D4D6");
+      })
+
+      $("#savebutton").hover(function(){
+        $(this).css("background-color", "#E26D3A");
+      }, function(){
+        $(this).css("background-color", "#F69165");
+      })
+
       return false;
     }
 
@@ -211,7 +300,7 @@
             </midi-player>
           </section>
           <!-- 저장 버튼 -->
-          <button type="submit" onclick="btnActive();" style="margin-top:15px" class="btn btn-secondary makelyricButton">저장하기</button>
+          <button type="submit" id="savebutton" style="margin-top:15px" class="btn btn-secondary makelyricButton">저장하기</button>
         </div>
       </div>
     </div>
@@ -225,7 +314,7 @@
       </div>
       <div class="answer">
         <i style="display:none" class="fa fa-spinner fa-spin"></i>
-        <button type="button" disabled="disabled" class="btn btn-secondary makelyricButton" onclick="location.href='/result'">결과보기</button>  
+        <button type="button" id="mypage" disabled="disabled" class="btn btn-secondary makelyricButton" onclick="location.href='/result'">결과보기</button>  
       </div>
     </div>
 
@@ -265,11 +354,7 @@
   <script src="https://cdn.jsdelivr.net/combine/npm/tone@14.7.58,npm/@magenta/music@1.23.1/es6/core.js,npm/focus-visible@5,npm/html-midi-player@1.4.0"></script>
 
   <script>
-    function btnActive(){
-      console.log("확인");
-      let recommend = document.getElementById("recommend");
-      recommend.disabled = false;
-    }
+
   </script>
 </div>
 {% endblock content %}

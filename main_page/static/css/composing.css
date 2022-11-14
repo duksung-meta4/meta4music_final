@@ -35,7 +35,6 @@
 }
   
 .makelyricButton{
-    background-color: #80D4D6;
     font-size: 17px;
     color: white;
     border: none;
@@ -46,7 +45,19 @@
     width: 200px;
 }
 
-.makelyricButton:hover{
+#start{
+    background-color: #F69165;
+}
+
+#start:hover{
+    background-color: #E26D3A;
+}
+
+#savebutton{
+    background-color: #80D4D6;
+}
+
+#savebutton:hover{
     background-color: #6DB2B4;
 }
 
