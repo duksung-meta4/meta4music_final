@@ -106,13 +106,12 @@ def canvasToImage(request):
     # answer = {'filename':filename}
     return render(request, 'main_page/drawing.html')
 
-
 @csrf_exempt
 def post(request):
     if request.method=="POST":
         user=User.objects.get(id=LoginUser.objects.all()[:1][0].id);     
         lyric=Lyrics();
-        lyric.lyrics=request.POST['content'];
+        lyric.lyrics=request.POST['content'].replace(',',"");
         lyric.userid=user;
         lyric.save();
         messages.success(request,'작사가 저장되었습니다.')
@@ -122,7 +121,6 @@ def post(request):
         lyrics=Lyrics.objects.all();
         #template
         return render(request,'main_page/playing.html',{'lyrics':lyrics})
-
 
 @csrf_exempt
 def post2(request):

@@ -251,10 +251,17 @@
   let content = document.getElementById('content');
   let whiteSpace = content.value;
 
-  let TempSpace = whiteSpace.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;");
-  TempSpace = TempSpace.replaceAll('<unk>', "&nbsp;");
+  let TempSpace = whiteSpace.replaceAll('<unk>', "");
+  TempSpace = TempSpace.replaceAll(',', '');
+  TempSpace = TempSpace.replaceAll(/[0-9]/g, "");
+  TempSpace = TempSpace.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;");
+  TempSpace = TempSpace.replaceAll(/[a-z]/g, '');
+  TempSpace = TempSpace.replaceAll(/[A-Z]/g, '');
+  TempSpace = TempSpace.replaceAll("\'", '');
+  TempSpace = TempSpace.replaceAll('\"', '');
 
   content.innerHTML =  TempSpace;
+
 
   //console.log(content.value);
   //console.log(whiteSpace.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;"));

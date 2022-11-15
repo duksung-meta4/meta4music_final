@@ -1,8 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'https://unpkg.com/three@0.128.0/examples/jsm/controls/OrbitControls.js';
-//import { GLTFLoader } from  'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js';
 import {GLTFLoader} from 'GLTFLoader';
-
 import gsap from 'https://cdn.skypack.dev/@recly/gsap';
 
 import {
@@ -72,7 +70,7 @@ scene.add(directionalLight);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 
-//gltf loader
+// gltf loader
 const gltfloader = new GLTFLoader();
 let mixer;
 
@@ -81,8 +79,7 @@ gltfloader.load(
 	gltf => {
 		const metamongMesh = gltf.scene.children[0];
         metamongMesh.scale.set(0.2, 0.2, 0.2);
-        metamongMesh.rotation.y = -1;
-        metamongMesh.rotation.z = 0.5;
+        metamongMesh.rotation.y = -2;
         scene.add(metamongMesh);
 
         // 애니메이션
@@ -103,48 +100,94 @@ const planeGeometry = new THREE.PlaneGeometry(0.3, 0.3);
 // Points
 const sphereGeometry = new THREE.SphereGeometry(1, 8, 8);
 const spherePositionArray = sphereGeometry.attributes.position.array;
+
 const randomPositionArray = [];
 for (let i = 0; i < spherePositionArray.length; i++) {
   randomPositionArray.push((Math.random() - 0.5) * 10);
 }
 
-// // 여러 개의 Plane Mesh 생성
+// PostionArray 2차원 배열로 만들기 -> 겹치는 거 비교하기 위함
+const postionArraySet = [];
+for(let i=0; i<spherePositionArray.length; i+=3) {
+  const cells = [];
+  for(let j=i; j<i+3; j++) {
+    cells.push(spherePositionArray[j]);
+  }
+  postionArraySet.push(cells);
+}
+
+// 2차원 배열 중복 제거
+function removeDup(arr) {
+  return [...new Set(arr.join("|").split("|"))]
+    .map((v) => v.split(","))
+    .map((v) => v.map((a) => +a));
+}
+let uniqueArr = removeDup(postionArraySet);
+console.log(uniqueArr);
+
+const arr2 = uniqueArr.reduce(function (acc, cur) {
+  return acc.concat(cur);
+});
+console.log(arr2);
+
+// 여러 개의 Plane Mesh 생성
 const imagePanels = [];
 let imagePanel;
+const dup = [];
 
+for(let i = 0; i < 195; i += 3) {
+  const num = i / 3;
+  const bigNum = num % imageurl.length;
+  if(i % 27 == 3) {
+    dup.push(bigNum);
+  }
+}
 
-for(let i = 0; i < imageurl.length; i++) {
+for (let i = 0; i < 195; i += 3) {
+  // const randnum = Math.ceil(Math.random() * imageurl.length) - 1;
+  const num = i / 3;
+  const bigNum = num % imageurl.length;
+
+  // console.log("num: "+num + " bigNum: "+bigNum);
+
+  if(i != 0 && i % 27 == 0) {
+    const mock = (i / 27)-1;
+    let specNum = dup[mock];
+
+    if (specNum > imageurl.length-1) {
+      specNum = 0;
+    }
+
+    console.log("specNum: "+specNum);
+
+    imagePanel = new ImagePanel({
+      textureLoader,
+      geometry: planeGeometry,
+      scene,
+      imageSrc: imageurl[specNum],
+      x: arr2[i],
+      y: arr2[i + 1],
+      z: arr2[i + 2],
+    });
+    imagePanels.push(imagePanel);
+    continue;
+  }
+
   imagePanel = new ImagePanel({
     textureLoader,
     scene,
     geometry: planeGeometry,
-    imageSrc: imageurl[i],
-    x: randomPositionArray[i],
-    y: randomPositionArray[i],
-    z: randomPositionArray[i],
-  })
-  imagePanels.push(imagePanel);  
+    imageSrc: imageurl[bigNum],
+    x: arr2[i],
+    y: arr2[i + 1],
+    z: arr2[i + 2],
+  });
+
+  imagePanels.push(imagePanel);
+  console.log("나는 "+i +"번째 " +"x: " + spherePositionArray[i] + " y: "+spherePositionArray[i+1]+" z: "+spherePositionArray[i+2]);
 }
+console.log(dup);
 
-
-console.log(imagePanels[0])
-//console.log(imagePanels[1].mesh.uuid);
-
-// for (let i = 0; i < spherePositionArray.length; i += 3) {
-//   imagePanel = new ImagePanel({
-//     textureLoader,
-//     scene,
-//     geometry: boxGeometry,
-//     // imageSrc: `..${drawingSrc}`,
-//     x: spherePositionArray[i],
-//     y: spherePositionArray[i + 1],
-//     z: spherePositionArray[i + 2],
-//   });
-
-//   imagePanels.push(imagePanel);
-//   console.log(imageurl);
-// }
-//console.log(imageurl);
 // Raycaster
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
@@ -171,10 +214,16 @@ function checkIntersects() {
   const intersects = raycaster.intersectObjects(scene.children);
 
   for (const item of intersects) {
-    console.log(item.object.uuid)
     //클릭하는 그림에 따라 해당하는 id값 반환
     for(let i = 0; i < imageurl.length; i++){
-      if (imagePanels[i].mesh.uuid == item.object.uuid){
+      const panel = imagePanels[i].mesh.material.map.source.data.attributes.src.value;
+      const it = item.object.material.map.source.data.attributes.src.value;
+      console.log(panel + " 랑 " + it);
+      console.log(imagePanels[i].mesh.position);
+      console.log(item.object.position);
+
+      if (panel == it){
+        console.log(i);
         showPopup(i);
       }
     }
@@ -182,33 +231,28 @@ function checkIntersects() {
   }
 }
 
-//작사
-// let lyr = document.getElementById('lyrics').innerHTML;
-
-// let temp1 = lyr.replace("[" , '');
-// temp1 = temp1.replace("]", '');
-// temp1 = temp1.replaceAll("\'", '');
-// temp1 = temp1.replace(/ /g, '');
-
-
-// let templ1 = temp1.split(',');
-
 
 // 팝업 띄우기
 function showPopup(i) {
- 
+
   document.getElementById("popup_layer").style.display = "block";
   //for(let i = 0; i < imageurl.length; i++) {
   document.getElementById("userid").innerHTML = templ3[i] + "님이 만든 작품입니다.";
   let temp_textarea = templ1[i]
-  let flower = temp_textarea.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;");
-  flower = flower.replaceAll('&lt;unk&gt;', "&nbsp;");
+  let flower = temp_textarea.replaceAll(/[0-9]/g, "");
+  flower = flower.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;");
+  flower = flower.replaceAll('&lt;unk&gt;', "");
+
+  flower = flower.replaceAll(/[a-z]/g, '');
+  flower = flower.replaceAll(/[A-Z]/g, '');
+  
   document.getElementById("lyrics2").innerHTML = flower;
   document.getElementById("midiplayer").src = '/static/'+ templ2[i];
   //}
   //document.getElementById("lyrics2").innerHTML = templ1[Math.floor(Math.random() * templ1.length)];
 
 }
+
 //팝업 닫기
 const btnPopClose = document.getElementById("btnPopClose");
 btnPopClose.addEventListener("click", function () {
@@ -227,39 +271,48 @@ function setShape(e) {
   let array;
 
   switch (type) {
-    case "random":
-      array = randomPositionArray;
-      break;
-    case "sphere":
-      array = spherePositionArray;
-      break;
+      case 'random':
+          array = randomPositionArray;
+          break;
+      case 'sphere':
+          array = arr2;
+          break;
   }
 
   for (let i = 0; i < imagePanels.length; i++) {
-    // 위치 이동
-    gsap.to(imagePanels[i].mesh.position, {
-      duration: 2,
-      x: array[i * 3],
-      y: array[i * 3 + 1],
-      z: array[i * 3 + 2],
-    });
+      // 위치 이동 
+      gsap.to(
+          imagePanels[i].mesh.position,
+          {
+              duration: 2,
+              x: array[i * 3],
+              y: array[i * 3 + 1],
+              z: array[i * 3 + 2],
+          }
+      );
 
-    // 회전
-    if (type === "random") {
-      gsap.to(imagePanels[i].mesh.rotation, {
-        duration: 2,
-        x: 0,
-        y: 0,
-        z: 0,
-      });
-    } else if (type === "sphere") {
-      gsap.to(imagePanels[i].mesh.position, {
-        duration: 2,
-        x: array[i * 3] +(Math.random() - 0.5) * 6,
-        y: array[i * 3 + 1]+(Math.random() - 0.5) * 6,
-        z: array[i * 3 + 2]+(Math.random() - 0.5) * 6,
-      });
-    }
+      // 회전
+      if (type === 'random') {
+          gsap.to(
+              imagePanels[i].mesh.rotation,
+              {
+                  duration: 2,
+                  x: 0,
+                  y: 0,
+                  z: 0
+              }
+          );
+      } else if (type === 'sphere') {
+          gsap.to(
+              imagePanels[i].mesh.rotation,
+              {
+                  duration: 2,
+                  x: imagePanels[i].sphereRotationX,
+                  y: imagePanels[i].sphereRotationY,
+                  z: imagePanels[i].sphereRotationZ
+              } 
+          )
+      }
   }
 }
 
@@ -289,7 +342,7 @@ const sphereBtn = document.createElement("button");
 sphereBtn.dataset.type = "sphere";
 sphereBtn.style.cssText =
   "position: absolute; left: 30px; top: 70px; color: #F45866;";
-sphereBtn.innerHTML = "Slide";
+sphereBtn.innerHTML = "Sphere";
 btnWrapper.append(sphereBtn);
 
 document.body.append(btnWrapper);
