@@ -1,13 +1,13 @@
-import * as THREE from 'three';
-import { OrbitControls } from 'https://unpkg.com/three@0.128.0/examples/jsm/controls/OrbitControls.js';
-import {GLTFLoader} from 'GLTFLoader';
-import gsap from 'https://cdn.skypack.dev/@recly/gsap';
+import * as THREE from "three";
+import { OrbitControls } from "https://unpkg.com/three@0.128.0/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "GLTFLoader";
+import gsap from "https://cdn.skypack.dev/@recly/gsap";
 
 import {
   MeshBasicMaterial,
   DoubleSide,
   Mesh,
-} from 'https://cdn.skypack.dev/three';
+} from "https://cdn.skypack.dev/three";
 
 export class ImagePanel {
   constructor(info) {
@@ -44,7 +44,7 @@ renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 // Scene
 const scene = new THREE.Scene();
 
-const bgTexture = textureLoader.load('/static/img/space_metabackground.jpg');
+const bgTexture = textureLoader.load("/static/img/space_metabackground.jpg");
 scene.background = bgTexture;
 
 // Camera
@@ -74,25 +74,22 @@ controls.enableDamping = true;
 const gltfloader = new GLTFLoader();
 let mixer;
 
-gltfloader.load(
-	'static/model/metamong.glb',
-	gltf => {
-		const metamongMesh = gltf.scene.children[0];
-        metamongMesh.scale.set(0.2, 0.2, 0.2);
-        metamongMesh.rotation.y = -2;
-        scene.add(metamongMesh);
+gltfloader.load("static/model/metamong.glb", (gltf) => {
+  const metamongMesh = gltf.scene.children[0];
+  metamongMesh.scale.set(0.2, 0.2, 0.2);
+  metamongMesh.rotation.y = -2;
+  scene.add(metamongMesh);
 
-        // 애니메이션
-        mixer = new THREE.AnimationMixer(metamongMesh);
-        const actions = [];
-        console.log(gltf.animations);
-        actions[0] = mixer.clipAction(gltf.animations[0]);
-        // actions[1] = mixer.clipAction(gltf.animations[1]);
-        actions[0].repetitions = 1;
-        actions[0].clampWhenFinished = true;
-        actions[0].play();
-	}
-)
+  // 애니메이션
+  mixer = new THREE.AnimationMixer(metamongMesh);
+  const actions = [];
+  console.log(gltf.animations);
+  actions[0] = mixer.clipAction(gltf.animations[0]);
+  // actions[1] = mixer.clipAction(gltf.animations[1]);
+  actions[0].repetitions = 1;
+  actions[0].clampWhenFinished = true;
+  actions[0].play();
+});
 
 // Mesh
 const planeGeometry = new THREE.PlaneGeometry(0.3, 0.3);
@@ -109,9 +106,9 @@ for (let i = 0; i < spherePositionArray.length; i++) {
 // sphereMesh의 x,y,z값을 다 찍어 본 결과 중복값이 존재 했음
 // postionArraySet은 [[x1,y1,z1], [x2,y2,z2], ..] 이렇게 x, y, z값을 2차원 배열로 만들어 준 것
 const postionArraySet = [];
-for(let i=0; i<spherePositionArray.length; i+=3) {
+for (let i = 0; i < spherePositionArray.length; i += 3) {
   const cells = [];
-  for(let j=i; j<i+3; j++) {
+  for (let j = i; j < i + 3; j++) {
     cells.push(spherePositionArray[j]);
   }
   postionArraySet.push(cells);
@@ -142,19 +139,19 @@ const dup = [];
 
 // dup 배열은 겹치는 한 줄(메타몽 우리 기준 왼팔)의 resultImg를 가짐
 // ex) i가 3, 27일 때 처음 겹치는데 3이 가진 이미지를 27 이미지 패널로 넣는 것
-for(let i = 0; i < 195; i += 3) {
+for (let i = 0; i < 195; i += 3) {
   const num = i / 3;
   const bigNum = num % imageurl.length;
-  if(i % 27 == 3) {
+  if (i % 27 == 3) {
     dup.push(bigNum);
   }
 }
-dup.length = dup.length -1;
+dup.length = dup.length - 1;
 console.log(dup);
 
 for (let i = 0; i < 195; i += 3) {
   // const randnum = Math.ceil(Math.random() * imageurl.length) - 1;
-  
+
   // num: i가 3씩 증가하고 있는 반복문이라 0, 1, 2, 3, .. 으로 바꾸는 것
   const num = i / 3;
 
@@ -162,18 +159,18 @@ for (let i = 0; i < 195; i += 3) {
   // 이게 없으면 검정 패널이 뜸 (이미지 not found)
   const bigNum = num % imageurl.length;
 
-  console.log("num: "+num + " bigNum: "+bigNum);
+  console.log("num: " + num + " bigNum: " + bigNum);
 
   // i가 27의 배수(27, 54, 81,..)일 때 겹치는 현상 발생
-  if(i != 0 && i % 27 == 0) {
+  if (i != 0 && i % 27 == 0) {
     // mock: 겹치는 7장(한 줄은 이미지 7장) 중 몇 번째인지
-    const mock = (i / 27)-1;
+    const mock = i / 27 - 1;
 
     // dup: 겹치는 이미지가 resultImg에서 몇 번째인지 출력하는 배열. [1,0,3,9,4] => 겹치는 첫 줄은 resultImg 폴더 내 1번째 이미지. 두 번째 줄은 resultImg 폴더 내 0번째 이미지. 이런 뜻
     // specNum: resultImg내 몇 번째 이미지를 불러올 건지
     let specNum = dup[mock];
-    console.log("specNum: "+specNum+imageurl[specNum]);
-    
+    console.log("specNum: " + specNum + imageurl[specNum]);
+
     imagePanel = new ImagePanel({
       textureLoader,
       geometry: planeGeometry,
@@ -184,9 +181,7 @@ for (let i = 0; i < 195; i += 3) {
       z: arr2[i + 2],
     });
     imagePanels.push(imagePanel);
-  }
-
-  else {
+  } else {
     imagePanel = new ImagePanel({
       textureLoader,
       scene,
@@ -230,13 +225,14 @@ function checkIntersects() {
 
   for (const item of intersects) {
     //클릭하는 그림에 따라 해당하는 id값 반환
-    for(let i = 0; i < imageurl.length; i++){
-      const panel = imagePanels[i].mesh.material.map.source.data.attributes.src.value;
+    for (let i = 0; i < imageurl.length; i++) {
+      const panel =
+        imagePanels[i].mesh.material.map.source.data.attributes.src.value;
       const it = item.object.material.map.source.data.attributes.src.value;
-      console.log(i+1 +"번째 "+panel + " 랑 " + it);
+      console.log(i + 1 + "번째 " + panel + " 랑 " + it);
       // console.log(i +"번째 ");
 
-      if (panel == it){
+      if (panel == it) {
         // console.log(i);
         showPopup(i);
       }
@@ -245,26 +241,24 @@ function checkIntersects() {
   }
 }
 
-
 // 팝업 띄우기
 function showPopup(i) {
-
   document.getElementById("popup_layer").style.display = "block";
   //for(let i = 0; i < imageurl.length; i++) {
-  document.getElementById("userid").innerHTML = templ3[i] + "님이 만든 작품입니다.";
-  let temp_textarea = templ1[i]
+  document.getElementById("userid").innerHTML =
+    templ3[i] + "님이 만든 작품입니다.";
+  let temp_textarea = templ1[i];
   let flower = temp_textarea.replaceAll(/[0-9]/g, "");
-  flower = flower.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;");
-  flower = flower.replaceAll('&lt;unk&gt;', "");
+  flower = flower.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g, "&#10;");
+  flower = flower.replaceAll("&lt;unk&gt;", "");
 
-  flower = flower.replaceAll(/[a-z]/g, '');
-  flower = flower.replaceAll(/[A-Z]/g, '');
-  
+  flower = flower.replaceAll(/[a-z]/g, "");
+  flower = flower.replaceAll(/[A-Z]/g, "");
+
   document.getElementById("lyrics2").innerHTML = flower;
-  document.getElementById("midiplayer").src = '/static/'+ templ2[i];
+  document.getElementById("midiplayer").src = "/static/" + templ2[i];
   //}
   //document.getElementById("lyrics2").innerHTML = templ1[Math.floor(Math.random() * templ1.length)];
-
 }
 
 //팝업 닫기
@@ -285,48 +279,39 @@ function setShape(e) {
   let array;
 
   switch (type) {
-      case 'random':
-          array = randomPositionArray;
-          break;
-      case 'sphere':
-          array = arr2;
-          break;
+    case "random":
+      array = randomPositionArray;
+      break;
+    case "sphere":
+      array = arr2;
+      break;
   }
 
   for (let i = 0; i < imagePanels.length; i++) {
-      // 위치 이동 
-      gsap.to(
-          imagePanels[i].mesh.position,
-          {
-              duration: 2,
-              x: array[i * 3],
-              y: array[i * 3 + 1],
-              z: array[i * 3 + 2],
-          }
-      );
+    // 위치 이동
+    gsap.to(imagePanels[i].mesh.position, {
+      duration: 2,
+      x: array[i * 3],
+      y: array[i * 3 + 1],
+      z: array[i * 3 + 2],
+    });
 
-      // 회전
-      if (type === 'random') {
-          gsap.to(
-              imagePanels[i].mesh.rotation,
-              {
-                  duration: 2,
-                  x: 0,
-                  y: 0,
-                  z: 0
-              }
-          );
-      } else if (type === 'sphere') {
-          gsap.to(
-              imagePanels[i].mesh.rotation,
-              {
-                  duration: 2,
-                  x: imagePanels[i].sphereRotationX,
-                  y: imagePanels[i].sphereRotationY,
-                  z: imagePanels[i].sphereRotationZ
-              } 
-          )
-      }
+    // 회전
+    if (type === "random") {
+      gsap.to(imagePanels[i].mesh.rotation, {
+        duration: 2,
+        x: 0,
+        y: 0,
+        z: 0,
+      });
+    } else if (type === "sphere") {
+      gsap.to(imagePanels[i].mesh.rotation, {
+        duration: 2,
+        x: imagePanels[i].sphereRotationX,
+        y: imagePanels[i].sphereRotationY,
+        z: imagePanels[i].sphereRotationZ,
+      });
+    }
   }
 }
 
@@ -359,6 +344,13 @@ sphereBtn.style.cssText =
 sphereBtn.innerHTML = "Sphere";
 btnWrapper.append(sphereBtn);
 
+const homeBtn = document.createElement("button");
+homeBtn.dataset.type = "home";
+homeBtn.style.cssText =
+  "position: absolute; left: 30px; top: 110px; color: #F45866;";
+homeBtn.innerHTML = "Home";
+btnWrapper.append(homeBtn);
+
 document.body.append(btnWrapper);
 
 randomBtn.style.backgroundColor = "white";
@@ -369,9 +361,14 @@ sphereBtn.style.backgroundColor = "white";
 sphereBtn.style.border = "2px #F45866";
 sphereBtn.style.borderRadius = "5px";
 sphereBtn.style.padding = "5px";
+homeBtn.style.backgroundColor = "white";
+homeBtn.style.border = "2px #F45866";
+homeBtn.style.borderRadius = "5px";
+homeBtn.style.padding = "5px";
+homeBtn.style.padding = "5px";
 
 // 이벤트
-btnWrapper.addEventListener("click", setShape);
+btnWrapper.addEventListener("", setShape);
 randomBtn.addEventListener("mouseover", function () {
   randomBtn.style.cssText =
     "position: absolute; left: 30px; top: 30px; color: white;";
@@ -404,6 +401,28 @@ sphereBtn.addEventListener("mouseout", function () {
   sphereBtn.style.borderRadius = "5px";
   sphereBtn.style.padding = "5px";
 });
+
+homeBtn.addEventListener("click", function () {
+  window.location.href = "/";
+});
+
+homeBtn.addEventListener("mouseover", function () {
+  homeBtn.style.cssText =
+    "position: absolute; left: 30px; top: 110px; color: white;";
+  homeBtn.style.backgroundColor = "#F45866";
+  homeBtn.style.border = "2px #F45866";
+  homeBtn.style.borderRadius = "5px";
+  homeBtn.style.padding = "5px";
+});
+homeBtn.addEventListener("mouseout", function () {
+  homeBtn.style.cssText =
+    "position: absolute; left: 30px; top: 110px; color: #F45866;";
+  homeBtn.style.backgroundColor = "white";
+  homeBtn.style.border = "2px #F45866";
+  homeBtn.style.borderRadius = "5px";
+  homeBtn.style.padding = "5px";
+});
+
 window.addEventListener("resize", setSize);
 canvas.addEventListener("click", (e) => {
   // raycaster를 사용하려면 -1 ~ 1 로 좌표를 바꿔 줘야 함. 가운데가 0.
@@ -418,24 +437,20 @@ let mouseMoved; // 마우스를 드래그 했는지 true false
 let clickStartX;
 let clickStartY;
 let clickStartTime;
-canvas.addEventListener('mousedown', e => {
+canvas.addEventListener("mousedown", (e) => {
   clickStartX = e.clientX;
   clickStartY = e.clientY;
   clickStartTime = Date.now();
 });
-canvas.addEventListener('mouseup', e => {
+canvas.addEventListener("mouseup", (e) => {
   const xGap = Math.abs(e.clientX - clickStartX);
   const yGap = Math.abs(e.clientY - clickStartY);
   const timeGap = Date.now() - clickStartTime;
 
-  if (
-      xGap > 5 ||
-      yGap > 5 ||
-      timeGap > 500
-  ) {
-      this.mouseMoved = true;
+  if (xGap > 5 || yGap > 5 || timeGap > 500) {
+    this.mouseMoved = true;
   } else {
-      this.mouseMoved = false;
+    this.mouseMoved = false;
   }
 });
 
