@@ -185,8 +185,9 @@ for (let i = 0; i < 195; i += 3) {
     });
     imagePanels.push(imagePanel);
   }
+
   else {
-        imagePanel = new ImagePanel({
+    imagePanel = new ImagePanel({
       textureLoader,
       scene,
       geometry: planeGeometry,
@@ -200,6 +201,7 @@ for (let i = 0; i < 195; i += 3) {
 
   // console.log("나는 "+i +"번째 " +"x: " + spherePositionArray[i] + " y: "+spherePositionArray[i+1]+" z: "+spherePositionArray[i+2]);
 }
+console.log(imagePanels[10]);
 
 // Raycaster
 const raycaster = new THREE.Raycaster();
