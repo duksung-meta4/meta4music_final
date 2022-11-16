@@ -56,13 +56,30 @@
 
         let lyr = document.getElementById('lyrics').innerHTML;
 
-        let temp1 = lyr.replace("[" , '');
+        // let temp1 = lyr.replace("[" , '');
+        // temp1 = temp1.replace("]", '');
+        // console.log(temp1)
+        //temp1 = temp1.replaceAll("\'", '');
+        //temp1 = temp1.replace(/ /g, '');
+        //console.log(lyr)
+
+        let temp1 = lyr.replace("[", '');
         temp1 = temp1.replace("]", '');
+        // temp1 = temp1.replaceAll('<unk>', "");
+        // temp1 = temp1.replaceAll(/[0-9]/g, "");
+
+        // temp1 = temp1.replaceAll(/(?:\\r\\n|\\r|\\n|\\)/g , "&#10;");
+
+
+        // temp1 = temp1.replaceAll(/[a-z]/g, '');
+        // temp1 = temp1.replaceAll(/[A-Z]/g, '');
         temp1 = temp1.replaceAll("\'", '');
-        temp1 = temp1.replace(/ /g, '');
+        temp1 = temp1.replaceAll('\"', '');
+
+
+        //console.log(temp1)
 
         let templ1 = temp1.split(',');
-        
 
         // var lyr = document.getElementById('lyrics').innerHTML;
 
