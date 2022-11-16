@@ -223,18 +223,40 @@ function checkIntersects() {
   raycaster.setFromCamera(mouse, camera);
   const intersects = raycaster.intersectObjects(scene.children);
 
+  console.log("intersects", intersects);
   for (const item of intersects) {
+    console.log(item);
+
+    // for (let i = 0; i < 65; i++) {
+    //   const panel =
+    //     imagePanels[i].mesh.material.map.source.data.attributes.src.value; //잘 돌아가는 img
+    //   const it = item.object.material.map.source.data.attributes.src.value; //내가 클릭한 img
+    //   if (i < 10) {
+    //     //정수리가 포함된 첫번째 줄
+    //     console.log("panel", i, "번째", panel);
+    //     console.log("it", i, "번째", it);
+    //     if (panel == it) {
+    //       showPopup(i);
+    //       break;
+    //     }
+    //   }
+
     //클릭하는 그림에 따라 해당하는 id값 반환
     for (let i = 0; i < imageurl.length; i++) {
+      console.log(i);
       const panel =
         imagePanels[i].mesh.material.map.source.data.attributes.src.value;
       const it = item.object.material.map.source.data.attributes.src.value;
-      console.log(i + 1 + "번째 " + panel + " 랑 " + it);
-      // console.log(i +"번째 ");
+      console.log("panel", i, "번째", panel);
+      console.log("it", i, "번째", it);
+
+      if (i !== 0 && i % 9 == 0) {
+        showPopup(9);
+      }
 
       if (panel == it) {
-        // console.log(i);
         showPopup(i);
+        break;
       }
     }
     break;
@@ -368,7 +390,7 @@ homeBtn.style.padding = "5px";
 homeBtn.style.padding = "5px";
 
 // 이벤트
-btnWrapper.addEventListener("", setShape);
+btnWrapper.addEventListener("click", setShape);
 randomBtn.addEventListener("mouseover", function () {
   randomBtn.style.cssText =
     "position: absolute; left: 30px; top: 30px; color: white;";
