@@ -124,7 +124,7 @@ DATABASES = {
         'NAME': 'meta4DB',
         'USER':'admin',
         'PASSWORD':'12341234',
-        #'HOST':'database-1.cxhdf5vmbh57.ap-northeast-2.rds.amazonaws.com',  # 생성한 데이터베이스 엔드포인트
+        'HOST':'database-1.cxhdf5vmbh57.ap-northeast-2.rds.amazonaws.com',  # 생성한 데이터베이스 엔드포인트
         'PORT':'3306',
         'OPTIONS':{
             'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
