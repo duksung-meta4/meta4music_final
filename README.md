@@ -169,8 +169,9 @@
 2.  [회의록](https://docs.google.com/spreadsheets/d/1efsfv7KjGN_QKApZw-XoXTU3IxGY87p0i-u8KbN0CNs/edit?usp=sharing)
 3.  [요구사항 분석서](https://docs.google.com/document/d/1I1g1d20tljeA-jKuOKwjwD1y9Z0XOjxs3nXp4SZVn1Q/edit?usp=sharing)
 4.  [SW 설계서](https://docs.google.com/document/d/1PW3zdLUbfdJqbOmY5vjDiCHoh2SDNBWCFft_WrgDOz4/edit?usp=sharing)
-5.  [완료 보고서: ppt](https://docs.google.com/presentation/d/1fuGfd2FiFVYRRE6KpK4OjSg4vDu2f4wb/edit?usp=sharing&ouid=115616156054822868753&rtpof=true&sd=true)
-6.  [완성된 SW: 구름 컨테이너 링크](https://goor.me/JN5AQ)
+5.  [완료 보고서: ppt]()
+6.  [결과 보고서: pdf](https://drive.google.com/drive/folders/1o7msy5AYdc0F5WHeT_lTS13065OAma2M) 
+7.  [완성된 결과물: 유튜브 링크](https://www.youtube.com/watch?v=-0EPXT0xlYw)
 
 ---
 
