@@ -115,6 +115,7 @@
 
 
 **3-3. 스프린트 리뷰 회의**
+
 <img src="https://user-images.githubusercontent.com/62791327/222944691-ad4c7387-76ee-4d00-a547-5531c19c473d.png" width="400" height="500"/>
 
 
