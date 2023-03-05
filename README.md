@@ -151,32 +151,32 @@
 
 - 메인화면
 
-![메인화면](https://user-images.githubusercontent.com/62791327/222946651-f9afb121-ba7d-438d-9d71-4e49025fbb7c.png)
+    ![메인화면](https://user-images.githubusercontent.com/62791327/222946651-f9afb121-ba7d-438d-9d71-4e49025fbb7c.png)
 
 - 그림 + 작사 화면
 
-![그림_작사_화면](https://user-images.githubusercontent.com/62791327/222946928-0238429b-7258-4654-992d-228a019f427d.png)
+    ![그림_작사_화면](https://user-images.githubusercontent.com/62791327/222946928-0238429b-7258-4654-992d-228a019f427d.png)
 
 - 작곡화면
 
-![작곡화면](https://user-images.githubusercontent.com/62791327/222947104-41140c25-da6f-4104-b797-4d5d8b7f7afb.png)
+    ![작곡화면](https://user-images.githubusercontent.com/62791327/222947104-41140c25-da6f-4104-b797-4d5d8b7f7afb.png)
 
 - 그림+작사+작곡 합본 화면
-![그림_작사_작곡_합본_화면](https://user-images.githubusercontent.com/62791327/222948429-7f1ea8f6-53c0-4ded-8651-eeaafd849ba3.png)
+
+    ![그림_작사_작곡_합본_화면](https://user-images.githubusercontent.com/62791327/222948429-7f1ea8f6-53c0-4ded-8651-eeaafd849ba3.png)
 
 - 메타버스 화면
-![메타버스_화면](https://user-images.githubusercontent.com/62791327/222947394-37e7ff0f-3749-4979-ab9e-5d669e2db38e.JPEG)
+
+    ![메타버스_화면](https://user-images.githubusercontent.com/62791327/222947394-37e7ff0f-3749-4979-ab9e-5d669e2db38e.JPEG)
 
 
 **4-2. 문서**
 
 1.  [제안서](https://docs.google.com/document/d/1h4JVXBmmLBH2FCbAOcV8ftNqSrIIc_rAxMoevZ9L8Hg/edit?usp=sharing)
 2.  [회의록](https://docs.google.com/spreadsheets/d/1efsfv7KjGN_QKApZw-XoXTU3IxGY87p0i-u8KbN0CNs/edit?usp=sharing)
-3.  [요구사항 분석서](https://docs.google.com/document/d/1I1g1d20tljeA-jKuOKwjwD1y9Z0XOjxs3nXp4SZVn1Q/edit?usp=sharing)
-4.  [SW 설계서](https://docs.google.com/document/d/1PW3zdLUbfdJqbOmY5vjDiCHoh2SDNBWCFft_WrgDOz4/edit?usp=sharing)
-5.  [완료 보고서: ppt]()
-6.  [결과 보고서: pdf](https://drive.google.com/drive/folders/1o7msy5AYdc0F5WHeT_lTS13065OAma2M) 
-7.  [완성된 결과물: 유튜브 링크](https://www.youtube.com/watch?v=-0EPXT0xlYw)
+3.  [완료 보고서: ppt](https://drive.google.com/drive/folders/1XfbqP-m5S1r5oJUNVXDMUEErh3ZIZaYn)
+4.  [결과 보고서: pdf](https://drive.google.com/drive/folders/1o7msy5AYdc0F5WHeT_lTS13065OAma2M) 
+5.  [완성된 결과물: 유튜브 링크](https://www.youtube.com/watch?v=-0EPXT0xlYw)
 
 ---
 
