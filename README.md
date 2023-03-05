@@ -150,22 +150,19 @@
 **4-1. 웹페이지**
 
 - 메인화면
-
-![메인화면](https://user-images.githubusercontent.com/62791327/222946651-f9afb121-ba7d-438d-9d71-4e49025fbb7c.png)
+    ![메인화면](https://user-images.githubusercontent.com/62791327/222946651-f9afb121-ba7d-438d-9d71-4e49025fbb7c.png)
 
 - 그림 + 작사 화면
-
-![그림_작사_화면](https://user-images.githubusercontent.com/62791327/222946928-0238429b-7258-4654-992d-228a019f427d.png)
+    ![그림_작사_화면](https://user-images.githubusercontent.com/62791327/222946928-0238429b-7258-4654-992d-228a019f427d.png)
 
 - 작곡화면
-
-![작곡화면](https://user-images.githubusercontent.com/62791327/222947104-41140c25-da6f-4104-b797-4d5d8b7f7afb.png)
+    ![작곡화면](https://user-images.githubusercontent.com/62791327/222947104-41140c25-da6f-4104-b797-4d5d8b7f7afb.png)
 
 - 그림+작사+작곡 합본 화면
-![그림_작사_작곡_합본_화면](https://user-images.githubusercontent.com/62791327/222947213-c7701147-8655-4d21-aea4-90926d344bcb.png)
+    ![그림_작사_작곡_합본_화면](https://user-images.githubusercontent.com/62791327/222947213-c7701147-8655-4d21-aea4-90926d344bcb.png)
 
 - 메타버스 화면
-![메타버스_화면](https://user-images.githubusercontent.com/62791327/222947394-37e7ff0f-3749-4979-ab9e-5d669e2db38e.JPEG)
+    ![메타버스_화면](https://user-images.githubusercontent.com/62791327/222947394-37e7ff0f-3749-4979-ab9e-5d669e2db38e.JPEG)
 
 
 **4-2. 문서**
