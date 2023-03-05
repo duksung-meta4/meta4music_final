@@ -174,7 +174,7 @@
 
 1.  [제안서](https://docs.google.com/document/d/1h4JVXBmmLBH2FCbAOcV8ftNqSrIIc_rAxMoevZ9L8Hg/edit?usp=sharing)
 2.  [회의록](https://adaptive-vest-8c5.notion.site/Meeting-Notes-39ac776c462447eba5da2b85041fc10d)
-3.  [완료 보고서: ppt](https://drive.google.com/drive/folders/1XfbqP-m5S1r5oJUNVXDMUEErh3ZIZaYn)
+3.  [완료 보고서: ppt](https://docs.google.com/presentation/d/1wbOFrYzECjc4Hu5ss2a82KUVMvNVUfRp/edit#slide=id.p1)
 4.  [결과 보고서: pdf](https://app.luminpdf.com/viewer/64044b5b488694a1745e5eeb) 
 5.  [완성된 결과물: 유튜브 링크](https://www.youtube.com/watch?v=-0EPXT0xlYw)
 
