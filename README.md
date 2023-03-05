@@ -39,12 +39,8 @@
 
 1.  개발 방법론
 2.  제품 백로그/스프린트 백로그
-3.  스크럼보드: freedcamp
-4.  스프린트 추적
-5.  번다운 차트
-6.  스프린트 리뷰 회의
-7.  스프린트 회고 회의
-8.  기타 회의
+3.  스프린트 리뷰 회의
+4.  기타 회의
 
 **4️⃣ 프로젝트 결과물**
 
@@ -110,51 +106,59 @@
 **3-1. 개발 방법론**
 
 -   애자일 모델의 스크럼
--   24일에 걸쳐 총 1번의 스프린트로 진행 
+-   8개월에 걸쳐 총 16번의 스프린트로 진행 
 
 **3-2. 제품 백로그/스프린트 백로그**
-- [전체 보기](https://docs.google.com/spreadsheets/d/14ES1psx6KkkMwHEBY1Dvnb17dqddb_smVlrbOsLRGjg/edit?usp=sharing)  
-![스프린트_주기_정하기](https://user-images.githubusercontent.com/61674991/146736233-50eb62ad-9ec1-4194-9029-e2fe10104c2a.JPG)
-![백로그_스프린트백로그](https://user-images.githubusercontent.com/61674991/146736242-f93f6f3f-c3f8-4f5d-874f-92a84614744e.JPG)
+- [전체 보기](https://duksung-meta4.atlassian.net/jira/software/projects/SYAW/boards/2/roadmap)  
+![스프린트_주기_정하기](https://user-images.githubusercontent.com/62791327/222943898-e7f1ce40-eb69-4422-b5a4-a0328f4dcad2.png)
+![백로그_스프린트백로그](https://user-images.githubusercontent.com/62791327/222943891-d6fbccf5-f9da-4143-93d3-b49c412f7c28.png)
 
 
-**3-3. 스크럼보드: freedcam**
-- ![스크럼_보드](https://user-images.githubusercontent.com/61674991/146736658-b9c48b35-f887-4135-bf7e-13c6b2d6f9ed.png)
+**3-3. 스프린트 리뷰 회의**
+<img src="https://user-images.githubusercontent.com/62791327/222944691-ad4c7387-76ee-4d00-a547-5531c19c473d.png" width="400" height="500"/>
 
 
-**3-4. 스프린트 추적**
-- [전체 보기](https://docs.google.com/spreadsheets/d/1HH5JimniXAJBkuMiNddJ1uYC7PEFowd13S3PJkiKeLQ/edit?usp=sharing)
-![스프린트_추적](https://user-images.githubusercontent.com/61674991/146736787-150c49c0-300b-4339-b8c7-bc5fa864774f.JPG)
+**3-4. 기타 회의**
 
+-   일일 스크럼회의: 각자의 수업시간과 일정으로 인해 실행하기 어려워 주 1회 회의로 대체
+-   주 1회 회의: 매주 수요일 21시(줌 소회의실)
+-   필요에 따라 추가 회의를 진행하거나 방학에는 회의 횟수를 늘림.
+<!--# ![정기회의](https://user-images.githubusercontent.com/62791327/222944541-8646b304-30c5-4512-893f-afe9aa6f89ab.png)-->
+<img src="https://user-images.githubusercontent.com/62791327/222944541-8646b304-30c5-4512-893f-afe9aa6f89ab.png" width="400" height="500"/>
 
-**3-5. 번다운 차트**
-- ![번다운차트](https://user-images.githubusercontent.com/61674991/146736921-7fb3a5fc-4658-463f-aec5-6e4256488dea.JPG)
+-   교수님 및 멘토님과 정기적인 회의 및 피드백을 진행함
 
+# ![교수님, 멘토님과의 정기회의 및 피드백](https://user-images.githubusercontent.com/62791327/222946555-a54c9758-7e58-4753-90e3-ab7aa3dc2c2c.png)
 
-**3-6. 스프린트 리뷰 회의**
-- [스프린트 리뷰 회의 보기: 스프레드 시트](https://docs.google.com/spreadsheets/d/1NnA6-j_QBgJbPciR7R26sk20E8wAqijMQrnW8e5lUFM/edit?usp=sharing)
-    -   ※ 개발이 끝났기 때문에 다음 스프린트를 위한 프로덕트 백로그는 작성하지 않음.
-
-**3-7. 스프린트 회고 회의**
-- [스프린트 회고 회의 보기: 잼보드](https://jamboard.google.com/d/1RLVjMjAgUIQ5BN8QwhFniixicGM5GryR56KQjlVfvOw/edit?usp=sharing)
-
-**3-8. 기타 회의**
-
--   일일 스크럼회의: 실행하기 어려워 주 2회 회의로 대체
--   주 2회 회의: 매주 화요일 17시(줌 소회의실)/금요일 21시(구글 미트)
 
 ---
 
 ### **4️⃣ 프로젝트 결과물**
 
 **4-1. 웹페이지**
-![결과물_사진1](https://user-images.githubusercontent.com/61674991/146884243-73614ab3-90fb-4603-b1a4-68a4534baa48.png)
-![결과물_사진2](https://user-images.githubusercontent.com/61674991/146884250-b7f3c68d-5648-4176-aa25-309fe5488bd4.png)
+
+- 메인화면
+
+![메인화면](https://user-images.githubusercontent.com/62791327/222946651-f9afb121-ba7d-438d-9d71-4e49025fbb7c.png)
+
+- 그림 + 작사 화면
+
+![그림_작사_화면](https://user-images.githubusercontent.com/62791327/222946928-0238429b-7258-4654-992d-228a019f427d.png)
+
+- 작곡화면
+
+![작곡화면](https://user-images.githubusercontent.com/62791327/222947104-41140c25-da6f-4104-b797-4d5d8b7f7afb.png)
+
+- 그림+작사+작곡 합본 화면
+![그림_작사_작곡_합본_화면](https://user-images.githubusercontent.com/62791327/222947213-c7701147-8655-4d21-aea4-90926d344bcb.png)
+
+- 메타버스 화면
+![메타버스_화면](https://user-images.githubusercontent.com/62791327/222947394-37e7ff0f-3749-4979-ab9e-5d669e2db38e.JPEG)
 
 
 **4-2. 문서**
 
-1.  [수행계획서](https://docs.google.com/document/d/1AkL9s3A_UnxywnPjAKztkgjIgS64OijKaWDJ1Hi7Ffg/edit?usp=sharing)
+1.  [제안서](https://docs.google.com/document/d/1h4JVXBmmLBH2FCbAOcV8ftNqSrIIc_rAxMoevZ9L8Hg/edit?usp=sharing)
 2.  [회의록](https://docs.google.com/spreadsheets/d/1efsfv7KjGN_QKApZw-XoXTU3IxGY87p0i-u8KbN0CNs/edit?usp=sharing)
 3.  [요구사항 분석서](https://docs.google.com/document/d/1I1g1d20tljeA-jKuOKwjwD1y9Z0XOjxs3nXp4SZVn1Q/edit?usp=sharing)
 4.  [SW 설계서](https://docs.google.com/document/d/1PW3zdLUbfdJqbOmY5vjDiCHoh2SDNBWCFft_WrgDOz4/edit?usp=sharing)
