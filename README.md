@@ -109,25 +109,26 @@
 <br/>
 
 **2-1. 프로젝트 수행 일정**
-# ![수행일정](https://ifh.cc/g/CH7OYj.jpg)
-
 <br/>
+![image](https://github.com/duksung-meta4/meta4music_final/assets/49816869/65f9b214-0f2f-4165-b0e0-60b49bad89b9)
 
 **2-2. 메뉴 구성도/기능 처리도**
 ##### 메뉴 구성도
-![메뉴구성도](https://ifh.cc/g/H1Fq41.jpg)
-
 <br/>
+
+![image](https://github.com/duksung-meta4/meta4music_final/assets/49816869/864d88a7-e079-4bf1-9ab0-5ef26b5ab088)
+
 
 ##### 기능 처리도
-![기능처리도](https://ifh.cc/g/Akl3pv.png)
-
 <br/>
+
+![image](https://github.com/duksung-meta4/meta4music_final/assets/49816869/c47e7350-e7e8-46df-9d36-72ca50c7f2e8)
 
 **2-3. 작품 구성도**
-# ![작품구성도](https://ifh.cc/g/NnrgnX.jpg)
-
 <br/>
+
+![image](https://github.com/duksung-meta4/meta4music_final/assets/49816869/8a81feb8-65e1-4b88-ab33-d3c703634b58)
+
 
 ---
 
@@ -208,7 +209,8 @@
 5.  [완성된 결과물: 유튜브 링크](https://www.youtube.com/watch?v=-0EPXT0xlYw)
 6.  출원 정보 :
 
-    ![출원정보](https://ifh.cc/g/qw3x0A.jpg)
+![image](https://github.com/duksung-meta4/meta4music_final/assets/49816869/21c6eabc-b109-499e-8490-36ca76f5f855)
+
 
 <br/>
 
